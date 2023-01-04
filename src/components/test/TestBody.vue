@@ -107,7 +107,7 @@ export default {
 
       axios({
         method: 'post',
-        url: 'http://192.168.0.2:19001/law/user/login',
+        url: '/law/user/login',
         data: {
           loginId: loginId.value
           , password: password.value
@@ -121,7 +121,7 @@ export default {
     const enroll = () => {
       axios({
         method: 'post',
-        url: 'http://192.168.0.2:19001/law/user/enroll',
+        url: '/law/user/enroll',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -134,7 +134,7 @@ export default {
     const callList = () => {
       axios({
         method: 'post',
-        url: 'http://192.168.0.2:19001/law/user/list',
+        url: '/law/user/list',
         headers: {
           'Content-Type': 'application/json'
         },
