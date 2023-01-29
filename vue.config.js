@@ -6,7 +6,7 @@ module.exports = defineConfig({
   outputDir: path.resolve(__dirname, "./docker/dist"),
   devServer : {
     proxy : {
-      '/law': {
+      '/lg': {
         target : 'http://192.168.0.2:19001',
         changeOrigin: true,
       }
