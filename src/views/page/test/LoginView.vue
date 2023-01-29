@@ -7,6 +7,7 @@
       비밀번호 : <input type="password" v-model="password" placeholder="로그인 패스워드" ><br>
       <button @click="lgLogin(loginId, password)">로그인</button>
     </div>
+    <hr>
     <router-link to="/sign">회원가입 페이지</router-link> |
     <router-link to="/sign">아이디 찾기</router-link> |
     <router-link to="/sign">비밀번호 찾기</router-link>
@@ -16,6 +17,7 @@
       로그인 성공
       <button @click="lgLogout">로그아웃</button>
     </div>
+    <hr>
     <router-link to="/sign">게시판 페이지</router-link> |
   </template>
   <hr>
