@@ -1,5 +1,18 @@
 <template>
   <h1>게시판 페이지</h1>
+
+  <div>
+    <h2>라인</h2>
+    <select v-model="type" @change="callBoard">
+      <option value="5">전체</option>
+      <option value="0">탑</option>
+      <option value="1">정글</option>
+      <option value="2">미드</option>
+      <option value="3">원딜</option>
+      <option value="4">서폿</option>
+    </select>
+  </div>
+
   <table border="1">
     <th>번호</th>
     <th>제목</th>
@@ -55,7 +68,8 @@ export default {
     return {
       callBoard,
       list,
-      page
+      page,
+      type
     }
   },
   mounted() {
