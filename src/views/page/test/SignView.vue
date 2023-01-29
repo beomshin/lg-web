@@ -34,7 +34,7 @@
       <button @click="sign">회원가입</button>
   </div>
   <hr>
-  <router-link to="/login">로그인 페이지</router-link>
+  <router-link to="/">로그인 페이지</router-link>
   <hr>
 </template>
 
@@ -88,7 +88,7 @@ export default {
       })
       .then(res => {
         if (res.data.resultCode == '00000') {
-          window.location.replace('/login')
+          window.location.replace('/')
         }
       })
     }

@@ -51,13 +51,13 @@ export default {
       })
       .then(res => {
         cookies.set("lg.m.log", res.data.accessToken)
-        window.location.replace('/login')
+        window.location.replace('/')
       })
     }
 
     const lgLogout = () => {
       cookies.remove('lg.m.log')
-      window.location.replace('/login')
+      window.location.replace('/')
     }
 
     return {

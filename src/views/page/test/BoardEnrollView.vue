@@ -39,7 +39,7 @@
 
     </template>
   <hr/>
-  <router-link to="/login">로그인 페이지</router-link> |
+  <router-link to="/">로그인 페이지</router-link> |
   <router-link to="/board">게시판 페이지</router-link> |
   <hr/>
 </template>

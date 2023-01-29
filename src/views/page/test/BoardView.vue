@@ -33,7 +33,7 @@
     </template>
   </table>
   <hr/>
-  <router-link to="/login">로그인 페이지</router-link> |
+  <router-link to="/">로그인 페이지</router-link> |
   <router-link to="/board/enroll">게시판 작성하기</router-link> |
   <hr/>
 </template>
