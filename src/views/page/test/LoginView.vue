@@ -50,8 +50,13 @@ export default {
         loginId, password
       })
       .then(res => {
-        cookies.set("lg.m.log", res.data.accessToken)
-        window.location.replace('/')
+
+        if (res.data.resultCode == "00000") {
+          cookies.set("lg.m.log", res.data.accessToken)
+          window.location.replace('/')
+        } else {
+          alert('로그인에 실패했습니다.')
+        }
       })
     }
 
