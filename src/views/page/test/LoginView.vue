@@ -8,6 +8,7 @@
       <button @click="lgLogin(loginId, password)">로그인</button>
     </div>
     <hr>
+    <router-link to="/board">게시판 페이지</router-link> |
     <router-link to="/sign">회원가입 페이지</router-link> |
     <router-link to="/sign">아이디 찾기</router-link> |
     <router-link to="/sign">비밀번호 찾기</router-link>
@@ -18,7 +19,7 @@
       <button @click="lgLogout">로그아웃</button>
     </div>
     <hr>
-    <router-link to="/sign">게시판 페이지</router-link> |
+    <router-link to="/board">게시판 페이지</router-link> |
   </template>
   <hr>
 
@@ -39,6 +40,12 @@ export default {
     const password = ref("");
 
     const lgLogin = (loginId, password) => {
+
+      if (!loginId || !password) {
+        alert('정보입력해주세요')
+        return
+      }
+
       service.login({
         loginId, password
       })
