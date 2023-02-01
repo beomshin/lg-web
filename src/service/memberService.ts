@@ -1,5 +1,6 @@
 import post from "@/http/post";
 import get from "@/http/get";
+import post2 from "@/http/post2";
 
 export default {
     login: (data: any) => {
@@ -16,5 +17,8 @@ export default {
     },
     verifyEmail: (url: any, data: any) => {
         return get(url, data);
+    },
+    memberInfo: (data: any, headers: any) => {
+        return post2('/lg/member/pq/info', data, headers);
     }
 }

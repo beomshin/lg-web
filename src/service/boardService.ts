@@ -11,5 +11,8 @@ export default {
     },
     enrollMember: (data: any, headers: any) => {
         return post2('/lg/board/pq/enroll/member', data, headers)
-    }
+    },
+    findBoard: (url: any, data: any) => {
+        return get(url, data);
+    },
 }
