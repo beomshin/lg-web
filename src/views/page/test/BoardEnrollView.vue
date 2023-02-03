@@ -49,6 +49,7 @@ import {ref} from "vue";
 import service from "@/service/config";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: "BoardEnrollView",
@@ -58,6 +59,8 @@ export default {
     const title = ref('')
     const content = ref('')
     const lineType = ref(0)
+    const router = useRouter()
+    const route = useRoute()
 
     const enrollAnonym = () => {
       if (!id.value) {
@@ -84,7 +87,7 @@ export default {
       .then(res => {
         if (res.data.resultCode == '00000') {
           alert('게시글 등록에 성공했습니다.')
-          window.location.replace('/board')
+          router.replace('/board')
         }
       })
     }
@@ -109,7 +112,7 @@ export default {
           .then(res => {
             if (res.data.resultCode == '00000') {
               alert('게시글 등록에 성공했습니다.')
-              window.location.replace('/board')
+              router.replace('/board')
             }
           })
 

@@ -34,6 +34,7 @@ import {useCookies} from "vue3-cookies";
 import {ref} from "vue";
 import service from "@/service/config";
 const { cookies } = useCookies();
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: "BoardUserInfo",
@@ -42,6 +43,8 @@ export default {
     const loginId = ref("");
     const password = ref("");
     const user = ref({})
+    const router = useRouter()
+    const route = useRoute()
 
     const lgLogin = (loginId, password) => {
 
@@ -57,7 +60,7 @@ export default {
 
             if (res.data.resultCode == "00000") {
               cookies.set("lg.m.log", res.data.accessToken)
-              window.location.replace('/board')
+              router.replace('/board')
             } else {
               alert('로그인에 실패했습니다.')
             }
@@ -66,7 +69,7 @@ export default {
 
     const lgLogout = () => {
       cookies.remove('lg.m.log')
-      window.location.replace('/')
+      router.replace('/')
     }
 
     const memberInfo = () => {
@@ -100,7 +103,7 @@ export default {
       console.log("test")
       this.memberInfo()
     }
-  }
+  },
 }
 </script>
 

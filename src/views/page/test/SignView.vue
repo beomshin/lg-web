@@ -41,6 +41,7 @@
 <script>
 import service from "@/service/config";
 import {reactive, ref} from "vue";
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: "SignView",
@@ -57,7 +58,8 @@ export default {
     const isPost = ref(false)
     const code = ref('')
     const isVerify = ref(false)
-
+    const router = useRouter()
+    const route = useRoute()
 
     const sign = () => {
 
@@ -88,7 +90,7 @@ export default {
       })
       .then(res => {
         if (res.data.resultCode == '00000') {
-          window.location.replace('/')
+          router.replace('/')
         }
       })
     }
@@ -127,7 +129,7 @@ export default {
     }
 
     const  verify = () => {
-      service.verifyEmail(`/lg/sign/verify/email/${txId.value}`, {
+      service.verifyEmail(`/sign/verify/email/${txId.value}`, {
         code: code.value
       })
       .then(res => {

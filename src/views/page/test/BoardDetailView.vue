@@ -38,7 +38,7 @@ export default {
 
     const detail = (boardId) => {
       service.findBoard(
-          `/lg/board/find/board/${boardId}`, {}
+          `/board/find/board/${boardId}`, {}
       ).then(res => {
         console.log(res)
         board.value = res.data.data
