@@ -4,13 +4,13 @@ import post2 from "@/http/post2";
 
 export default {
     findBoards: (data: any) => {
-        return get('/board/find/boards', data);
+        return get('/be/board/find/boards', data);
     },
-    enrollAnonym: (data: any) => {
-        return post('/board/enroll/anonym', data);
+    enrollAnonym: (data: any, headers: any) => {
+        return post2('/be/board/enroll/anonym', data, headers);
     },
     enrollMember: (data: any, headers: any) => {
-        return post2('/board/pq/enroll/member', data, headers)
+        return post2('/be/board/pq/enroll/member', data, headers)
     },
     findBoard: (url: any, data: any) => {
         return get(url, data);

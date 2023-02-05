@@ -9,7 +9,8 @@
   <br><br>
   <template v-if="board.files">
     <div v-for="(item, index) in board.files" :key="index">
-      <span>파일명 : {{item.oriName}} | 파일 경로 : {{item.path}} | 파일 사이즈 : {{item.size}}</span>
+      <img :src="item.path"><br>
+      <span>파일명 : {{item.oriName}} | 파일 사이즈 : {{item.size}}</span>
     </div>
   </template>
 
@@ -38,7 +39,7 @@ export default {
 
     const detail = (boardId) => {
       service.findBoard(
-          `/board/find/board/${boardId}`, {}
+          `/be/board/find/board/${boardId}`, {}
       ).then(res => {
         console.log(res)
         board.value = res.data.data

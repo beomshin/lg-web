@@ -129,7 +129,7 @@ export default {
     }
 
     const  verify = () => {
-      service.verifyEmail(`/sign/verify/email/${txId.value}`, {
+      service.verifyEmail(`/be/sign/verify/email/${txId.value}`, {
         code: code.value
       })
       .then(res => {

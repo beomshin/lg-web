@@ -7,7 +7,7 @@ module.exports = defineConfig({
   outputDir: path.resolve(__dirname, "../lg-was/src/main/resources/static"),
   devServer : {
     proxy : {
-      '/': {
+      '/be': {
         target : 'http://localhost:19001',
         changeOrigin: true,
       }

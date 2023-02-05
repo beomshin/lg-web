@@ -34,6 +34,8 @@
           <option value="4">서폿</option>
         </select>
         <br>
+        <input type="file" @change="upload"> 파일업로드
+        <br>
         <button @click="enrollAnonym">작성하기</button>
       </div>
 
@@ -58,9 +60,10 @@ export default {
     const password = ref('')
     const title = ref('')
     const content = ref('')
-    const lineType = ref(0)
-    const router = useRouter()
-    const route = useRoute()
+    const lineType = ref(0);
+    const router = useRouter();
+    const route = useRoute();
+    const files = ref([]);
 
     const enrollAnonym = () => {
       if (!id.value) {
@@ -83,6 +86,9 @@ export default {
         , title: title.value
         , content : content.value
         , lineType: lineType.value
+        , files: files.value
+      }, {
+        'Content-Type' : 'multipart/form-data'
       })
       .then(res => {
         if (res.data.resultCode == '00000') {
@@ -119,6 +125,12 @@ export default {
     }
 
 
+    const upload = (event) => {
+      for (const file of event.target.files) {
+        files.value.push(file);
+      }
+    }
+
     return {
       id
       , password
@@ -127,6 +139,7 @@ export default {
       , lineType
       , enrollAnonym
       , enrollMember
+      , upload
     }
 
   },
