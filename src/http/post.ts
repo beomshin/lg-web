@@ -7,9 +7,9 @@ const post = (url: string, data: any, headers: any) => {
         , url: url
         , data: data
     })
-        .then(res => {
-            return res;
-        })
+    .then(res => {
+        return res;
+    })
 }
 
 export default post;

@@ -1,15 +1,17 @@
 import get from "@/http/get";
 import post from "@/http/post";
 import FindBoards from "@/dto/board/FindBoards";
+import EnrollUserBoard from "@/dto/board/EnrollUserBoard";
+import EnrollAnonymBoard from "@/dto/board/EnrollAnonymBoard";
 
 export default {
     findBoards: (data: FindBoards) => {
         return get('/be/board/find/boards', data);
     },
-    enrollAnonym: (data: any, headers: any) => {
+    enrollAnonym: (data: EnrollAnonymBoard, headers: any) => {
         return post('/be/board/enroll/anonym', data, headers);
     },
-    enrollMember: (data: any, headers: any) => {
+    enrollMember: (data: EnrollUserBoard, headers: any) => {
         return post('/be/board/pq/enroll/member', data, headers)
     },
     findBoard: (url: any, data: any) => {
