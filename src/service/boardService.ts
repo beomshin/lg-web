@@ -14,7 +14,7 @@ export default {
     enrollMember: (data: EnrollUserBoard, headers: any) => {
         return post('/be/board/pq/enroll/member', data, headers)
     },
-    findBoard: (url: any, data: any) => {
-        return get(url, data);
+    findBoard: (url: any, boardId: number, data: any) => {
+        return get(`${url}/${boardId}`, data);
     },
 }
