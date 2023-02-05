@@ -1,24 +1,5 @@
 <template>
   <h1>게시판 작성 페이지</h1>
-    <template v-if="hasLogin">
-      <h2>회원등록</h2>
-      <div>
-        제목 : <input type="text" placeholder=" 아이디" v-model="title" maxlength="32"><br>
-        내용 : <input type="text" placeholder=" 아이디" v-model="content" ><br>
-        라인타입 :
-        <select v-model="lineType">
-          <option value="0">탑</option>
-          <option value="1">정글</option>
-          <option value="2">미드</option>
-          <option value="3">원딜</option>
-          <option value="4">서폿</option>
-        </select>
-        <br>
-        <button @click="enrollMember">작성하기</button>
-      </div>
-
-    </template>
-    <template v-else>
       <h2>비회원등록</h2>
       <div>
         아이디 : <input type="text" placeholder=" 아이디" v-model="id" maxlength="16"><br>
@@ -38,8 +19,6 @@
         <br>
         <button @click="enrollAnonym">작성하기</button>
       </div>
-
-    </template>
   <hr/>
   <router-link to="/">로그인 페이지</router-link> |
   <router-link to="/board">게시판 페이지</router-link> |

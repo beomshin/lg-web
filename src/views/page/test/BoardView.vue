@@ -39,10 +39,10 @@
   <hr/>
   <router-link to="/">메인 페이지</router-link> |
   <template v-if="hasLogin">
-    <router-link to="/board/enroll">회원 게시판 작성하기</router-link>
+    <router-link to="/board/enroll/user">회원 게시판 작성하기</router-link>
   </template>
   <template v-else>
-    <router-link to="/board/enroll">비회원 게시판 작성하기</router-link>
+    <router-link to="/board/enroll/anonym">비회원 게시판 작성하기</router-link>
   </template>
   <hr/>
 </template>
