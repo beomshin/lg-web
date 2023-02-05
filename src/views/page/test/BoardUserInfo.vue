@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     Login (loginId, password) {
-      if(!this.validateLogin) {
+      if(!this.validateLogin()) {
         alert('정보입력해주세요')
       } else {
         service
