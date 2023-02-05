@@ -1,6 +1,5 @@
 <template>
   <h1>게시판 상세 페이지</h1>
-  <BoardUserInfo/>
   <h2>{{board.title}}</h2>
   <h3>글쓴이 : {{board.writer}} | 날짜 : {{board.writeDt}}</h3>
   <span>조회 : {{board.view}} | 추천 : {{board.recommendCnt}} | 댓글 : {{board.commentCnt}}</span><br><br>
@@ -27,12 +26,11 @@
 </template>
 
 <script>
-import BoardUserInfo from "@/views/page/test/BoardUserInfo";
+import BoardUserInfo from "@/views/page/test/Header";
 import {ref} from "vue";
 import service from "@/service/config";
 export default {
   name: "BoardDetailView",
-  components: {BoardUserInfo},
   setup() {
     const boardId = ref(0)
     const board = ref({})

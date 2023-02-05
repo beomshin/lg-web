@@ -1,9 +1,8 @@
 <template>
   <h1>게시판 페이지</h1>
-  <BoardUserInfo/>
   <div>
     <h2>라인</h2>
-    <select v-model="type" @change="callBoard(0, pageNum)">
+    <select v-model="type" @change="FindBoard(0, pageNum)">
       <option value="5">전체</option>
       <option value="0">탑</option>
       <option value="1">정글</option>
@@ -21,8 +20,8 @@
     <th>조회수</th>
     <th>추천수</th>
 
-    <template v-for="(item, index) in list" v-bind:key="index">
-      <tr style="cursor: pointer" @click="detailPage(item.boardId)">
+    <template v-for="(item, index) in boards" v-bind:key="index">
+      <tr class="tr" @click="detailPage(item.boardId)">
         <td>{{(index + 1) + (curPage * 10)}}</td>
         <td>{{item.title}}</td>
         <td>{{item.writer}} <strong v-if="item.tierName">({{item.tierName}})</strong></td>
@@ -34,7 +33,7 @@
   </table>
   <br>
   <template v-for="(item, index) in totalPage" :key="index">
-    <span style="cursor: pointer; font-size: 30px" @click="callBoard(index, pageNum)">{{item}}</span> |
+    <span class="page" @click="FindBoard(index, pageNum)">{{item}}</span> |
   </template>
   <br>
   <hr/>
@@ -46,51 +45,54 @@
 <script>
 import {ref} from "vue";
 import service from "@/service/config";
-import BoardUserInfo from "@/views/page/test/BoardUserInfo";
+import BoardUserInfo from "@/views/page/test/Header";
+import FindBoards from "@/dto/board/FindBoards";
 
 export default {
   name: "BoardView",
-  components: {BoardUserInfo},
   setup() {
     const page = ref(0);
     const pageNum = ref(10);
     const topic = ref(0)
     const type = ref(5)
     const list = ref([]);
+    const boards = ref([]);
     const totalPage = ref(0)
     const curPage = ref(1)
 
-    const callBoard = (page, pageNum) => {
-      service.findBoards({
-        page: page
-        , pageNum: pageNum
-        , topic: topic.value
-        , type : type.value
-      })
-      .then(res => {
-        list.value = res.data.data.boards
-        totalPage.value = res.data.data.totalPage
-        curPage.value = page
-      })
-
-    }
-
     return {
-      callBoard,
       list,
       page,
+      topic,
       type,
       totalPage,
       curPage,
-      pageNum
+      pageNum,
+      boards
     }
   },
   mounted() {
-    this.callBoard(this.page, this.pageNum)
+    this.FindBoard(this.page, this.pageNum)
   },
   methods: {
+    FindBoard(page, pageNum) {
+      service
+          .findBoards(new FindBoards(page, pageNum, this.topic, this.type))
+          .then(res => {
+            if (res.data.resultCode == "00000") {
+              this.boards = res.data.data.boards
+              this.totalPage = res.data.data.totalPage
+              this.curPage = page
+            } else {
+              alert('게시판을 불러오는데 실패했습니다.')
+            }
+          })
+          .catch(err => {
+            alert('게시판을 불러오는데 실패했습니다.')
+          })
+
+    },
     detailPage (boardId) {
-      console.log(boardId)
       this.$router.push({
         name: 'BoardDetailView',
         query: {
@@ -103,5 +105,17 @@ export default {
 </script>
 
 <style scoped>
-
+  .tr {
+    cursor: pointer;
+  }
+  .tr:hover {
+    background-color: gray;
+  }
+  .page {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .page:hover {
+    color: gold;
+  }
 </style>

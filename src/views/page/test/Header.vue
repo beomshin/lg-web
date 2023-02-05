@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>유저</h2>
+    <h2>헤더</h2>
     <div>
 
       <template v-if="hasLogin">
@@ -49,11 +49,12 @@ export default {
         if (!loginId.value || !password.value) return false
         else return true
     }
+
     return {
       loginId,
       password,
       user,
-      validateLogin
+      validateLogin,
     }
   },
   mounted() {
@@ -70,7 +71,7 @@ export default {
   methods: {
     Login (loginId, password) {
       if(!this.validateLogin()) {
-        alert('정보입력해주세요')
+        alert('아이디 또는 비밀번호를 입력해주세요')
       } else {
         service
             .login(new LoginMember(loginId, password), null)

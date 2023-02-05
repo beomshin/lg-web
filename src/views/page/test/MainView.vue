@@ -1,7 +1,4 @@
 <template>
-  <h1>로그인 페이지</h1>
-  <hr/>
-  <BoardUserInfo/>
   <router-link to="/board">게시판 페이지</router-link> |
   <template v-if="!hasLogin">
     <router-link to="/sign">회원가입 페이지</router-link>
@@ -15,13 +12,12 @@
 </template>
 
 <script>
-import BoardUserInfo from "@/views/page/test/BoardUserInfo";
+import BoardUserInfo from "@/views/page/test/Header";
 import {useCookies} from "vue3-cookies";
 const { cookies } = useCookies();
 
 export default {
   name: 'MainView',
-  components: {BoardUserInfo},
   computed: {
     hasLogin () {
       if (cookies.isKey('lg.m.log')) return true
