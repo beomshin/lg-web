@@ -1,4 +1,5 @@
 <template>
+  <h1>메인 페이지</h1>
   <router-link to="/board">게시판 페이지</router-link> |
   <template v-if="!hasLogin">
     <router-link to="/sign">회원가입 페이지</router-link>

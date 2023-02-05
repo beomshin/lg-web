@@ -37,16 +37,22 @@
   </template>
   <br>
   <hr/>
-  <router-link to="/">로그인 페이지</router-link> |
-  <router-link to="/board/enroll">게시판 작성하기</router-link> |
+  <router-link to="/">메인 페이지</router-link> |
+  <template v-if="hasLogin">
+    <router-link to="/board/enroll">회원 게시판 작성하기</router-link>
+  </template>
+  <template v-else>
+    <router-link to="/board/enroll">비회원 게시판 작성하기</router-link>
+  </template>
   <hr/>
 </template>
 
 <script>
 import {ref} from "vue";
 import service from "@/service/config";
-import BoardUserInfo from "@/views/page/test/Header";
 import FindBoards from "@/dto/board/FindBoards";
+import { useCookies } from 'vue3-cookies'
+const { cookies } = useCookies();
 
 export default {
   name: "BoardView",
@@ -73,6 +79,12 @@ export default {
   },
   mounted() {
     this.FindBoard(this.page, this.pageNum)
+  },
+  computed: {
+    hasLogin () {
+      if (cookies.isKey('lg.m.log')) return true
+      return false
+    }
   },
   methods: {
     FindBoard(page, pageNum) {
