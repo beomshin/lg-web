@@ -78,7 +78,7 @@ export default {
               if (res.data.resultCode == "00000") {
                 cookies.set("lg.m.log", res.data.accessToken)
                 this.hasLogin = true
-                window.location.replace('/board')
+                window.location.replace('/')
               } else {
                 alert('로그인에 실패했습니다.')
               }
