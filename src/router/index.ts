@@ -30,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/board/detail',
     name: 'BoardDetailView',
     component: () => import('../views/page/test/BoardDetailView.vue')
+  },
+  {
+    path: '/board/update',
+    name: 'BoardUpdateView',
+    component: () => import('../views/page/test/BoardUpdateView.vue')
   }
 ]
 

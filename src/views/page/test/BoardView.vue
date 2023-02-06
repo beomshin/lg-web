@@ -94,7 +94,6 @@ export default {
   },
   methods: {
     FindBoard(page, pageNum) {
-      if (page == this.curPage) return
       service
           .findBoards(new FindBoards(page, pageNum, this.topic, this.type))
           .then(res => {
