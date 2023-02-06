@@ -6,6 +6,7 @@ import EnrollAnonymBoard from "@/dto/board/EnrollAnonymBoard";
 import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import UpdateBoard from "@/dto/member/UpdateBoard";
+import RecommendBoard from "@/dto/member/RecommendBoard";
 
 export default {
     findBoards: (data: FindBoards) => {
@@ -34,5 +35,8 @@ export default {
     },
     updateBoard: (data: UpdateBoard, headers: any) => {
         return post('/be/board/update', data, headers);
+    },
+    recommendBoard: (data: RecommendBoard, headers: any) => {
+        return post('/be/board/pq/recommend', data, headers);
     }
 }

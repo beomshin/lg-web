@@ -4,9 +4,10 @@
     <h1>게시판 상세 페이지</h1>
     <hr/>
     <div style="margin-top: 10px; margin-bottom: 10px">
-      <button class="btn btn-primary" @click="() => this.type = 1">수정하기</button>
+      <button class="btn btn-success" @click="Recommend">추천하기</button>
+      <button class="btn btn-primary" style="margin-left: 5px" @click="() => this.type = 1">수정하기</button>
       <button class="btn btn-danger" style="margin-left: 5px" @click="() => this.type = 2">삭제하기</button>
-      <button class="btn btn-secondary" @click="() => this.type = 0" style="margin-left: 5px">닫기</button>
+      <button class="btn btn-secondary" @click="Back" style="margin-left: 5px">닫기</button>
       <div class="input-group mb-3" style="margin-top: 5px" v-if="!type == 0">
         <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="password">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="VerifyPassword">
@@ -84,6 +85,9 @@ import {ref} from "vue";
 import service from "@/service/config";
 import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
+import {useCookies} from "vue3-cookies";
+import RecommendBoard from "@/dto/member/RecommendBoard";
+const { cookies } = useCookies();
 
 export default {
   name: "BoardDetailView",
@@ -100,6 +104,12 @@ export default {
   },
   mounted() {
     this.BoardDetail(this.$route.query.boardId)
+  },
+  computed: {
+    hasLogin () {
+      if (cookies.isKey('lg.m.log')) return true
+      return false
+    }
   },
   methods: {
     BoardDetail (boardId) {
@@ -156,6 +166,29 @@ export default {
       }
 
       this.password = ''
+    },
+    Recommend() {
+      if (!this.hasLogin) {
+        alert('로그인 유저만 가능합니다.')
+        return
+      }
+      let token = 'Bearer ' + cookies.get('lg.m.log');
+      let request = new RecommendBoard(this.board.boardId)
+      service
+          .recommendBoard(request, {Authorization: token})
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              alert('추천하기 성공했습니다.')
+              this.board.recommendCnt += 1
+            } else if (res.data.resultCode == '10016') {
+              alert('이미 추천하셨습니다.')
+            } else {
+              alert('추천하기 실패했습니다.')
+            }
+          })
+          .catch(err => {
+            alert('추천하기 실패했습니다.')
+          })
     }
   }
 }
