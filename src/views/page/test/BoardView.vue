@@ -1,49 +1,55 @@
 <template>
-  <h1>게시판 페이지</h1>
-  <div>
-    <h2>라인</h2>
-    <select v-model="type" @change="FindBoard(0, pageNum)">
-      <option value="5">전체</option>
-      <option value="0">탑</option>
-      <option value="1">정글</option>
-      <option value="2">미드</option>
-      <option value="3">원딜</option>
-      <option value="4">서폿</option>
-    </select>
+  <div class="lgBoard">
+    <hr>
+    <h1>게시판 페이지</h1>
+
+    <div style="margin-top: 5px; margin-bottom: 5px">
+      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum)">
+        <option value="5">전체</option>
+        <option value="0">탑</option>
+        <option value="1">정글</option>
+        <option value="2">미드</option>
+        <option value="3">원딜</option>
+        <option value="4">서폿</option>>
+      </select>
+      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="MoveDetail">글쓰기</button>
+    </div>
+
+    <div style="width: 1200px">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">글쓴이</th>
+          <th scope="col">작성일</th>
+          <th scope="col">조회수</th>
+          <th scope="col">추천수</th>
+        </tr>
+        </thead>
+        <tbody>
+          <template v-for="(item, index) in boards" v-bind:key="index">
+            <tr class="tr" @click="detailPage(item.boardId)" style="cursor: pointer">
+              <td>{{(index + 1) + (curPage * 10)}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.writer}} <strong v-if="item.tierName">({{item.tierName}})</strong></td>
+              <td>{{item.writeDt}}</td>
+              <td>{{item.view}}</td>
+              <td>{{item.recommendCnt}}</td>
+            </tr>
+          </template>
+        </tbody>
+
+        <nav aria-label="Page navigation example" style="cursor: pointer; margin-top: 5px">
+          <ul class="pagination">
+            <template v-for="(item, index) in totalPage" :key="index">
+              <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum)">{{item}}</a></li>
+            </template>
+          </ul>
+        </nav>
+      </table>
+    </div>
   </div>
-
-  <table border="1" >
-    <th>번호</th>
-    <th>제목</th>
-    <th>글쓴이</th>
-    <th>작성일</th>
-    <th>조회수</th>
-    <th>추천수</th>
-
-    <template v-for="(item, index) in boards" v-bind:key="index">
-      <tr class="tr" @click="detailPage(item.boardId)">
-        <td>{{(index + 1) + (curPage * 10)}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.writer}} <strong v-if="item.tierName">({{item.tierName}})</strong></td>
-        <td>{{item.writeDt}}</td>
-        <td>{{item.view}}</td>
-        <td>{{item.recommendCnt}}</td>
-      </tr>
-    </template>
-  </table>
-  <br>
-  <template v-for="(item, index) in totalPage" :key="index">
-    <span class="page" @click="FindBoard(index, pageNum)">{{item}}</span> |
-  </template>
-  <br>
-  <hr/>
-  <router-link to="/">메인 페이지</router-link> |
-  <template v-if="hasLogin">
-    <router-link to="/board/enroll/user">회원 게시판 작성하기</router-link>
-  </template>
-  <template v-else>
-    <router-link to="/board/enroll/anonym">비회원 게시판 작성하기</router-link>
-  </template>
   <hr/>
 </template>
 
@@ -88,6 +94,7 @@ export default {
   },
   methods: {
     FindBoard(page, pageNum) {
+      if (page == this.curPage) return
       service
           .findBoards(new FindBoards(page, pageNum, this.topic, this.type))
           .then(res => {
@@ -111,23 +118,22 @@ export default {
           boardId: boardId
         }
       })
+    },
+    MoveDetail() {
+      if (this.hasLogin) {
+        this.$router.push('/board/enroll/user')
+      } else {
+        this.$router.push('/board/enroll/anonym')
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-  .tr {
-    cursor: pointer;
-  }
-  .tr:hover {
-    background-color: gray;
-  }
-  .page {
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .page:hover {
-    color: gold;
+  .lgBoard {
+    margin-top: 20px;
+    padding-left: 10px;
+
   }
 </style>
