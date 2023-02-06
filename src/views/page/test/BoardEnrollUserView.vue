@@ -1,37 +1,53 @@
 <template>
-  <h1>게시판 작성 페이지</h1>
-      <h2>회원등록</h2>
-      <div>
-        제목 : <input type="text" placeholder=" 아이디" v-model="title" maxlength="32"><br><br>
-        내용 : <input type="text" placeholder=" 아이디" v-model="content" ><br><br>
-        라인타입 :
-        <select v-model="lineType">
+  <div class="enrollBoard">
+    <hr>
+    <h1>회원 게시판 작성</h1>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">제목</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" v-model="title" maxlength="32" placeholder="제목">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content" ></textarea>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">라인타입</label>
+      <div class="col-sm-10">
+        <select class="form-select" aria-label="Default select example" v-model="lineType">
           <option value="0">탑</option>
           <option value="1">정글</option>
           <option value="2">미드</option>
           <option value="3">원딜</option>
           <option value="4">서폿</option>
         </select>
-        <br><br>
-        <input type="file" @change="UploadFile"> 파일업로드 <br>
-        <div v-if="this.files && this.files.length > 0">
-          <p>등록 파일</p>
-          <template v-for="(file, index) in files" :key="index">
-              <span>{{index + 1}}번 | 파일명 : {{file.name}} || 파일 사이즈 : {{file.size}}</span>
-              <button @click="DeleteFile(index)">삭제</button>
-            <br>
-          </template>
-        </div>
-        <br>
-
-        {{this.files.length}}
-        <button @click="EnrollBoard">작성하기</button>
       </div>
-  <br>
-  <hr/>
-  <router-link to="/">로그인 페이지</router-link> |
-  <router-link to="/board">게시판 페이지</router-link> |
-  <hr/>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <div class="input-group col-sm-10">
+        <input type="file" class="form-control" id="inputGroupFile02" @change="UploadFile">
+        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">등록 파일</label>
+      <div class="input-group col-sm-10">
+        <ul class="list-group">
+          <template v-for="(file, index) in files" :key="index">
+            <li class="list-group-item">파일명 : {{file.name}}, 사이즈 : {{file.size}}</li>
+            <button class="btn btn-secondary" @click="DeleteFile(index)">삭제</button>
+          </template>
+        </ul>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" @click="EnrollBoard">작성하기</button>
+  </div>
+  <hr>
 </template>
 
 <script>
@@ -119,5 +135,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .enrollBoard {
+    margin-top: 20px;
+    padding-left: 10px;
+    width: 600px;
+  }
 </style>

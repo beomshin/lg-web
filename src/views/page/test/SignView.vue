@@ -255,6 +255,7 @@ export default {
 
 <style scoped>
   .sign {
+    margin-top: 20px;
     padding-left: 10px;
     width: 1000px;
   }
