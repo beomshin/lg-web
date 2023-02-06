@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <label for="inputEmail3" class="col-sm-2 col-form-label">파일</label>
       <div class="input-group col-sm-10">
         <input type="file" class="form-control" id="inputGroupFile02" @change="UploadFile">
         <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -44,8 +44,8 @@
         </ul>
       </div>
     </div>
-
-    <button class="btn btn-secondary" @click="EnrollBoard">작성하기</button>
+    <button class="btn btn-secondary" @click="Back">취소</button>
+    <button class="btn btn-secondary" @click="EnrollBoard" style="margin-left: 5px">작성하기</button>
   </div>
   <hr>
 </template>
@@ -130,6 +130,9 @@ export default {
             })
       }
     },
+    Back () {
+      window.history.back()
+    }
   },
 }
 </script>

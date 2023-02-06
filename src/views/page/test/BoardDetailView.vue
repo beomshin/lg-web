@@ -1,37 +1,70 @@
 <template>
-  <h1>게시판 상세 페이지</h1>
-  <router-link to="/board">게시판 페이지</router-link>
-  <hr>
-  <h2>제목: {{board.title}}</h2>
-  <hr>
-  <v-btn
-      color="secondary"
-      elevation="2"
-      x-small
-  >테스트</v-btn>
-  <button>게시판삭제</button> | <button>게시판 수정</button>
-  <hr>
-  <h3>글쓴이 : {{board.writer}} | 날짜 : {{board.writeDt}}</h3>
-  <h3>조회 : {{board.view}} | 추천 : {{board.recommendCnt}} | 댓글 : {{board.commentCnt}}</h3>
-  <h3>티어 : {{board?.tierName }} | 게시판 타입 : {{board.postName}}타입</h3>
-  <br>
-  <div>
-    <h2>내용</h2>
-    내용
-    <p>
-      {{board.content}}
-    </p>
-  </div>
-  <br><br>
-  <template v-if="board.files">
-    <div v-for="(item, index) in board.files" :key="index">
-      <img :src="item.path"><br>
-      <span>파일명 : {{item.oriName}}</span>
+  <div class="boardDetail">
+    <hr>
+    <h1>게시판 상세 페이지</h1>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">제목</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.title">
+      </div>
     </div>
-  </template>
-  <br>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">작성일</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.writeDt">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">글쓴이</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.writer">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">조회수</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.view">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">추천수</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.recommendCnt">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">댓글수</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.commentCnt">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">티어</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board?.tierName || '미정'">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">타입</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.postName + '타입'">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" aria-label="With textarea" placeholder="내용" disabled :value="board.content" ></textarea>
+      </div>
+    </div>
+    <template v-if="board.files">
+      <div v-for="(item, index) in board.files" :key="index">
+        <img :src="item.path" class="img-thumbnail">
+      </div>
+    </template><br>
+    <button class="btn btn-secondary" @click="Back">뒤로가기</button>
+  </div>
   <hr>
-  <router-link to="/board">게시판 페이지</router-link> |
+
 </template>
 
 <script>
@@ -58,11 +91,18 @@ export default {
             this.board = res.data.data
           })
 
+    },
+    Back() {
+      window.history.back()
     }
   }
 }
 </script>
 
 <style scoped>
-
+.boardDetail {
+  margin-top: 20px;
+  padding-left: 10px;
+  width: 600px;
+}
 </style>

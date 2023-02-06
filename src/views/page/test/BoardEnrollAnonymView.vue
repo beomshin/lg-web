@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <label for="inputEmail3" class="col-sm-2 col-form-label">파일</label>
       <div class="input-group col-sm-10">
         <input type="file" class="form-control" id="inputGroupFile02" @change="UploadFile">
         <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -56,7 +56,8 @@
         </ul>
       </div>
     </div>
-    <button class="btn btn-secondary" @click="EnrollAnonym">작성하기</button>
+    <button class="btn btn-secondary" @click="Back">취소</button>
+    <button class="btn btn-secondary" @click="EnrollAnonym" style="margin-left: 5px">작성하기</button>
   </div>
   <hr/>
 </template>
@@ -87,10 +88,10 @@ export default {
         alert('비밀번호 입력해주세요.')
         return false
       } else if (!title.value) {
-        alert('이메일 인증해주세요.')
+        alert('제목을 입력해주세요.')
         return false
       } else if (!content.value) {
-        alert('닉네임 입력해주세요.')
+        alert('내용을 입력해주세요.')
         return false
       } else {
         return true
@@ -155,6 +156,9 @@ export default {
               alert('게시글 등록에 실패했습니다.')
             })
       }
+    },
+    Back () {
+      window.history.back()
     }
   }
 }
