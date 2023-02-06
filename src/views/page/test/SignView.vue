@@ -1,40 +1,62 @@
 <template>
-  <h1>회원가입 페이지</h1>
-  <div>
-      아이디 : <input type="text" placeholder=" 아이디" v-model="loginId" maxlength="16" @change="ChangeId" :disabled="isLoginId">
-      <button @click="CheckOverlapId" v-if="!isLoginId">아이디 조회</button>
-    <br>
-      비밀번호 : <input type="password" placeholder="패스워드" v-model="password">
-
-    <br>
-      이메일 : <input type="text" placeholder="이메일" v-model="email1" :disabled="isVerify">@
-      <select v-model="email2" :disabled="isVerify">
-        <option value="@naver.com">naver.com</option>
-        <option value="@gmail.com">gmail.com</option>
-        <option value="@daum.net">daum.net</option>
-      </select>
-      <button @click="PostEmail" v-if="!isVerify">이메일 인증</button>
-      <template v-if="isPost">
-        <br>
-        <div>
-          <input type="text" v-model="code">
-          <button @click="VerifyEmail">인증하기</button>
+  <div class="sign">
+    <hr>
+    <h1>회원가입 페이지</h1>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" v-model="loginId" maxlength="16" @change="ChangeId" :disabled="isLoginId" placeholder="아이디">
+          <button type="button" class="btn btn-secondary" @click="CheckOverlapId" v-if="!isLoginId" style="margin-top: 3px">아이디 조회</button>
         </div>
-      </template>
-    <br>
-      닉네임 : <input type="text" placeholder="닉네임" v-model="nickName">
-    <br>
-      개인정보유효기간:
-      <select v-model="personalPeriod">
-        <option value="1">1년</option>
-        <option value="3">3년</option>
-        <option value="5">5년</option>
-      </select>
-    <br>
-      <button @click="Sign">회원가입</button>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">패스워드</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" v-model="password" placeholder="패스워드">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">이메일</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" v-model="email1" placeholder="이메일" :disabled="isVerify">
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">@</span>
+            <select class="form-select" aria-label="Default select example" v-model="email2" :disabled="isVerify">
+              <option value="@naver.com">naver.com</option>
+              <option value="@gmail.com">gmail.com</option>
+              <option value="@daum.net">daum.net</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-secondary" @click="PostEmail" v-if="!isVerify" style="margin-top: 3px">이메일 인증</button>
+        </div>
+      </div>
+      <div class="row mb-3" v-if="isPost">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">인증번호</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" v-model="code">
+          <button type="button" class="btn btn-secondary" @click="VerifyEmail" style="margin-top: 3px">인증하기</button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">닉네임</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" v-model="nickName">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">개인정보유효기간</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" v-model="personalPeriod">
+            <option value="1">1년</option>
+            <option value="3">3년</option>
+            <option value="5">5년</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="Sign">회원가입</button>
   </div>
-  <hr>
-  <router-link to="/">로그인 페이지</router-link>
   <hr>
 </template>
 
@@ -232,5 +254,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .sign {
+    padding-left: 10px;
+    width: 1000px;
+  }
 </style>

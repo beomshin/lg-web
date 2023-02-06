@@ -1,0 +1,121 @@
+<template>
+  <div class="login">
+      <template v-if="hasLogin">
+        <div class="card" style="width: 23rem;">
+          <img class="card-img-top" >
+          <div class="card-body">
+            <h5 class="card-title">닉네임 : {{user?.nickName || '-'}} 님</h5>
+            <p class="card-text">나의 티어 : {{user?.tierName || '미정'}}, 내 로펌 : {{user?.lawFirmName || '없음'}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">미열람 알림함 개수 : {{user?.alarmCnt}}개</li>
+            <li class="list-group-item">게시판 작성수 : {{user?.boardCnt}}개</li>
+            <li class="list-group-item">재판 작성수 : {{user?.trialCount}}개</li>
+          </ul>
+          <div class="card-body">
+            <a class="card-link" style="cursor: pointer" @click="Logout">로그아웃</a>
+            <a class="card-link" style="cursor: pointer" >아이디 찾기</a>
+            <a class="card-link" style="cursor: pointer" >비밀번호 찾기</a>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <div style="width: 500px">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">아이디</label>
+              <input type="text" class="form-control" v-model="loginId" placeholder="로그인 아이디">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">패스워드</label>
+              <input type="password" class="form-control" v-model="password" placeholder="로그인 패스워드">
+            </div>
+            <button type="button" class="btn btn-secondary" @click="Login(loginId, password)">로그인</button>
+            <button type="button" class="btn btn-secondary" style="margin-left: 5px" @click="MoveSign" >회원가입</button>
+          </form>
+        </div>
+      </template>
+  </div>
+</template>
+
+<script>
+import {useCookies} from "vue3-cookies";
+import {ref} from "vue";
+import service from "@/service/config";
+import LoginMember from "@/dto/member/LoginMember";
+const { cookies } = useCookies();
+
+
+export default {
+  name: "BoardUserInfo",
+  setup () {
+    const loginId = ref("");
+    const password = ref("");
+    const user = ref({})
+
+    const validateLogin = () => {
+        if (!loginId.value || !password.value) return false
+        else return true
+    }
+
+    return {
+      loginId,
+      password,
+      user,
+      validateLogin,
+    }
+  },
+  mounted() {
+    if (this.hasLogin) {
+      this.MemberInfo()
+    }
+  },
+  computed: {
+    hasLogin () {
+      if (cookies.isKey('lg.m.log')) return true
+      return false
+    }
+  },
+  methods: {
+    Login (loginId, password) {
+      if(!this.validateLogin()) {
+        alert('아이디 또는 비밀번호를 입력해주세요')
+      } else {
+        service
+            .login(new LoginMember(loginId, password), null)
+            .then(res => {
+              if (res.data.resultCode == "00000") {
+                cookies.set("lg.m.log", res.data.accessToken)
+                this.hasLogin = true
+                window.location.replace('/')
+              } else {
+                alert('로그인에 실패했습니다.')
+              }
+            })
+      }
+    },
+    Logout() {
+      cookies.remove('lg.m.log')
+      window.location.replace('/')
+    },
+    MemberInfo() {
+      let token = 'Bearer ' + cookies.get('lg.m.log');
+      service
+          .memberInfo(null, {Authorization: token})
+          .then(res => {
+            this.user = res.data.data
+          })
+    },
+    MoveSign() {
+      this.$router.push('/sign')
+    }
+  },
+}
+</script>
+
+<style scoped>
+  .login {
+    margin-top: 30px;
+    padding-left: 10px;
+  }
+</style>

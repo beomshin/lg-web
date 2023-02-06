@@ -1,33 +1,25 @@
 <template>
-  <h1>메인 페이지</h1>
-  <router-link to="/board">게시판 페이지</router-link> |
-  <template v-if="!hasLogin">
-    <router-link to="/sign">회원가입 페이지</router-link>
-  </template>
-  <template v-else>
-    <router-link to="/sign">아이디 찾기</router-link> |
-    <router-link to="/sign">비밀번호 찾기</router-link>
-  </template>
-  <hr>
-
+  <div class="main">
+    <hr>
+    <h1>메인 페이지</h1>
+    <p>준비중....</p>
+    <hr>
+  </div>
 </template>
 
 <script>
-import BoardUserInfo from "@/views/page/test/Header";
 import {useCookies} from "vue3-cookies";
 const { cookies } = useCookies();
 
 export default {
   name: 'MainView',
-  computed: {
-    hasLogin () {
-      if (cookies.isKey('lg.m.log')) return true
-      return false
-    }
-  },
 }
 </script>
 
 <style scoped>
+  .main {
+    margin-top: 20px;
+    padding-left: 10px;
 
+  }
 </style>

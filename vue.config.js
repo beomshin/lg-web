@@ -16,5 +16,5 @@ module.exports = defineConfig({
   configureWebpack: config => {
     config.output.filename = 'js/[name].[hash].js'
     config.output.chunkFilename = 'js/[name].[hash].js'
-  }
+  },
 })
