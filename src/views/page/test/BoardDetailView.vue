@@ -78,10 +78,14 @@
     <BoardComment
       :boardId="this.board.boardId"
       :hasLogin="hasLogin"
-      :comments="comments"
-      :commentCnt="commentCnt"
       @ReFindComment="ReFindComment"
     />
+    <BoardComments
+        :boardId="this.board.boardId"
+        :hasLogin="hasLogin"
+        :comments="comments"
+        :commentCnt="commentCnt"
+      />
     <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
   <hr>
@@ -95,11 +99,12 @@ import DeleteBoard from "@/dto/member/DeleteBoard";
 import {useCookies} from "vue3-cookies";
 import RecommendBoard from "@/dto/member/RecommendBoard";
 import BoardComment from "@/views/page/test/BoardComment";
+import BoardComments from "@/views/page/test/BoardComments";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardDetailView",
-  components: {BoardComment},
+  components: {BoardComments, BoardComment},
   setup() {
     const board = ref({})
     const type = ref(0)
