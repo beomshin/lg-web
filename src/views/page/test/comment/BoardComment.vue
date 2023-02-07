@@ -23,10 +23,10 @@
             >삭제</button>
           </div>
         </button>
-        <BoardChildrenComment
+        <BoardCommentChildren
             v-if="index == activeIndex"
-          :title="'대댓글달기'"
-          :btn-title="'대댓글달기'"
+            :board-id="this.boardId"
+            :parent-id="parentId(item)"
         />
 
 
@@ -48,12 +48,12 @@
 <script>
 import {ref} from "vue";
 import { useCookies } from 'vue3-cookies'
-import BoardChildrenComment from "@/views/page/test/comment/BoardChildrenComment";
+import BoardCommentChildren from "@/views/page/test/comment/BoardCommentChildren";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardComments",
-  components: {BoardChildrenComment},
+  components: {BoardCommentChildren},
   props: ['boardId','comments', 'totalCommentCnt'],
   setup() {
     const activeIndex = ref(-1)
@@ -67,6 +67,13 @@ export default {
       if (index == this.activeIndex) this.activeIndex = -1
       else this.activeIndex = index
     },
+    parentId(comment) {
+      if (comment.depth == 1) {
+        return comment.boardCommentId
+      } else if (comment.depth == 2) {
+        return comment.bundleId
+      }
+    }
   }
 
 }

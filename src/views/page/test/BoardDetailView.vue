@@ -75,7 +75,7 @@
         <img :src="item.path" class="img-thumbnail">
       </div>
     </template><br>
-    <BoardEnrollComment
+    <BoardCommentParent
       :boardId="this.board.boardId"
       :parent-id="board.boardCommentId"
     />
@@ -96,14 +96,14 @@ import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import {useCookies} from "vue3-cookies";
 import RecommendBoard from "@/dto/member/RecommendBoard";
-import BoardEnrollComment from "@/views/page/test/comment/BoardEnrollComment";
+import BoardCommentParent from "@/views/page/test/comment/BoardCommentParent";
 import BoardComment from "@/views/page/test/comment/BoardComment";
 const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: "BoardDetailView",
-  components: {BoardComment, BoardEnrollComment},
+  components: {BoardComment, BoardCommentParent},
   setup() {
     const router = useRouter()
     const route = useRoute()
