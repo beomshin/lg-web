@@ -109,7 +109,7 @@ export default {
       service
           .findBoard(`/be/board/find/board`, boardId, null)
           .then(res => {
-            this.board = res.data.data
+            this.board = res.data.data.board
           })
     },
     Back() {
