@@ -8,6 +8,7 @@ import DeleteBoard from "@/dto/member/DeleteBoard";
 import UpdateBoard from "@/dto/member/UpdateBoard";
 import RecommendBoard from "@/dto/member/RecommendBoard";
 import EnrollBoardMemberComment from "@/dto/member/EnrollBoardAnonymComment";
+import DeleteComment from "@/dto/member/DeleteComment";
 
 export default {
     findBoards: (data: FindBoards) => {
@@ -48,5 +49,8 @@ export default {
     },
     findComments: (url: any, boardId: number, data: any) => {
         return get(`${url}/${boardId}`, data);
+    },
+    deleteComment: (data: DeleteComment, headers: any) =>  {
+        return post('/be/board/comment/delete', data, headers);
     }
 }
