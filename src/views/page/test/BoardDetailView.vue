@@ -78,6 +78,9 @@
     <BoardComment
       :boardId="this.board.boardId"
       :hasLogin="hasLogin"
+      :comments="comments"
+      :commentCnt="commentCnt"
+      @ReFindComment="ReFindComment"
     />
     <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
@@ -101,15 +104,20 @@ export default {
     const board = ref({})
     const type = ref(0)
     const password = ref('')
+    const comments = ref([])
+    const commentCnt = ref(0)
 
     return {
       board,
       type,
-      password
+      password,
+      comments,
+      commentCnt
     }
   },
   mounted() {
     this.BoardDetail(this.$route.query.boardId)
+    this.FindComments(this.$route.query.boardId)
   },
   computed: {
     hasLogin () {
@@ -123,6 +131,21 @@ export default {
           .findBoard(`/be/board/find/board`, boardId, null)
           .then(res => {
             this.board = res.data.data
+          })
+    },
+    FindComments (boardId) {
+      service
+          .findComments('/be/board/find/board/comment', boardId, null)
+          .then(res => {
+            if (res.data.resultCode == '00000') {
+              this.comments = res.data.data.comments
+              this.commentCnt = res.data.data?.totalElements || 0
+            } else {
+              alert('댓글 조회 실패')
+            }
+          })
+          .catch(err => {
+            alert('댓글 조회 실패')
           })
     },
     Back() {
@@ -195,6 +218,9 @@ export default {
           .catch(err => {
             alert('추천하기 실패했습니다.')
           })
+    },
+    ReFindComment() {
+      this.FindComments(this.board.boardId)
     }
   }
 }

@@ -45,5 +45,8 @@ export default {
     },
     enrollAnonymComment: (data: EnrollBoardMemberComment, headers: any) => {
         return post('/be/board/enroll/comment/anonym', data, headers);
+    },
+    findComments: (url: any, boardId: number, data: any) => {
+        return get(`${url}/${boardId}`, data);
     }
 }
