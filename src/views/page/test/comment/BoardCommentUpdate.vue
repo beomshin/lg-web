@@ -33,10 +33,19 @@ export default {
   setup() {
     const text = ref('')
     const password = ref('')
+    const validate = () => {
+      if (!text.value) {
+        alert('내용을 입력하세요')
+        return false
+      } else {
+        return true
+      }
+    }
 
     return {
       text,
-      password
+      password,
+      validate
     }
   },
   mounted() {
@@ -44,6 +53,7 @@ export default {
   },
   methods: {
     UpdateComment() {
+      if (!this.validate()) return
       let request = new UpdateComment(this.boardCommentId, this.password, this.text)
         service
             .updateComment(request, null)
