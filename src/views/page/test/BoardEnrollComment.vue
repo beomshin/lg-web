@@ -45,57 +45,40 @@ export default {
     const password = ref('')
     const content = ref('')
 
+    const validate1 = () => {
+      if (!content.value) {
+        alert('내용을 입력해주세요')
+        return false
+      }
+      return true
+    }
+
+    const validate2 = () => {
+      if (!content.value) {
+        alert('내용을 입력해주세요')
+        return false
+      } else if (!id.value) {
+        alert('아이디를 입력해주세요')
+        return false
+      } else if (!password.value) {
+        alert('패스워드를 입력해주세요')
+        return false
+      }
+      return true
+    }
+
     return {
       id,
       password,
       content,
+      validate1,
+      validate2
     }
   },
   methods: {
     Enroll() {
-      if (this.hasLogin) {
-        this.EnrollMemberComment();
-      } else {
-        this.EnrollAnonymComment();
-      }
-    },
-    EnrollMemberComment() {
-      const request = new EnrollBoardMemberComment(this.boardId, null, this.content, 1)
-      let token = 'Bearer ' + cookies.get('lg.m.log');
-      service
-          .enrollMemberComment(request, {
-            "Authorization": token
-          })
-          .then(res => {
-            if(res.data.resultCode == '00000') {
-              alert('댓글 등록 성공')
-              this.content = ''
-              this.$emit('ReFindComment')
-            } else {
-              alert('댓글 등록 실패')
-            }
-          })
-          .catch(err => {
-            alert('댓글 등록 실패')
-          })
-    },
-    EnrollAnonymComment() {
-      const request = new EnrollBoardAnonymComment(this.boardId, null, this.id, this.password, this.content, 1)
-      service
-          .enrollAnonymComment(request, null)
-          .then(res => {
-            if(res.data.resultCode == '00000') {
-              this.content = ''
-              this.$emit('ReFindComment')
-              alert('댓글 등록 성공')
-            } else {
-              alert('댓글 등록 실패')
-            }
-          })
-          .catch(err => {
-            alert('댓글 등록 실패')
-          })
-    },
+      this.$emit('Enroll')
+    }
   }
 }
 </script>
