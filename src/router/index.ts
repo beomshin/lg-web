@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/board/enroll/anonym',
     name: 'BoardEnrollAnonymView',
-    component: () => import('../views/page/test/comment/BoardEnrollAnonymView.vue')
+    component: () => import('../views/page/test/BoardEnrollAnonymView.vue')
   },
   {
     path: '/board/enroll/user',

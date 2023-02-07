@@ -77,13 +77,10 @@
     </template><br>
     <BoardEnrollComment
       :boardId="this.board.boardId"
-      :hasLogin="hasLogin"
       :parent-id="board.boardCommentId"
-      @ReFindComment="ReFindComment"
     />
     <BoardComment
         :boardId="this.board.boardId"
-        :hasLogin="hasLogin"
         :comments="comments"
         :totalCommentCnt="totalCommentCnt"
       />
@@ -102,17 +99,28 @@ import RecommendBoard from "@/dto/member/RecommendBoard";
 import BoardEnrollComment from "@/views/page/test/comment/BoardEnrollComment";
 import BoardComment from "@/views/page/test/comment/BoardComment";
 const { cookies } = useCookies();
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: "BoardDetailView",
   components: {BoardComment, BoardEnrollComment},
   setup() {
+    const router = useRouter()
+    const route = useRoute()
+    const boardId = route.query.boardId
     const board = ref({})
     const type = ref(0)
     const password = ref('')
     const comments = ref([])
     const commentCnt = ref(0)
     const totalCommentCnt = ref(0)
+    const hasLogin = () => {
+      if (cookies.isKey('lg.m.log')) return true
+      else {
+        alert('로그인 유저만 가능합니다.')
+        return false
+      }
+    }
 
     return {
       board,
@@ -120,18 +128,15 @@ export default {
       password,
       comments,
       commentCnt,
-      totalCommentCnt
+      totalCommentCnt,
+      boardId,
+      hasLogin
     }
   },
   mounted() {
-    this.BoardDetail(this.$route.query.boardId)
-    this.FindComments(this.$route.query.boardId)
-  },
-  computed: {
-    hasLogin () {
-      if (cookies.isKey('lg.m.log')) return true
-      return false
-    }
+    this.BoardDetail(this.boardId)
+    this.FindComments(this.boardId)
+    this.$emitter.on('ReFindComment', this.ReFindComment)
   },
   methods: {
     BoardDetail (boardId) {
@@ -206,10 +211,7 @@ export default {
       this.password = ''
     },
     Recommend() {
-      if (!this.hasLogin) {
-        alert('로그인 유저만 가능합니다.')
-        return
-      }
+      if (!this.hasLogin()) return;
       let token = 'Bearer ' + cookies.get('lg.m.log');
       let request = new RecommendBoard(this.board.boardId)
       service
@@ -229,7 +231,7 @@ export default {
           })
     },
     ReFindComment() {
-      this.FindComments(this.board.boardId)
+      this.FindComments(this.boardId)
     }
   }
 }

@@ -54,7 +54,7 @@ const { cookies } = useCookies();
 export default {
   name: "BoardComments",
   components: {BoardChildrenComment},
-  props: ['boardId', 'hasLogin','comments', 'totalCommentCnt'],
+  props: ['boardId','comments', 'totalCommentCnt'],
   setup() {
     const activeIndex = ref(-1)
 

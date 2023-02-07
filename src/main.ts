@@ -3,9 +3,14 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import mitt from "mitt";
 
+const app = createApp(App)
 
-createApp(App)
-    .use(store)
-    .use(router)
-    .mount('#app')
+const emitter = mitt();
+app.config.globalProperties.$emitter = emitter;
+
+app.use(store)
+app.use(router)
+app.mount('#app')
+
