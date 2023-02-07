@@ -7,6 +7,7 @@
       <button class="btn btn-success" @click="Recommend">추천하기</button>
       <button class="btn btn-primary" style="margin-left: 5px" @click="() => this.type = 1">수정하기</button>
       <button class="btn btn-danger" style="margin-left: 5px" @click="() => this.type = 2">삭제하기</button>
+      <button class="btn btn-warning" style="margin-left: 5px" @click="Report">신고하기</button>
       <button class="btn btn-secondary" @click="Back" style="margin-left: 5px">닫기</button>
       <div class="input-group mb-3" style="margin-top: 5px" v-if="!type == 0">
         <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="password">
@@ -100,6 +101,7 @@ import BoardCommentParent from "@/views/page/test/comment/BoardCommentParent";
 import BoardComment from "@/views/page/test/comment/BoardComment";
 const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
+import ReportBoard from "@/dto/member/ReportBoard";
 
 export default {
   name: "BoardDetailView",
@@ -232,6 +234,22 @@ export default {
     },
     ReFindComment() {
       this.FindComments(this.boardId)
+    },
+    Report() {
+      service
+          .reportBoard(new ReportBoard(this.board.boardId), null)
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              alert('신고하기 성공하였습니다.')
+            } else if (res.data.resultCode == '10017') {
+              alert('이미 신고하셨습니다.')
+            } else {
+              alert('신고하기 실패하였습니다.')
+            }
+          })
+          .catch(err => {
+            alert('신고하기 실패하였습니다.')
+          })
     }
   }
 }

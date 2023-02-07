@@ -11,6 +11,7 @@ import EnrollBoardMemberComment from "@/dto/member/EnrollBoardAnonymComment";
 import DeleteComment from "@/dto/member/DeleteComment";
 import EnrollBoardAnonymComment from "@/dto/member/EnrollBoardAnonymComment";
 import UpdateComment from "@/dto/member/UpdateComment";
+import ReportBoard from "@/dto/member/ReportBoard";
 
 export default {
     findBoards: (data: FindBoards) => {
@@ -57,5 +58,8 @@ export default {
     },
     updateComment: (data: UpdateComment, headers: any) =>  {
         return post('/be/board/comment/update', data, headers);
+    },
+    reportBoard: (data: ReportBoard, headers: any) =>  {
+        return post('/be/board/report', data, headers);
     }
 }
