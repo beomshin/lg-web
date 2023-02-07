@@ -45,7 +45,7 @@
       <nav aria-label="Page navigation example" style="cursor: pointer; margin-top: 5px">
         <ul class="pagination">
           <template v-for="(item, index) in totalPage" :key="index">
-            <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum)">{{item}}</a></li>
+            <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum, 0, this.subject, this.keyword)">{{item}}</a></li>
           </template>
         </ul>
       </nav>
