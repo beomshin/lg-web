@@ -1,69 +1,46 @@
 <template>
-  <div>
+  <li class="list-group-item" >
+    <h3>{{title}}</h3>
     <hr>
-    <h2>댓글 ({{this.totalCommentCnt}})개</h2>
-    <ul class="list-group">
-      <template v-for="(item, index) in comments" :key="index">
-
-        <button type="button"
-                class="list-group-item list-group-item-action"
-                :class="item.depth == 1 ? 'pink' : ''"
-                @click="Active(index)"
-        >
-          <template v-if="item.depth == 2">└ </template>{{item.content}} - {{item.writer}}
-          <div style="float: right">
-            <button
-                class="btn btn-outline-primary"
-                type="button" id="button-addon2"
-            >수정</button>
-            <button
-                class="btn btn-outline-danger"
-                type="button" id="button-addon2"
-                style="margin-left: 5px"
-            >삭제</button>
-          </div>
-        </button>
-        <BoardCommentForm
-            v-if="index == activeIndex"
-          :title="'대댓글달기'"
-          :btn-title="'대댓글달기'"
-            :Enroll="Enroll(item)"
-        />
-
-
-<!--        <li class="list-group-item"  >-->
-<!--          <div class="input-group mb-3" style="margin-top: 5px" >-->
-<!--            <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" >-->
-<!--            <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click.stop="DelteComment(item.boardCommentId)">삭제</button>-->
-<!--          </div>-->
-<!--        </li>-->
-
-
-      </template>
-
-    </ul>
-    <hr>
-  </div>
+    <div v-if="!hasLogin">
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" v-model="id" maxlength="16" placeholder="아이디">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">비밀번호</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" v-model="password" maxlength="32" placeholder="비밀번호">
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content" ></textarea>
+      </div>
+    </div>
+    <button class="btn btn-secondary" @click.stop="Enroll">{{btnTitle}}</button>
+  </li>
 </template>
 
 <script>
 import {ref} from "vue";
-import service from "@/service/config";
 import { useCookies } from 'vue3-cookies'
-import BoardCommentForm from "@/views/page/test/BoardCommentForm";
 import EnrollBoardMemberComment from "@/dto/member/EnrollBoardMemberComment";
+import service from "@/service/config";
 import EnrollBoardAnonymComment from "@/dto/member/EnrollBoardAnonymComment";
 const { cookies } = useCookies();
 
 export default {
-  name: "BoardComments",
-  components: {BoardCommentForm},
-  props: ['boardId', 'hasLogin','comments', 'totalCommentCnt'],
+  name: "BoardCommentForm",
+  props: ['title', 'btnTitle'],
   setup() {
     const id = ref('')
     const password = ref('')
     const content = ref('')
-    const activeIndex = ref(-1)
 
     const validate1 = () => {
       if (!content.value) {
@@ -91,16 +68,17 @@ export default {
       id,
       password,
       content,
-      activeIndex,
       validate1,
       validate2
     }
   },
+  computed: {
+    hasLogin () {
+      if (cookies.isKey('lg.m.log')) return true
+      return false
+    }
+  },
   methods: {
-    Active(index) {
-      if (index == this.activeIndex) this.activeIndex = -1
-      else this.activeIndex = index
-    },
     Enroll(item) {
       if (this.hasLogin) {
         this.EnrollMemberComment();
@@ -148,12 +126,9 @@ export default {
           })
     },
   }
-
 }
 </script>
 
 <style scoped>
-.pink {
-  background-color: lightpink;
-}
+
 </style>

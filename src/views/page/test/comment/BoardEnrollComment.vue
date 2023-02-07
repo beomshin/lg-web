@@ -24,7 +24,7 @@
           <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content" ></textarea>
         </div>
       </div>
-      <button class="btn btn-secondary" @click="Enroll">댓글달기</button>
+      <button class="btn btn-secondary" @click.stop="Enroll">댓글달기</button>
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ const { cookies } = useCookies();
 
 export default {
   name: "BoardComment",
-  props: ['boardId', 'hasLogin'],
+  props: ['boardId', 'hasLogin','parentId'],
   setup () {
     const id = ref('')
     const password = ref('')
@@ -77,8 +77,51 @@ export default {
   },
   methods: {
     Enroll() {
-      this.$emit('Enroll')
-    }
+      if (this.hasLogin) {
+        this.EnrollMemberComment();
+      } else {
+        this.EnrollAnonymComment();
+      }
+    },
+    EnrollMemberComment() {
+      if(!this.validate1()) return
+      const request = new EnrollBoardMemberComment(this.boardId, this.parentId, this.content, 1)
+      let token = 'Bearer ' + cookies.get('lg.m.log');
+      service
+          .enrollMemberComment(request, {
+            "Authorization": token
+          })
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              alert('댓글 등록 성공')
+              this.content = ''
+              this.$emit('ReFindComment')
+            } else {
+              alert('댓글 등록 실패')
+            }
+          })
+          .catch(err => {
+            alert('댓글 등록 실패')
+          })
+    },
+    EnrollAnonymComment() {
+      if(!this.validate2()) return
+      const request = new EnrollBoardAnonymComment(this.boardId, this.parentId, this.id, this.password, this.content, 1)
+      service
+          .enrollAnonymComment(request, null)
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              this.content = ''
+              this.$emit('ReFindComment')
+              alert('댓글 등록 성공')
+            } else {
+              alert('댓글 등록 실패')
+            }
+          })
+          .catch(err => {
+            alert('댓글 등록 실패')
+          })
+    },
   }
 }
 </script>

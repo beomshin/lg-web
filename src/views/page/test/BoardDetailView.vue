@@ -78,9 +78,10 @@
     <BoardEnrollComment
       :boardId="this.board.boardId"
       :hasLogin="hasLogin"
+      :parent-id="board.boardCommentId"
       @ReFindComment="ReFindComment"
     />
-    <BoardComments
+    <BoardComment
         :boardId="this.board.boardId"
         :hasLogin="hasLogin"
         :comments="comments"
@@ -98,13 +99,13 @@ import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import {useCookies} from "vue3-cookies";
 import RecommendBoard from "@/dto/member/RecommendBoard";
-import BoardEnrollComment from "@/views/page/test/BoardEnrollComment";
-import BoardComments from "@/views/page/test/BoardComments";
+import BoardEnrollComment from "@/views/page/test/comment/BoardEnrollComment";
+import BoardComment from "@/views/page/test/comment/BoardComment";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardDetailView",
-  components: {BoardComments, BoardEnrollComment},
+  components: {BoardComment, BoardEnrollComment},
   setup() {
     const board = ref({})
     const type = ref(0)
@@ -137,7 +138,7 @@ export default {
       service
           .findBoard(`/be/board/find/board`, boardId, null)
           .then(res => {
-            this.board = res.data.data
+            this.board = res.data.data.board
           })
     },
     FindComments (boardId) {
