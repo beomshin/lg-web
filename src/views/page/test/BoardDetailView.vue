@@ -75,6 +75,10 @@
         <img :src="item.path" class="img-thumbnail">
       </div>
     </template><br>
+    <BoardComment
+      :boardId="this.board.boardId"
+      :hasLogin="hasLogin"
+    />
     <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
   <hr>
@@ -87,10 +91,12 @@ import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import {useCookies} from "vue3-cookies";
 import RecommendBoard from "@/dto/member/RecommendBoard";
+import BoardComment from "@/views/page/test/BoardComment";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardDetailView",
+  components: {BoardComment},
   setup() {
     const board = ref({})
     const type = ref(0)

@@ -3,11 +3,11 @@
     <hr>
     <h1>비회원 게시판 작성</h1>
     <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" v-model="id" maxlength="16" placeholder="아이디">
-      </div>
+    <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" v-model="id" maxlength="16" placeholder="아이디">
     </div>
+  </div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-2 col-form-label">비밀번호</label>
       <div class="col-sm-10">

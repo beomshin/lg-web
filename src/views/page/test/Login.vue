@@ -103,7 +103,18 @@ export default {
       service
           .memberInfo(null, {Authorization: token})
           .then(res => {
-            this.user = res.data.data
+            if (res.data.resultCode == '00000') {
+              this.user = res.data.data
+            } else if (res.data.resultCode == "17008") {
+              cookies.remove('lg.m.log')
+              alert('세션이 만료되었습니다. 로그아웃 됩니다.')
+              window.location.replace('/')
+            }
+          })
+          .catch(err => {
+            cookies.remove('lg.m.log')
+            alert('문제가 발생했습니다. 로그아웃 됩니다.')
+            window.location.replace('/')
           })
     },
     MoveSign() {

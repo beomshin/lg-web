@@ -7,6 +7,7 @@ import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import UpdateBoard from "@/dto/member/UpdateBoard";
 import RecommendBoard from "@/dto/member/RecommendBoard";
+import EnrollBoardMemberComment from "@/dto/member/EnrollBoardAnonymComment";
 
 export default {
     findBoards: (data: FindBoards) => {
@@ -38,5 +39,11 @@ export default {
     },
     recommendBoard: (data: RecommendBoard, headers: any) => {
         return post('/be/board/pq/recommend', data, headers);
+    },
+    enrollMemberComment: (data: EnrollBoardMemberComment, headers: any) => {
+        return post('/be/board/pq/enroll/comment/member', data, headers);
+    },
+    enrollAnonymComment: (data: EnrollBoardMemberComment, headers: any) => {
+        return post('/be/board/enroll/comment/anonym', data, headers);
     }
 }

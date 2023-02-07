@@ -4,7 +4,7 @@
     <h1>게시판 페이지</h1>
 
     <div style="margin-top: 5px; margin-bottom: 5px">
-      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum)">
+      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum, 0, this.subject, this.keyword)">
         <option value="5">전체</option>
         <option value="0">탑</option>
         <option value="1">정글</option>
@@ -12,6 +12,8 @@
         <option value="3">원딜</option>
         <option value="4">서폿</option>>
       </select>
+      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindAll">전체</button>
+      <button type="button" class="btn btn-danger btn-sm" style="margin-left: 5px" @click="FindHot">HOT</button>
       <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="MoveDetail">글쓰기</button>
     </div>
 
@@ -19,12 +21,12 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제목</th>
-          <th scope="col">글쓴이</th>
-          <th scope="col">작성일</th>
-          <th scope="col">조회수</th>
-          <th scope="col">추천수</th>
+          <th scope="col" style="width: 10%">번호</th>
+          <th scope="col" style="width: 30%">제목</th>
+          <th scope="col" style="width: 20%">글쓴이</th>
+          <th scope="col" style="width: 15%">작성일</th>
+          <th scope="col" style="width: 15%">조회수</th>
+          <th scope="col" style="width: 10%">추천수</th>
         </tr>
         </thead>
         <tbody>
@@ -39,15 +41,34 @@
             </tr>
           </template>
         </tbody>
-
-        <nav aria-label="Page navigation example" style="cursor: pointer; margin-top: 5px">
-          <ul class="pagination">
-            <template v-for="(item, index) in totalPage" :key="index">
-              <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum)">{{item}}</a></li>
-            </template>
-          </ul>
-        </nav>
       </table>
+      <nav aria-label="Page navigation example" style="cursor: pointer; margin-top: 5px">
+        <ul class="pagination">
+          <template v-for="(item, index) in totalPage" :key="index">
+            <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum)">{{item}}</a></li>
+          </template>
+        </ul>
+      </nav>
+
+      <div style="display: flex">
+        <div>
+          <select class="form-select" aria-label="Default select example" v-model="subject">
+            <option value="0">전체</option>
+            <option value="1">제목</option>
+            <option value="2">내용</option>
+            <option value="3">글쓴이</option>
+          </select>
+        </div>
+        <div style="margin-left: 5px">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">키워드</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="keyword" @keyup.enter="FindBoard(0, pageNum, 0, this.subject, this.keyword)">
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindBoard(0, pageNum, 0, this.subject, this.keyword)" >검색</button>
+        </div>
+      </div>
     </div>
   </div>
   <hr/>
@@ -71,6 +92,8 @@ export default {
     const boards = ref([]);
     const totalPage = ref(0)
     const curPage = ref(1)
+    const subject = ref(0)
+    const keyword = ref('')
 
     return {
       list,
@@ -80,11 +103,13 @@ export default {
       totalPage,
       curPage,
       pageNum,
-      boards
+      boards,
+      subject,
+      keyword
     }
   },
   mounted() {
-    this.FindBoard(this.page, this.pageNum)
+    this.FindBoard(this.page, this.pageNum, 0, this.subject, this.keyword)
   },
   computed: {
     hasLogin () {
@@ -93,9 +118,9 @@ export default {
     }
   },
   methods: {
-    FindBoard(page, pageNum) {
+    FindBoard(page, pageNum, topic, subject, keyword) {
       service
-          .findBoards(new FindBoards(page, pageNum, this.topic, this.type))
+          .findBoards(new FindBoards(page, pageNum, topic, this.type, subject, keyword))
           .then(res => {
             if (res.data.resultCode == "00000") {
               this.boards = res.data.data.boards
@@ -124,6 +149,16 @@ export default {
       } else {
         this.$router.push('/board/enroll/anonym')
       }
+    },
+    FindAll() {
+      this.keyword = ''
+      this.subject = 0
+      this.FindBoard(0, this.pageNum, 0, this.subject, this.keyword)
+    },
+    FindHot() {
+      this.keyword = ''
+      this.subject = 0
+      this.FindBoard(0, this.pageNum, 1, this.subject, this.keyword)
     }
   }
 }
