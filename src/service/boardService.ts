@@ -10,6 +10,7 @@ import RecommendBoard from "@/dto/member/RecommendBoard";
 import EnrollBoardMemberComment from "@/dto/member/EnrollBoardAnonymComment";
 import DeleteComment from "@/dto/member/DeleteComment";
 import EnrollBoardAnonymComment from "@/dto/member/EnrollBoardAnonymComment";
+import UpdateComment from "@/dto/member/UpdateComment";
 
 export default {
     findBoards: (data: FindBoards) => {
@@ -53,5 +54,8 @@ export default {
     },
     deleteComment: (data: DeleteComment, headers: any) =>  {
         return post('/be/board/comment/delete', data, headers);
+    },
+    updateComment: (data: UpdateComment, headers: any) =>  {
+        return post('/be/board/comment/update', data, headers);
     }
 }

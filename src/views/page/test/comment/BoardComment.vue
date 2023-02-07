@@ -8,34 +8,43 @@
         <button type="button"
                 class="list-group-item list-group-item-action"
                 :class="item.depth == 1 ? 'pink' : ''"
-                @click.stop="Active(index)"
+                @click.stop="Active(index, 0)"
         >
-          <template v-if="item.depth == 2">└ </template>{{item.content}} - {{item.writer}}
+          <template v-if="item.depth == 2">└ </template>{{item.content}} - {{item.writer}} - {{item.regDt}}
           <div style="float: right">
             <button
                 class="btn btn-outline-primary"
                 type="button" id="button-addon2"
+                @click.stop="Active(index, 1)"
             >수정</button>
             <button
                 class="btn btn-outline-danger"
                 type="button" id="button-addon2"
                 style="margin-left: 5px"
+                @click.stop="Active(index, 2)"
             >삭제</button>
           </div>
         </button>
         <BoardCommentChildren
-            v-if="index == activeIndex"
+            v-if="index == activeIndex && type == 0"
             :board-id="this.boardId"
             :parent-id="parentId(item)"
         />
 
+        <BoardCommentUpdate
+            v-if="index == activeIndex && type == 1"
+            :content="item.content"
+            :boardCommentId="item.boardCommentId"
+            @close="close"
+          />
 
-<!--        <li class="list-group-item"  >-->
-<!--          <div class="input-group mb-3" style="margin-top: 5px" >-->
-<!--            <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" >-->
-<!--            <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click.stop="DelteComment(item.boardCommentId)">삭제</button>-->
-<!--          </div>-->
-<!--        </li>-->
+        <li class="list-group-item" v-if="index == activeIndex && type == 2" >
+          <div class="input-group mb-3" style="margin-top: 5px" >
+            <input type="password" class="form-control" placeholder="비밀번호"  v-model="password">
+            <button class="btn btn-outline-danger" type="button" @click.stop="DeleteComment(item.boardCommentId)">삭제</button>
+          </div>
+        </li>
+
 
 
       </template>
@@ -49,23 +58,34 @@
 import {ref} from "vue";
 import { useCookies } from 'vue3-cookies'
 import BoardCommentChildren from "@/views/page/test/comment/BoardCommentChildren";
+import BoardCommentUpdate from "@/views/page/test/comment/BoardCommentUpdate";
+import DeleteComment from "@/dto/member/DeleteComment";
 const { cookies } = useCookies();
+import service from "@/service/config";
 
 export default {
   name: "BoardComments",
-  components: {BoardCommentChildren},
+  components: {BoardCommentChildren, BoardCommentUpdate},
   props: ['boardId','comments', 'totalCommentCnt'],
   setup() {
     const activeIndex = ref(-1)
+    const type = ref(0)
+    const password = ref('')
 
     return {
       activeIndex,
+      type,
+      password
     }
   },
   methods: {
-    Active(index) {
-      if (index == this.activeIndex) this.activeIndex = -1
-      else this.activeIndex = index
+    Active(index, type) {
+      if (index == this.activeIndex && this.type == type) {
+        this.activeIndex = -1
+      } else {
+        this.type = type
+        this.activeIndex = index
+      }
     },
     parentId(comment) {
       if (comment.depth == 1) {
@@ -73,6 +93,29 @@ export default {
       } else if (comment.depth == 2) {
         return comment.bundleId
       }
+    },
+    DeleteComment(boardCommentId) {
+      let request = new DeleteComment(boardCommentId, this.password)
+      service
+          .deleteComment(request, null)
+          .then(res => {
+            if (res.data.resultCode == '00000') {
+              this.password = ''
+              this.activeIndex = -1
+              this.$emitter.emit('ReFindComment')
+              alert('댓글 삭제 성공')
+            } else {
+              this.password = ''
+              alert('댓글 삭제 실패')
+            }
+          })
+          .catch(err => {
+            this.password = ''
+            alert('댓글 삭제 실패')
+          })
+    },
+    close() {
+      this.activeIndex = -1
     }
   }
 

@@ -49,7 +49,7 @@
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-2 col-form-label">댓글수</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.commentCnt">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="totalCommentCnt">
       </div>
     </div>
     <div class="row mb-3">
