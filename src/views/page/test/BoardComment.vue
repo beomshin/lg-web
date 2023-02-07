@@ -30,35 +30,48 @@
       <hr>
       <h2>댓글 ({{this.commentCnt}})개</h2>
       <ul class="list-group">
-        <template v-for="(item, index) in comments" :key="index">
-          <button type="button" class="list-group-item list-group-item-action" @click="SHOW(index, item.boardCommentId)">
-            {{item.content}} - {{item.writer}}
-          </button>
-          <li class="list-group-item" v-if="commentIdx == index && active">
-            <h3>대댓글 달기</h3>
-            <hr>
-            <div v-if="!hasLogin">
-              <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" v-model="id2" maxlength="16" placeholder="아이디">
+        <template v-for="(key, idx) in comments.keys()" :key="idx">
+          <template v-for="(item, index) in comments[key]" :key="index">
+
+            <template v-if="item.depth == 1">
+              <button type="button" class="list-group-item list-group-item-action" style="background-color: lightpink" @click="SHOW(idx, item.boardCommentId)">
+                {{item.content}} - {{item.writer}}
+              </button>
+              <li class="list-group-item" v-if="commentIdx == idx && active">
+                <h3>대댓글 달기</h3>
+                <hr>
+                <div v-if="!hasLogin">
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" v-model="id2" maxlength="16" placeholder="아이디">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">비밀번호</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" v-model="password2" maxlength="32" placeholder="비밀번호">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">비밀번호</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" v-model="password2" maxlength="32" placeholder="비밀번호">
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content2" ></textarea>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content2" ></textarea>
-              </div>
-            </div>
-            <button class="btn btn-secondary" @click="EnrollComment">대댓글달기</button>
-          </li>
+                <button class="btn btn-secondary" @click="EnrollComment">대댓글달기</button>
+              </li>
+            </template>
+
+            <template v-else-if="item.depth == 2">
+              <button type="button" class="list-group-item list-group-item-action" @click="SHOW(idx, item.bundleId)">
+                └ {{item.content}} - {{item.writer}}
+              </button>
+            </template>
+
+          </template>
+
         </template>
       </ul>
       <hr>
@@ -126,6 +139,7 @@ export default {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
               this.content = ''
+              this.active = false;
               this.$emit('ReFindComment')
             } else {
               alert('댓글 등록 실패')
@@ -142,6 +156,9 @@ export default {
           .then(res => {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
+              this.content = ''
+              this.active = false;
+              this.$emit('ReFindComment')
             } else {
               alert('댓글 등록 실패')
             }

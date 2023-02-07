@@ -138,13 +138,24 @@ export default {
           .findComments('/be/board/find/board/comment', boardId, null)
           .then(res => {
             if (res.data.resultCode == '00000') {
-              this.comments = res.data.data.comments
+              this.comments = []
+              for(let item of res.data.data.comments) {
+                 let key = 0
+                  if (item.depth == 1) {
+                    key = item.boardCommentId
+                  } else if (item.depth == 2) {
+                    key = item.bundleId
+                  }
+                  if (!this.comments[key]) this.comments[key] = []
+                  this.comments[key].push(item)
+              }
               this.commentCnt = res.data.data?.totalElements || 0
             } else {
               alert('댓글 조회 실패')
             }
           })
           .catch(err => {
+            console.log(err)
             alert('댓글 조회 실패')
           })
     },
