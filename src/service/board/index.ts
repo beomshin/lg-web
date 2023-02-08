@@ -29,13 +29,13 @@ export default {
         return post('/be/board/login/lawfirm', data, headers);
     },
     BoardFindList: (data: BoardFindList, headers: any, subUrl: string) => {
-        return get('/be/board/find/boards', data, headers);
+        return get('/be/board/find/list', data, headers);
     },
     BoardFindBoardAnonym: (data: BoardFindBoardAnonym, headers: any, subUrl: string) => {
-        return get(`/be/board/find/board/anonym/${subUrl}`, data, headers);
+        return get(`/be/board/find/anonym/${subUrl}`, data, headers);
     },
     BoardFindBoardMember: (data: BoardFindBoardMember, headers: any, subUrl: string) => {
-        return get(`/be/board/pq/find/board/member/${subUrl}`, data, headers);
+        return get(`/be/board/pq/find/member/${subUrl}`, data, headers);
     },
     BoardEnrollAnonym: (data: BoardEnrollAnonym, headers: any, subUrl: string) => {
         return post('/be/board/enroll/anonym', data, headers);
