@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import service from "@/service/config";
+import service from "@/service";
 import {reactive, ref} from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import SignMember from "@/dto/member/SignMember";
@@ -168,7 +168,7 @@ export default {
         )
 
         service
-            .sign(request, null)
+            .MemberSign(request, null, null)
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('회원가입에 성공했습니다.')
@@ -188,7 +188,7 @@ export default {
       } else {
         const request = new CheckOverlapId(this.loginId)
         service
-            .checkOverlapId(request)
+            .MemberCheckId(request, null, null)
             .then(res => {
               if (res.data.resultCode ==  '00000') {
                 this.isLoginId = true;
@@ -211,7 +211,7 @@ export default {
         return
       } else {
         service
-            .postEmail(new PostEmail(this.email1 + this.email2), null)
+            .MemberPostEmail(new PostEmail(this.email1 + this.email2), null, null)
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('이메일 전송에 성공했습니다.')
@@ -231,7 +231,7 @@ export default {
         return
       } else {
         service
-            .verifyEmail(`/be/sign/verify/email`, this.txId , new VerifyEmail(this.code))
+            .MemberVerifyEmail(new VerifyEmail(this.code), null, this.txId )
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('이메일 인증에 성공했습니다.')

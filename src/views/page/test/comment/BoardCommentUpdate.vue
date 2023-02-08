@@ -24,7 +24,7 @@
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import {ref} from "vue";
-import service from "@/service/config";
+import service from "@/service";
 import UpdateComment from "@/dto/member/UpdateComment";
 
 export default {
@@ -56,7 +56,7 @@ export default {
       if (!this.validate()) return
       let request = new UpdateComment(this.boardCommentId, this.password, this.text)
         service
-            .updateComment(request, null)
+            .BoardCommentUpdate(request, null, null)
             .then(res => {
               if (res.data.resultCode == '00000') {
                 this.password = ''

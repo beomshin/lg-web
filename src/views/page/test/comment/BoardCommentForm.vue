@@ -28,7 +28,7 @@
 import {ref} from "vue";
 import {useCookies} from "vue3-cookies";
 import EnrollBoardMemberComment from "@/dto/member/EnrollBoardMemberComment";
-import service from "@/service/config";
+import service from "@/service";
 import EnrollBoardAnonymComment from "@/dto/member/EnrollBoardAnonymComment";
 const { cookies } = useCookies();
 
@@ -89,9 +89,10 @@ export default {
       const request = new EnrollBoardMemberComment(this.boardId, this.parentId, this.content, this.depth)
       let token = 'Bearer ' + cookies.get('lg.m.log');
       service
-          .enrollMemberComment(request, {
+          .BoardCommentEnrollMember(request, {
             "Authorization": token
-          })
+          },
+          null)
           .then(res => {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
@@ -109,7 +110,7 @@ export default {
       if(!this.validate2()) return
       const request = new EnrollBoardAnonymComment(this.boardId, this.parentId, this.id, this.password, this.content, this.depth)
       service
-          .enrollAnonymComment(request, null)
+          .BoardCommentEnrollAnonym(request, null, null)
           .then(res => {
             if(res.data.resultCode == '00000') {
               this.content = ''

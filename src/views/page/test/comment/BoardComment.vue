@@ -61,7 +61,7 @@ import BoardCommentChildren from "@/views/page/test/comment/BoardCommentChildren
 import BoardCommentUpdate from "@/views/page/test/comment/BoardCommentUpdate";
 import DeleteComment from "@/dto/member/DeleteComment";
 const { cookies } = useCookies();
-import service from "@/service/config";
+import service from "@/service";
 
 export default {
   name: "BoardComments",
@@ -97,7 +97,7 @@ export default {
     DeleteComment(boardCommentId) {
       let request = new DeleteComment(boardCommentId, this.password)
       service
-          .deleteComment(request, null)
+          .BoardCommentDelete(request, null, null)
           .then(res => {
             if (res.data.resultCode == '00000') {
               this.password = ''

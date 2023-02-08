@@ -60,7 +60,7 @@
 
 <script>
 import {ref} from "vue";
-import service from "@/service/config";
+import service from "@/service";
 import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import UpdateBoard from "@/dto/member/UpdateBoard";
@@ -109,7 +109,7 @@ export default {
   methods: {
     BoardDetail(boardId) {
       service
-          .findBoard(`/be/board/find/board`, boardId, null, {"Authorization": 'Bearer ' + cookies.get('lg.m.log')})
+          .BoardFindBoard(null, {"Authorization": 'Bearer ' + cookies.get('lg.m.log')}, boardId)
           .then(res => {
             this.board = res.data.data.board
           })
@@ -120,7 +120,7 @@ export default {
     UpdateBoard() {
       let request = new UpdateBoard(this.board.boardId, this.board.title, this.board.content, this.addFiles, this.deleteFiles)
       service
-          .updateBoard(request, { "Content-Type" : 'multipart/form-data'})
+          .BoardUpdate(request, { "Content-Type" : 'multipart/form-data'}, null)
           .then(res => {
             if (res.data.resultCode == '00000') {
               alert('게시판 수정 성공')
