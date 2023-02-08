@@ -163,7 +163,7 @@ export default {
     },
     FindComments (boardId) {
       service
-          .BoardCommentFind(null, null, boardId)
+          .BoardFindComment(null, null, boardId)
           .then(res => {
             if (res.data.resultCode == '00000') {
               this.comments = res.data.content.comments

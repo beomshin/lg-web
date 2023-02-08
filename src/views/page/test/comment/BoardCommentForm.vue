@@ -28,8 +28,8 @@
 import {ref} from "vue";
 import {useCookies} from "vue3-cookies";
 import service from "@/service";
-import BoardCommentEnrollMember from "@/dto/board/BoardCommentEnrollMember";
-import BoardCommentEnrollAnonym from "@/dto/board/BoardCommentEnrollAnonym";
+import BoardEnrollCommentMember from "@/dto/board/BoardEnrollCommentMember";
+import BoardEnrollCommentAnonym from "@/dto/board/BoardEnrollCommentAnonym";
 const { cookies } = useCookies();
 
 export default {
@@ -86,10 +86,10 @@ export default {
     },
     EnrollMemberComment() {
       if(!this.validate1()) return
-      const request = new BoardCommentEnrollMember(this.boardId, this.parentId, this.content, this.depth)
+      const request = new BoardEnrollCommentMember(this.boardId, this.parentId, this.content, this.depth)
       let token = 'Bearer ' + cookies.get('lg.m.log');
       service
-          .BoardCommentEnrollMember(request, {
+          .BoardEnrollCommentMember(request, {
             "Authorization": token
           },
           null)
@@ -108,9 +108,9 @@ export default {
     },
     EnrollAnonymComment() {
       if(!this.validate2()) return
-      const request = new BoardCommentEnrollAnonym(this.boardId, this.parentId, this.id, this.password, this.content, this.depth)
+      const request = new BoardEnrollCommentAnonym(this.boardId, this.parentId, this.id, this.password, this.content, this.depth)
       service
-          .BoardCommentEnrollAnonym(request, null, null)
+          .BoardEnrollCommentAnonym(request, null, null)
           .then(res => {
             if(res.data.resultCode == '00000') {
               this.content = ''

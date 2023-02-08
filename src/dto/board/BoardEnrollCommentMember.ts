@@ -1,4 +1,4 @@
-class BoardCommentEnrollMember {
+class BoardEnrollCommentMember {
     boardId: number
     bundleId: number
     content: string
@@ -12,4 +12,4 @@ class BoardCommentEnrollMember {
     }
 }
 
-export default BoardCommentEnrollMember
+export default BoardEnrollCommentMember

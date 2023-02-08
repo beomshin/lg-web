@@ -1,4 +1,4 @@
-class BoardCommentEnrollAnonym {
+class BoardEnrollCommentAnonym {
     boardId: number
     bundleId: number
     id: string
@@ -16,4 +16,4 @@ class BoardCommentEnrollAnonym {
     }
 }
 
-export default BoardCommentEnrollAnonym
+export default BoardEnrollCommentAnonym

@@ -11,11 +11,11 @@ import BoardUpdate from "@/dto/board/BoardUpdate";
 import BoardDelete from "@/dto/board/BoardDelete";
 import BoardReport from "@/dto/board/BoardReport";
 import BoardRecommend from "@/dto/board/BoardRecommend";
-import BoardCommentFind from "@/dto/board/BoardCommentFind";
-import BoardCommentEnrollMember from "@/dto/board/BoardCommentEnrollMember";
-import BoardCommentEnrollAnonym from "@/dto/board/BoardCommentEnrollAnonym";
-import BoardCommentUpdate from "@/dto/board/BoardCommentUpdate";
-import BoardCommentDelete from "@/dto/board/BoardCommentDelete";
+import BoardFindComment from "@/dto/board/BoardFindComment";
+import BoardEnrollCommentMember from "@/dto/board/BoardEnrollCommentMember";
+import BoardEnrollCommentAnonym from "@/dto/board/BoardEnrollCommentAnonym";
+import BoardUpdateComment from "@/dto/board/BoardUpdateComment";
+import BoardDeleteComment from "@/dto/board/BoardDeleteComment";
 import BoardFindBoardMember from "@/dto/board/BoardFindBoardMember";
 
 export default {
@@ -55,19 +55,19 @@ export default {
     BoardRecommend: (data: BoardRecommend, headers: any, subUrl: string) => {
         return post('/be/board/pq/recommend', data, headers);
     },
-    BoardCommentFind: (data: BoardCommentFind, headers: any, subUrl: string) => {
-        return get(`/be/board/find/board/comment/${subUrl}`, data, headers);
+    BoardFindComment: (data: BoardFindComment, headers: any, subUrl: string) => {
+        return get(`/be/board/find/comment/${subUrl}`, data, headers);
     },
-    BoardCommentEnrollMember: (data: BoardCommentEnrollMember, headers: any, subUrl: string) => {
+    BoardEnrollCommentMember: (data: BoardEnrollCommentMember, headers: any, subUrl: string) => {
         return post('/be/board/pq/enroll/comment/member', data, headers);
     },
-    BoardCommentEnrollAnonym: (data: BoardCommentEnrollAnonym, headers: any, subUrl: string) => {
+    BoardEnrollCommentAnonym: (data: BoardEnrollCommentAnonym, headers: any, subUrl: string) => {
         return post('/be/board/enroll/comment/anonym', data, headers);
     },
-    BoardCommentUpdate: (data: BoardCommentUpdate, headers: any, subUrl: string) => {
-        return post('/be/board/comment/update', data, headers);
+    BoardUpdateComment: (data: BoardUpdateComment, headers: any, subUrl: string) => {
+        return post('/be/board/update/comment', data, headers);
     },
-    BoardCommentDelete: (data: BoardCommentDelete, headers: any, subUrl: string) => {
-        return post('/be/board/comment/delete', data, headers);
+    BoardDeleteComment: (data: BoardDeleteComment, headers: any, subUrl: string) => {
+        return post('/be/board/delete/comment', data, headers);
     },
 }
