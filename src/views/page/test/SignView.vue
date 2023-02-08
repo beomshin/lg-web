@@ -64,10 +64,10 @@
 import service from "@/service";
 import {reactive, ref} from "vue";
 import { useRouter, useRoute } from 'vue-router'
-import SignMember from "@/dto/member/SignMember";
-import CheckOverlapId from "@/dto/member/CheckOverlapId";
-import PostEmail from "@/dto/member/PostEmail";
-import VerifyEmail from "@/dto/member/VerifyEmail";
+import MemberSignDto from "@/dto/member/MemberSignDto";
+import MemberCheckId from "@/dto/member/MemberCheckId";
+import MemberPostEmail from "@/dto/member/MemberPostEmail";
+import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
 
 export default {
   name: "SignView",
@@ -159,7 +159,7 @@ export default {
       if (!this.validateSign()) {
         return
       } else {
-        const request = new SignMember(
+        const request = new MemberSignDto(
             this.loginId
             , this.password
             ,this.email1 + this.email2
@@ -186,7 +186,7 @@ export default {
       if (!this.validateId()) {
         return
       } else {
-        const request = new CheckOverlapId(this.loginId)
+        const request = new MemberCheckId(this.loginId)
         service
             .MemberCheckId(request, null, null)
             .then(res => {
@@ -211,7 +211,7 @@ export default {
         return
       } else {
         service
-            .MemberPostEmail(new PostEmail(this.email1 + this.email2), null, null)
+            .MemberPostEmail(new MemberPostEmail(this.email1 + this.email2), null, null)
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('이메일 전송에 성공했습니다.')
@@ -231,7 +231,7 @@ export default {
         return
       } else {
         service
-            .MemberVerifyEmail(new VerifyEmail(this.code), null, this.txId )
+            .MemberVerifyEmail(new MemberVerifyEmail(this.code), null, this.txId )
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('이메일 인증에 성공했습니다.')

@@ -1,4 +1,4 @@
-class LoginMember {
+class MemberLoginDto {
     loginId: string;
     password: string;
 
@@ -8,4 +8,4 @@ class LoginMember {
     }
 }
 
-export default LoginMember
+export default MemberLoginDto

@@ -1,4 +1,4 @@
-class SignMember {
+class MemberSignDto {
     loginId: string;
     password: string;
     email: string;
@@ -16,7 +16,6 @@ class SignMember {
         this.nickName = nickName
         this.personalPeriod = personalPeriod
     }
-
 }
 
-export default SignMember
+export default MemberSignDto

@@ -42,7 +42,7 @@
 import {useCookies} from "vue3-cookies";
 import {ref} from "vue";
 import service from "@/service";
-import LoginMember from "@/dto/member/LoginMember";
+import MemberLoginDto from "@/dto/member/MemberLoginDto";
 const { cookies } = useCookies();
 
 
@@ -82,7 +82,7 @@ export default {
         alert('아이디 또는 비밀번호를 입력해주세요')
       } else {
         service
-            .MemberLogin(new LoginMember(loginId, password), null, null)
+            .MemberLogin(new MemberLoginDto(loginId, password), null, null)
             .then(res => {
               if (res.data.resultCode == "00000") {
                 cookies.set("lg.m.log", res.data.accessToken)

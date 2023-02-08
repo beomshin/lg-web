@@ -1,10 +1,9 @@
-class VerifyEmail {
+class MemberVerifyEmail {
     code: string
 
     constructor(code: string) {
         this.code = code;
     }
-
 }
 
-export default VerifyEmail
+export default MemberVerifyEmail
