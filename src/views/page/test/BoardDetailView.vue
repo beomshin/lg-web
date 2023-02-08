@@ -151,13 +151,13 @@ export default {
               "Authorization": token
             }, boardId)
             .then(res => {
-              this.board = res.data.data.board
+              this.board = res.data.content.board
             })
       } else {
         service
             .BoardFindBoardAnonym(null, null, boardId)
             .then(res => {
-              this.board = res.data.data.board
+              this.board = res.data.content.board
             })
       }
     },
@@ -166,8 +166,8 @@ export default {
           .BoardCommentFind(null, null, boardId)
           .then(res => {
             if (res.data.resultCode == '00000') {
-              this.comments = res.data.data.comments
-              this.totalCommentCnt = res.data.data.totalElements
+              this.comments = res.data.content.comments
+              this.totalCommentCnt = res.data.content.totalElements
             } else {
               alert('댓글 조회 실패')
             }

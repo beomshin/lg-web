@@ -215,7 +215,7 @@ export default {
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('이메일 전송에 성공했습니다.')
-                this.txId = res.data.data.txId;
+                this.txId = res.data.content.txId;
                 this.isPost = true
               } else {
                 alert('이메일 전송에 실패했습니다.')

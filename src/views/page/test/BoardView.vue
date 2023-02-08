@@ -123,8 +123,8 @@ export default {
           .BoardFindList(new BoardFindList(page, pageNum, topic, this.type, subject, keyword), null, null)
           .then(res => {
             if (res.data.resultCode == "00000") {
-              this.boards = res.data.data.boards
-              this.totalPage = res.data.data.totalPage
+              this.boards = res.data.content.boards
+              this.totalPage = res.data.content.totalPage
               this.curPage = page
             } else {
               alert('게시판을 불러오는데 실패했습니다.')

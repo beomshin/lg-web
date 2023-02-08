@@ -114,13 +114,13 @@ export default {
               "Authorization": token
             }, boardId)
             .then(res => {
-              this.board = res.data.data.board
+              this.board = res.data.content.board
             })
       } else {
         service
             .BoardFindBoardAnonym(null, null, boardId)
             .then(res => {
-              this.board = res.data.data.board
+              this.board = res.data.content.board
             })
       }
     },
