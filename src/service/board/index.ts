@@ -4,7 +4,7 @@ import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
 import BoardLoginMember from "@/dto/board/BoardLoginMember";
 import BoardLoginLawFirm from "@/dto/board/BoardLoginLawFirm";
 import BoardFindList from "@/dto/board/BoardFindList";
-import BoardFindBoard from "@/dto/board/BoardFindBoard";
+import BoardFindBoardAnonym from "@/dto/board/BoardFindBoardAnonym";
 import BoardEnrollAnonym from "@/dto/board/BoardEnrollAnonym";
 import BoardEnrollMember from "@/dto/board/BoardEnrollMember";
 import BoardUpdate from "@/dto/board/BoardUpdate";
@@ -16,6 +16,7 @@ import BoardCommentEnrollMember from "@/dto/board/BoardCommentEnrollMember";
 import BoardCommentEnrollAnonym from "@/dto/board/BoardCommentEnrollAnonym";
 import BoardCommentUpdate from "@/dto/board/BoardCommentUpdate";
 import BoardCommentDelete from "@/dto/board/BoardCommentDelete";
+import BoardFindBoardMember from "@/dto/board/BoardFindBoardMember";
 
 export default {
     BoardLoginAnonym: (data: BoardLoginAnonym, headers: any, subUrl: string) => {
@@ -30,8 +31,11 @@ export default {
     BoardFindList: (data: BoardFindList, headers: any, subUrl: string) => {
         return get('/be/board/find/boards', data, headers);
     },
-    BoardFindBoard: (data: BoardFindBoard, headers: any, subUrl: string) => {
-        return get(`/be/board/find/board/${subUrl}`, data, headers);
+    BoardFindBoardAnonym: (data: BoardFindBoardAnonym, headers: any, subUrl: string) => {
+        return get(`/be/board/find/board/anonym/${subUrl}`, data, headers);
+    },
+    BoardFindBoardMember: (data: BoardFindBoardMember, headers: any, subUrl: string) => {
+        return get(`/be/board/pq/find/board/member/${subUrl}`, data, headers);
     },
     BoardEnrollAnonym: (data: BoardEnrollAnonym, headers: any, subUrl: string) => {
         return post('/be/board/enroll/anonym', data, headers);

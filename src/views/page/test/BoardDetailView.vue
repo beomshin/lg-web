@@ -143,11 +143,23 @@ export default {
   },
   methods: {
     BoardDetail (boardId) {
-      service
-          .BoardFindBoard(null, {"Authorization": 'Bearer ' + cookies.get('lg.m.log')}, boardId)
-          .then(res => {
-            this.board = res.data.data.board
-          })
+
+      if (cookies.isKey('lg.m.log')) {
+        let token = 'Bearer ' + cookies.get('lg.m.log');
+        service
+            .BoardFindBoardMember(null, {
+              "Authorization": token
+            }, boardId)
+            .then(res => {
+              this.board = res.data.data.board
+            })
+      } else {
+        service
+            .BoardFindBoardAnonym(null, null, boardId)
+            .then(res => {
+              this.board = res.data.data.board
+            })
+      }
     },
     FindComments (boardId) {
       service
