@@ -14,13 +14,13 @@ export default {
         return post('/be/sign/member', data, headers);
     },
     checkOverlapId: (data: CheckOverlapId) => {
-        return get('/be/sign/find/id', data);
+        return get('/be/sign/find/id', data, null);
     },
     postEmail: (data: PostEmail, headers: any) => {
         return post('/be/sign/post/email', data, headers);
     },
     verifyEmail: (url: string, txId: string, data: VerifyEmail) => {
-        return get(url + `/${txId}`, data);
+        return get(url + `/${txId}`, data, null);
     },
     memberInfo: (data: any, headers: any) => {
         return post('/be/member/pq/info', data, headers);

@@ -15,7 +15,7 @@ import ReportBoard from "@/dto/member/ReportBoard";
 
 export default {
     findBoards: (data: FindBoards) => {
-        return get('/be/board/find/boards', data);
+        return get('/be/board/find/boards', data, null);
     },
     enrollAnonym: (data: EnrollAnonymBoard, headers: any) => {
         return post('/be/board/enroll/anonym', data, headers);
@@ -23,8 +23,8 @@ export default {
     enrollMember: (data: EnrollUserBoard, headers: any) => {
         return post('/be/board/pq/enroll/member', data, headers)
     },
-    findBoard: (url: any, boardId: number, data: any) => {
-        return get(`${url}/${boardId}`, data);
+    findBoard: (url: any, boardId: number, data: any, headers: any) => {
+        return get(`${url}/${boardId}`, data, headers);
     },
     loginAnonymBoard: (data: LoginBoard, headers: any) => {
         return post('/be/board/login/anonym', data, headers);
@@ -51,7 +51,7 @@ export default {
         return post('/be/board/enroll/comment/anonym', data, headers);
     },
     findComments: (url: any, boardId: number, data: any) => {
-        return get(`${url}/${boardId}`, data);
+        return get(`${url}/${boardId}`, data, null);
     },
     deleteComment: (data: DeleteComment, headers: any) =>  {
         return post('/be/board/comment/delete', data, headers);

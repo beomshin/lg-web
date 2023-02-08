@@ -1,10 +1,11 @@
 import axios from "@/plugins/axios";
 
-const get = (url: string, data: any) => {
+const get = (url: string, data: any, headers: any) => {
     return axios({
         method: 'get'
         , url: url
         , params: data
+        , headers: headers
     })
         .then(res => {
             return res;

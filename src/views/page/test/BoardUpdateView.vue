@@ -64,6 +64,8 @@ import service from "@/service/config";
 import LoginBoard from "@/dto/member/LoginBoard";
 import DeleteBoard from "@/dto/member/DeleteBoard";
 import UpdateBoard from "@/dto/member/UpdateBoard";
+import {useCookies} from "vue3-cookies";
+const { cookies } = useCookies();
 
 export default {
   name: "BoardUpdateView",
@@ -107,7 +109,7 @@ export default {
   methods: {
     BoardDetail(boardId) {
       service
-          .findBoard(`/be/board/find/board`, boardId, null)
+          .findBoard(`/be/board/find/board`, boardId, null, {"Authorization": 'Bearer ' + cookies.get('lg.m.log')})
           .then(res => {
             this.board = res.data.data.board
           })

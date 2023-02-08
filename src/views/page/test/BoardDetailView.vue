@@ -143,7 +143,7 @@ export default {
   methods: {
     BoardDetail (boardId) {
       service
-          .findBoard(`/be/board/find/board`, boardId, null)
+          .findBoard(`/be/board/find/board`, boardId, null, {"Authorization": 'Bearer ' + cookies.get('lg.m.log')})
           .then(res => {
             this.board = res.data.data.board
           })
