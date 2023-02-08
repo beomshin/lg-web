@@ -59,9 +59,9 @@ import {ref} from "vue";
 import { useCookies } from 'vue3-cookies'
 import BoardCommentChildren from "@/views/page/test/comment/BoardCommentChildren";
 import BoardCommentUpdate from "@/views/page/test/comment/BoardCommentUpdate";
-import DeleteComment from "@/dto/member/DeleteComment";
 const { cookies } = useCookies();
 import service from "@/service";
+import BoardCommentDelete from "@/dto/board/BoardCommentDelete";
 
 export default {
   name: "BoardComments",
@@ -95,7 +95,7 @@ export default {
       }
     },
     DeleteComment(boardCommentId) {
-      let request = new DeleteComment(boardCommentId, this.password)
+      let request = new BoardCommentDelete(boardCommentId, this.password)
       service
           .BoardCommentDelete(request, null, null)
           .then(res => {

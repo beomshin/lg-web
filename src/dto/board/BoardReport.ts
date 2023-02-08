@@ -1,4 +1,4 @@
-class ReportBoard {
+class BoardReport {
     boardId: number
 
     constructor(boardId: number) {
@@ -6,4 +6,4 @@ class ReportBoard {
     }
 }
 
-export default ReportBoard
+export default BoardReport

@@ -25,7 +25,7 @@ import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import {ref} from "vue";
 import service from "@/service";
-import UpdateComment from "@/dto/member/UpdateComment";
+import BoardCommentUpdate from "@/dto/board/BoardCommentUpdate";
 
 export default {
   name: "BoardCommentChildren",
@@ -54,7 +54,7 @@ export default {
   methods: {
     UpdateComment() {
       if (!this.validate()) return
-      let request = new UpdateComment(this.boardCommentId, this.password, this.text)
+      let request = new BoardCommentUpdate(this.boardCommentId, this.password, this.text)
         service
             .BoardCommentUpdate(request, null, null)
             .then(res => {

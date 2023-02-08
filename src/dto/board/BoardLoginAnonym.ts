@@ -1,4 +1,4 @@
-class LoginBoard {
+class BoardLoginAnonym {
     boardId: number
     password: string
     constructor(boardId: number, password: string) {
@@ -7,4 +7,4 @@ class LoginBoard {
     }
 }
 
-export default LoginBoard
+export default BoardLoginAnonym

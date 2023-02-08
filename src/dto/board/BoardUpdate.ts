@@ -1,4 +1,4 @@
-class UpdateBoard {
+class BoardUpdate {
     boardId: number
     title: string
     content: string
@@ -12,7 +12,6 @@ class UpdateBoard {
         this.addFiles = addFiles
         this.deleteFiles = deleteFiels
     }
-
 }
 
-export default UpdateBoard
+export default BoardUpdate

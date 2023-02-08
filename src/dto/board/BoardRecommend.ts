@@ -1,4 +1,4 @@
-class DeleteBoard {
+class BoardRecommend {
     boardId: number
 
     constructor(boardId: number) {
@@ -6,4 +6,4 @@ class DeleteBoard {
     }
 }
 
-export default DeleteBoard
+export default BoardRecommend

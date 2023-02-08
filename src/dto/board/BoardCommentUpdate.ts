@@ -1,4 +1,4 @@
-class UpdateComment {
+class BoardCommentUpdate {
     boardCommentId: number
     password: string
     content: string
@@ -10,4 +10,4 @@ class UpdateComment {
     }
 }
 
-export default UpdateComment
+export default BoardCommentUpdate

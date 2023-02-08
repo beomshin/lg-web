@@ -61,10 +61,8 @@
 <script>
 import {ref} from "vue";
 import service from "@/service";
-import LoginBoard from "@/dto/member/LoginBoard";
-import DeleteBoard from "@/dto/member/DeleteBoard";
-import UpdateBoard from "@/dto/member/UpdateBoard";
 import {useCookies} from "vue3-cookies";
+import BoardUpdate from "@/dto/board/BoardUpdate";
 const { cookies } = useCookies();
 
 export default {
@@ -118,7 +116,7 @@ export default {
       window.history.back()
     },
     UpdateBoard() {
-      let request = new UpdateBoard(this.board.boardId, this.board.title, this.board.content, this.addFiles, this.deleteFiles)
+      let request = new BoardUpdate(this.board.boardId, this.board.title, this.board.content, this.addFiles, this.deleteFiles)
       service
           .BoardUpdate(request, { "Content-Type" : 'multipart/form-data'}, null)
           .then(res => {

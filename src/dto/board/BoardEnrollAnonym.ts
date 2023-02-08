@@ -1,4 +1,4 @@
-class EnrollAnonymBoard {
+class BoardEnrollAnonym {
     id: string
     password: string
     title: string
@@ -22,7 +22,6 @@ class EnrollAnonymBoard {
         this.files = files
     }
 
-
 }
 
-export default EnrollAnonymBoard
+export default BoardEnrollAnonym

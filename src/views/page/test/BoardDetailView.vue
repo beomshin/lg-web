@@ -93,16 +93,17 @@
 <script>
 import {ref} from "vue";
 import service from "@/service";
-import LoginBoard from "@/dto/member/LoginBoard";
-import DeleteBoard from "@/dto/member/DeleteBoard";
 import {useCookies} from "vue3-cookies";
-import RecommendBoard from "@/dto/member/RecommendBoard";
 import BoardCommentParent from "@/views/page/test/comment/BoardCommentParent";
 import BoardComment from "@/views/page/test/comment/BoardComment";
 const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
-import ReportBoard from "@/dto/member/ReportBoard";
-
+import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
+import BoardLoginMember from "@/dto/board/BoardLoginMember";
+import BoardLoginLawFirm from "@/dto/board/BoardLoginLawFirm";
+import BoardDelete from "@/dto/board/BoardDelete";
+import BoardReport from "@/dto/board/BoardReport";
+import BoardRecommend from "@/dto/board/BoardRecommend";
 export default {
   name: "BoardDetailView",
   components: {BoardComment, BoardCommentParent},
@@ -174,12 +175,11 @@ export default {
       }
 
       const writerType = this.board.writerType
-      let request = new LoginBoard(this.board.boardId, this.password)
       let response = {}
       switch (writerType) {
-        case 0 : response = await service.BoardLoginAnonym(request, null, null); break;
-        case 1 : response = await service.BoardLoginMember(request, null, null); break;
-        case 2 : response = await service.BoardLoginLawFirm(request, null, null); break;
+        case 0 : response = await service.BoardLoginAnonym(new BoardLoginAnonym(this.board.boardId, this.password), null, null); break;
+        case 1 : response = await service.BoardLoginMember(new BoardLoginMember(this.board.boardId, this.password), null, null); break;
+        case 2 : response = await service.BoardLoginLawFirm(new BoardLoginLawFirm(this.board.boardId, this.password), null, null); break;
       }
 
       if (response.data.resultCode == '00000') {
@@ -192,7 +192,7 @@ export default {
           })
         } else if (this.type == 2) {
           service
-              .BoardDelete(new DeleteBoard(this.board.boardId), null, null)
+              .BoardDelete(new BoardDelete(this.board.boardId), null, null)
               .then(res => {
                 if (res.data.resultCode == '00000') {
                   alert('게시판 삭제 성공')
@@ -215,7 +215,7 @@ export default {
     Recommend() {
       if (!this.hasLogin()) return;
       let token = 'Bearer ' + cookies.get('lg.m.log');
-      let request = new RecommendBoard(this.board.boardId)
+      let request = new BoardRecommend(this.board.boardId)
       service
           .BoardRecommend(request, {Authorization: token}, null)
           .then(res => {
@@ -237,7 +237,7 @@ export default {
     },
     Report() {
       service
-          .BoardReport(new ReportBoard(this.board.boardId), null, null)
+          .BoardReport(new BoardReport(this.board.boardId), null, null)
           .then(res => {
             if(res.data.resultCode == '00000') {
               alert('신고하기 성공하였습니다.')

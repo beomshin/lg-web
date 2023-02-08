@@ -1,5 +1,5 @@
-import get from "../../http/get";
-import post from "../../http/post";
+import get from "@/http/get";
+import post from "@/http/post";
 import MemberLoginDto from "@/dto/member/MemberLoginDto";
 import MemberSignDto from "@/dto/member/MemberSignDto";
 import MemberCheckId from "@/dto/member/MemberCheckId";

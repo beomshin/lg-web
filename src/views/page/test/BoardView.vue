@@ -77,8 +77,8 @@
 <script>
 import {ref} from "vue";
 import service from "@/service";
-import FindBoards from "@/dto/board/FindBoards";
 import { useCookies } from 'vue3-cookies'
+import BoardFindList from "@/dto/board/BoardFindList";
 const { cookies } = useCookies();
 
 export default {
@@ -120,7 +120,7 @@ export default {
   methods: {
     FindBoard(page, pageNum, topic, subject, keyword) {
       service
-          .BoardFindList(new FindBoards(page, pageNum, topic, this.type, subject, keyword), null, null)
+          .BoardFindList(new BoardFindList(page, pageNum, topic, this.type, subject, keyword), null, null)
           .then(res => {
             if (res.data.resultCode == "00000") {
               this.boards = res.data.data.boards

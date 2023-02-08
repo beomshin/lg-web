@@ -55,7 +55,7 @@ import {ref} from "vue";
 import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
-import EnrollUserBoard from "@/dto/board/EnrollUserBoard";
+import BoardEnrollMember from "@/dto/board/BoardEnrollMember";
 
 export default {
   name: "BoardUserEnrollView",
@@ -110,7 +110,7 @@ export default {
         const token = 'Bearer ' + cookies.get('lg.m.log')
         service
             .BoardEnrollMember(
-                new EnrollUserBoard(this.title, this.content, this.lineType, this.files),
+                new BoardEnrollMember(this.title, this.content, this.lineType, this.files),
                 {
                   "Content-Type" : 'multipart/form-data',
                   "Authorization": token

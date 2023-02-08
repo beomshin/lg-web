@@ -1,4 +1,4 @@
-class EnrollUserBoard {
+class BoardEnrollMember {
     title: string
     content: string
     lineType: number
@@ -12,4 +12,4 @@ class EnrollUserBoard {
     }
 }
 
-export default EnrollUserBoard
+export default BoardEnrollMember

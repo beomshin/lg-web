@@ -27,9 +27,9 @@
 <script>
 import {ref} from "vue";
 import {useCookies} from "vue3-cookies";
-import EnrollBoardMemberComment from "@/dto/member/EnrollBoardMemberComment";
 import service from "@/service";
-import EnrollBoardAnonymComment from "@/dto/member/EnrollBoardAnonymComment";
+import BoardCommentEnrollMember from "@/dto/board/BoardCommentEnrollMember";
+import BoardCommentEnrollAnonym from "@/dto/board/BoardCommentEnrollAnonym";
 const { cookies } = useCookies();
 
 export default {
@@ -86,7 +86,7 @@ export default {
     },
     EnrollMemberComment() {
       if(!this.validate1()) return
-      const request = new EnrollBoardMemberComment(this.boardId, this.parentId, this.content, this.depth)
+      const request = new BoardCommentEnrollMember(this.boardId, this.parentId, this.content, this.depth)
       let token = 'Bearer ' + cookies.get('lg.m.log');
       service
           .BoardCommentEnrollMember(request, {
@@ -108,7 +108,7 @@ export default {
     },
     EnrollAnonymComment() {
       if(!this.validate2()) return
-      const request = new EnrollBoardAnonymComment(this.boardId, this.parentId, this.id, this.password, this.content, this.depth)
+      const request = new BoardCommentEnrollAnonym(this.boardId, this.parentId, this.id, this.password, this.content, this.depth)
       service
           .BoardCommentEnrollAnonym(request, null, null)
           .then(res => {

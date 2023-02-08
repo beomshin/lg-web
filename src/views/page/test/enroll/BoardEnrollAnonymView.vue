@@ -68,7 +68,7 @@ import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
-import EnrollAnonymBoard from "@/dto/board/EnrollAnonymBoard";
+import BoardEnrollAnonym from "@/dto/board/BoardEnrollAnonym";
 
 export default {
   name: "BoardEnrollView",
@@ -129,7 +129,7 @@ export default {
       if (!this.validateBoard()) {
         return
       } else {
-        let request = new EnrollAnonymBoard(
+        let request = new BoardEnrollAnonym(
             this.id,
             this.password,
             this.title,

@@ -1,4 +1,4 @@
-class DeleteComment {
+class BoardCommentDelete {
     boardCommentId: number
     password: string
     constructor(boardCommentId: number, password: string) {
@@ -7,4 +7,4 @@ class DeleteComment {
     }
 }
 
-export default DeleteComment
+export default BoardCommentDelete

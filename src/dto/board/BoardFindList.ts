@@ -1,4 +1,4 @@
-class FindBoards {
+class BoardFindList {
     page: number
     pageNum: number
     topic: number
@@ -16,4 +16,4 @@ class FindBoards {
     }
 }
 
-export default FindBoards
+export default BoardFindList
