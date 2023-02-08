@@ -78,7 +78,7 @@
     </template><br>
     <BoardCommentParent
       :boardId="this.board.boardId"
-      :parent-id="board.boardCommentId"
+      :parent-id="board.rootId"
     />
     <BoardComment
         :boardId="this.board.boardId"
@@ -162,20 +162,41 @@ export default {
       }
     },
     FindComments (boardId) {
-      service
-          .BoardFindComment(null, null, boardId)
-          .then(res => {
-            if (res.data.resultCode == '00000') {
-              this.comments = res.data.content.comments
-              this.totalCommentCnt = res.data.content.totalElements
-            } else {
+
+      if (cookies.isKey('lg.m.log')) {
+        let token = 'Bearer ' + cookies.get('lg.m.log');
+        service
+            .BoardFindCommentMember(null, {
+              "Authorization": token
+            }, boardId)
+            .then(res => {
+              if (res.data.resultCode == '00000') {
+                this.comments = res.data.content.comments
+                this.totalCommentCnt = res.data.content.totalElements
+              } else {
+                alert('댓글 조회 실패')
+              }
+            })
+            .catch(err => {
+              console.log(err)
               alert('댓글 조회 실패')
-            }
-          })
-          .catch(err => {
-            console.log(err)
-            alert('댓글 조회 실패')
-          })
+            })
+      } else {
+        service
+            .BoardFindCommentAnonym(null, null, boardId)
+            .then(res => {
+              if (res.data.resultCode == '00000') {
+                this.comments = res.data.content.comments
+                this.totalCommentCnt = res.data.content.totalElements
+              } else {
+                alert('댓글 조회 실패')
+              }
+            })
+            .catch(err => {
+              console.log(err)
+              alert('댓글 조회 실패')
+            })
+      }
     },
     Back() {
       window.history.back()

@@ -11,12 +11,13 @@ import BoardUpdate from "@/dto/board/BoardUpdate";
 import BoardDelete from "@/dto/board/BoardDelete";
 import BoardReport from "@/dto/board/BoardReport";
 import BoardRecommend from "@/dto/board/BoardRecommend";
-import BoardFindComment from "@/dto/board/BoardFindComment";
+import BoardFindCommentAnonym from "@/dto/board/BoardFindCommentAnonym";
 import BoardEnrollCommentMember from "@/dto/board/BoardEnrollCommentMember";
 import BoardEnrollCommentAnonym from "@/dto/board/BoardEnrollCommentAnonym";
 import BoardUpdateComment from "@/dto/board/BoardUpdateComment";
 import BoardDeleteComment from "@/dto/board/BoardDeleteComment";
 import BoardFindBoardMember from "@/dto/board/BoardFindBoardMember";
+import BoardFindCommentMember from "@/dto/board/BoardFindCommentMember";
 
 export default {
     BoardLoginAnonym: (data: BoardLoginAnonym, headers: any, subUrl: string) => {
@@ -55,8 +56,11 @@ export default {
     BoardRecommend: (data: BoardRecommend, headers: any, subUrl: string) => {
         return post('/be/board/pq/recommend', data, headers);
     },
-    BoardFindComment: (data: BoardFindComment, headers: any, subUrl: string) => {
-        return get(`/be/board/find/comment/${subUrl}`, data, headers);
+    BoardFindCommentAnonym: (data: BoardFindCommentAnonym, headers: any, subUrl: string) => {
+        return get(`/be/board/find/comment/anonym/${subUrl}`, data, headers);
+    },
+    BoardFindCommentMember: (data: BoardFindCommentMember, headers: any, subUrl: string) => {
+        return get(`/be/board/pq/find/comment/member/${subUrl}`, data, headers);
     },
     BoardEnrollCommentMember: (data: BoardEnrollCommentMember, headers: any, subUrl: string) => {
         return post('/be/board/pq/enroll/comment/member', data, headers);
