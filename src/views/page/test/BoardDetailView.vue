@@ -41,7 +41,7 @@ import {ref} from "vue";
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
 import BoardCommentParent from "@/views/page/test/comment/BoardCommentParent";
-import BoardComment from "@/views/page/test/comment/BoardComment";
+import BoardComment from "@/views/page/test/comment/BoardCommentList";
 import { useRouter, useRoute } from 'vue-router'
 import BoardDetailBody from "@/views/page/test/detail/BoardDetailBody";
 import BoardDetailFiles from "@/views/page/test/detail/BoardDetailFiles";

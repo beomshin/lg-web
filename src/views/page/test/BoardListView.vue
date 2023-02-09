@@ -21,20 +21,37 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col" style="width: 10%">번호</th>
+          <th scope="col" style="width: 5%">번호</th>
           <th scope="col" style="width: 30%">제목</th>
+          <th scope="col" style="width: 10%">라인</th>
           <th scope="col" style="width: 20%">글쓴이</th>
           <th scope="col" style="width: 15%">작성일</th>
-          <th scope="col" style="width: 15%">조회수</th>
+          <th scope="col" style="width: 10%">조회수</th>
           <th scope="col" style="width: 10%">추천수</th>
         </tr>
         </thead>
         <tbody>
           <template v-for="(item, index) in boards" v-bind:key="index">
             <tr class="tr" @click="detailPage(item.boardId)" style="cursor: pointer">
-              <td>{{(index + 1) + (curPage * 10)}}</td>
+              <td>{{(index + 1) + (curPage * 10)}}
+                <template v-if="topic == 1 && (index + 1) + (curPage * 10) <= 5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                  </svg>
+                </template>
+              </td>
               <td>{{item.title}}</td>
-              <td>{{item.writer}} <strong v-if="item.tierName">({{item.tierName}})</strong></td>
+              <td>{{lineName(item.lineType)}}</td>
+              <td>
+                {{item.writer}} <strong v-if="item.tierName">({{item.tierName}})</strong>
+                <template v-if="item.writerType != 0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                  </svg>
+                </template>
+
+              </td>
               <td>{{item.writeDt}}</td>
               <td>{{item.view}}</td>
               <td>{{item.recommendCnt}}</td>
@@ -119,6 +136,7 @@ export default {
   },
   methods: {
     FindBoard(page, pageNum, topic, subject, keyword) {
+      this.topic = topic
       service
           .BoardFindList(new BoardFindList(page, pageNum, topic, this.type, subject, keyword), null, null)
           .then(res => {
@@ -159,6 +177,15 @@ export default {
       this.keyword = ''
       this.subject = 0
       this.FindBoard(0, this.pageNum, 1, this.subject, this.keyword)
+    },
+    lineName(lineType) {
+      switch (lineType) {
+        case 0 : return '탑'
+        case 1 : return '정글'
+        case 2 : return '미드'
+        case 3 : return '원딜'
+        case 4 : return '서폿'
+      }
     }
   }
 }

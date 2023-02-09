@@ -97,6 +97,7 @@ export default {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
               this.content = ''
+              this.$emitter.emit('close')
               this.$emitter.emit('ReFindComment')
             } else {
               alert('댓글 등록 실패')
