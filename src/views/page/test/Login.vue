@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">패스워드</label>
-              <input type="password" class="form-control" v-model="password" placeholder="로그인 패스워드">
+              <input type="password" class="form-control" v-model="password" placeholder="로그인 패스워드" @keyup.enter="Login(loginId, password)">
             </div>
             <button type="button" class="btn btn-secondary" @click="Login(loginId, password)">로그인</button>
             <button type="button" class="btn btn-secondary" style="margin-left: 5px" @click="MoveSign" >회원가입</button>

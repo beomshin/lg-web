@@ -2,7 +2,6 @@ import get from "@/http/get";
 import post from "@/http/post";
 import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
 import BoardLoginMember from "@/dto/board/BoardLoginMember";
-import BoardLoginLawFirm from "@/dto/board/BoardLoginLawFirm";
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardFindBoardAnonym from "@/dto/board/BoardFindBoardAnonym";
 import BoardEnrollAnonym from "@/dto/board/BoardEnrollAnonym";
@@ -25,9 +24,6 @@ export default {
     },
     BoardLoginMember: (data: BoardLoginMember, headers: any, subUrl: string) => {
         return post('/be/board/login/member', data, headers);
-    },
-    BoardLoginLawFirm: (data: BoardLoginLawFirm, headers: any, subUrl: string) => {
-        return post('/be/board/login/lawfirm', data, headers);
     },
     BoardFindList: (data: BoardFindList, headers: any, subUrl: string) => {
         return get('/be/board/find/list', data, headers);

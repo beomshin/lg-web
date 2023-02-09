@@ -100,7 +100,6 @@ const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
 import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
 import BoardLoginMember from "@/dto/board/BoardLoginMember";
-import BoardLoginLawFirm from "@/dto/board/BoardLoginLawFirm";
 import BoardDelete from "@/dto/board/BoardDelete";
 import BoardReport from "@/dto/board/BoardReport";
 import BoardRecommend from "@/dto/board/BoardRecommend";
@@ -212,7 +211,6 @@ export default {
       switch (writerType) {
         case 0 : response = await service.BoardLoginAnonym(new BoardLoginAnonym(this.board.boardId, this.password), null, null); break;
         case 1 : response = await service.BoardLoginMember(new BoardLoginMember(this.board.boardId, this.password), null, null); break;
-        case 2 : response = await service.BoardLoginLawFirm(new BoardLoginLawFirm(this.board.boardId, this.password), null, null); break;
       }
 
       if (response.data.resultCode == '00000') {
