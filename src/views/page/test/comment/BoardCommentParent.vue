@@ -1,9 +1,7 @@
 <template>
   <div>
     <div>
-      <hr>
       <h2>댓글 달기</h2>
-      <hr>
       <BoardCommentForm
           :board-id="this.boardId"
           :parent-id="this.parentId"

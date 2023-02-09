@@ -8,14 +8,13 @@
             <p class="card-text">나의 티어 : {{user?.tierName || '미정'}}, 내 로펌 : {{user?.lawFirmName || '없음'}}</p>
           </div>
           <ul class="list-group list-group-flush">
+            <li class="list-group-item">이메일 : {{user?.email}}</li>
             <li class="list-group-item">미열람 알림함 개수 : {{user?.alarmCnt}}개</li>
             <li class="list-group-item">게시판 작성수 : {{user?.boardCnt}}개</li>
             <li class="list-group-item">재판 작성수 : {{user?.trialCount}}개</li>
           </ul>
           <div class="card-body">
             <a class="card-link" style="cursor: pointer" @click="Logout">로그아웃</a>
-            <a class="card-link" style="cursor: pointer" >아이디 찾기</a>
-            <a class="card-link" style="cursor: pointer" >비밀번호 찾기</a>
           </div>
         </div>
       </template>
@@ -32,6 +31,8 @@
             </div>
             <button type="button" class="btn btn-secondary" @click="Login(loginId, password)">로그인</button>
             <button type="button" class="btn btn-secondary" style="margin-left: 5px" @click="MoveSign" >회원가입</button>
+            <button type="button" class="btn btn-secondary" style="margin-left: 5px" >아이디 찾기</button>
+            <button type="button" class="btn btn-secondary" style="margin-left: 5px" >비밀번호 찾기</button>
           </form>
         </div>
       </template>

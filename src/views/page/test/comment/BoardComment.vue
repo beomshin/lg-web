@@ -1,6 +1,5 @@
 <template>
   <div>
-    <hr>
     <h2>댓글 ({{this.totalCommentCnt}})개</h2>
     <ul class="list-group">
       <template v-for="(item, index) in comments" :key="index">
@@ -44,11 +43,7 @@
             <button class="btn btn-outline-danger" type="button" @click.stop="DeleteComment(item.boardCommentId)">삭제</button>
           </div>
         </li>
-
-
-
       </template>
-
     </ul>
     <hr>
   </div>

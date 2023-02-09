@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/board',
     name: 'board',
-    component: () => import('../views/page/test/BoardView.vue')
+    component: () => import('../views/page/test/BoardListView.vue')
   },
   {
     path: '/board/enroll/anonym',
