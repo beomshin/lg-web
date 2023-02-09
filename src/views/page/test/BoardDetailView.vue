@@ -8,6 +8,8 @@
       :has-login="hasLogin"
       :writer-type="board.writerType"
       :created="board.created"
+      :recommend="board.recommend"
+      @SuccessRecommend="SuccessRecommend"
     />
     <hr>
     <BoardDetailBody
@@ -145,6 +147,9 @@ export default {
     ReFindComment() {
       this.FindComments(this.boardId)
     },
+    SuccessRecommend() {
+      this.board.recommend = 1
+    }
   }
 }
 </script>

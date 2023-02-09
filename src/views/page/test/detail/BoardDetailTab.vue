@@ -1,6 +1,8 @@
 <template>
   <div style="margin-top: 10px; margin-bottom: 10px">
-    <button class="btn btn-success" @click="Recommend">추천하기</button>
+    <template v-if="hasLogin && recommend == 0 && created == 0">
+      <button class="btn btn-success" @click="Recommend">추천하기</button>
+    </template>
     <template v-if="writerType == 0">
       <button class="btn btn-primary" style="margin-left: 5px" @click="() => this.type = 1">수정하기</button>
       <button class="btn btn-danger" style="margin-left: 5px" @click="() => this.type = 2">삭제하기</button>
@@ -9,7 +11,9 @@
       <button class="btn btn-primary" style="margin-left: 5px" @click="() => this.type = 1">수정하기</button>
       <button class="btn btn-danger" style="margin-left: 5px" @click="() => this.type = 2">삭제하기</button>
     </template>
-    <button class="btn btn-warning" style="margin-left: 5px" @click="Report">신고하기</button>
+    <template v-if="hasLogin && created == 0">
+      <button class="btn btn-warning" style="margin-left: 5px" @click="Report">신고하기</button>
+    </template>
     <div class="input-group mb-3" style="margin-top: 5px" v-if="this.type != 0">
       <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="password">
       <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="VerifyPassword">
@@ -31,7 +35,7 @@ const { cookies } = useCookies();
 import {ref} from "vue";
 export default {
   name: "BoardDetailTab",
-  props: ['hasLogin', 'boardId', 'writerType', 'created'],
+  props: ['hasLogin', 'boardId', 'writerType', 'created','recommend'],
   setup() {
     const password = ref('')
     const type = ref(0)
@@ -51,6 +55,7 @@ export default {
           .BoardRecommend(new BoardRecommend(this.boardId), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
           .then(res => {
             if(res.data.resultCode == '00000') {
+              this.$emit('SuccessRecommend')
               alert('추천하기 성공했습니다.')
             } else if (res.data.resultCode == '10016') {
               alert('이미 추천하셨습니다.')
