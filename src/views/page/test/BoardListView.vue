@@ -4,7 +4,7 @@
     <h1>게시판 페이지</h1>
 
     <div style="margin-top: 5px; margin-bottom: 5px">
-      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum, 0, this.subject, this.keyword)">
+      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum, this.topic, this.subject, this.keyword)">
         <option value="5">전체</option>
         <option value="0">탑</option>
         <option value="1">정글</option>
@@ -64,7 +64,7 @@
       <nav aria-label="Page navigation example" style="cursor: pointer; margin-top: 5px">
         <ul class="pagination">
           <template v-for="(item, index) in totalPage" :key="index">
-            <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum, 0, this.subject, this.keyword)">{{item}}</a></li>
+            <li class="page-item" :class="{'active' : index == curPage}"><a class="page-link" @click="FindBoard(index, pageNum, this.topic, this.subject, this.keyword)">{{item}}</a></li>
           </template>
         </ul>
       </nav>
@@ -81,11 +81,11 @@
         <div style="margin-left: 5px">
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">키워드</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="keyword" @keyup.enter="FindBoard(0, pageNum, 0, this.subject, this.keyword)">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="keyword" @keyup.enter="FindBoard(0, pageNum, this.topic, this.subject, this.keyword)">
           </div>
         </div>
         <div>
-          <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindBoard(0, pageNum, 0, this.subject, this.keyword)" >검색</button>
+          <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindBoard(0, pageNum, this.topic, this.subject, this.keyword)" >검색</button>
         </div>
       </div>
     </div>
@@ -173,12 +173,14 @@ export default {
     FindAll() {
       this.keyword = ''
       this.subject = 0
-      this.FindBoard(0, this.pageNum, 0, this.subject, this.keyword)
+      this.topic = 0
+      this.FindBoard(0, this.pageNum, this.topic, this.subject, this.keyword)
     },
     FindHot() {
       this.keyword = ''
       this.subject = 0
-      this.FindBoard(0, this.pageNum, 1, this.subject, this.keyword)
+      this.topic = 1
+      this.FindBoard(0, this.pageNum, this.topic, this.subject, this.keyword)
     },
     lineName(lineType) {
       switch (lineType) {

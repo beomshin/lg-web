@@ -1,6 +1,13 @@
 <template>
   <div v-for="(item, index) in files" :key="index">
-    <img :src="item.path" class="img-thumbnail">
+    <template v-if="item.path.includes('MOV')">
+      <video controls loop muted width=560 height=315>
+        <source :src="item.path"/>
+      </video>
+    </template>
+    <template v-else>
+      <img :src="item.path" class="img-thumbnail">
+    </template>
   </div>
 </template>
 

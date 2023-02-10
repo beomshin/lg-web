@@ -35,6 +35,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/board/update',
     name: 'BoardUpdateView',
     component: () => import('../views/page/test/BoardUpdateView.vue')
+  },
+  {
+    path: '/lawfirm',
+    name: 'LawFirmBody',
+    component: () => import('../views/page/test/lawFirm/LawFirmBody.vue'),
+    children: [
+      {
+        path: '/lawfirm/list',
+        name: 'LawFirmList',
+        component: () => import('../views/page/test/lawFirm/LawFirmList.vue')
+      }
+    ]
   }
 ]
 
