@@ -22,10 +22,11 @@
         <thead>
         <tr>
           <th scope="col" style="width: 5%">번호</th>
-          <th scope="col" style="width: 30%">제목</th>
-          <th scope="col" style="width: 10%">라인</th>
+          <th scope="col" style="width: 25%">제목</th>
+          <th scope="col" style="width: 5%">라인</th>
           <th scope="col" style="width: 20%">글쓴이</th>
           <th scope="col" style="width: 15%">작성일</th>
+          <th scope="col" style="width: 10%">댓글수</th>
           <th scope="col" style="width: 10%">조회수</th>
           <th scope="col" style="width: 10%">추천수</th>
         </tr>
@@ -53,6 +54,7 @@
 
               </td>
               <td>{{item.writeDt}}</td>
+              <td>{{item.commentCnt - 1}}</td>
               <td>{{item.view}}</td>
               <td>{{item.recommendCnt}}</td>
             </tr>
