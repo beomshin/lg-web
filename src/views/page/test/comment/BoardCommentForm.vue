@@ -87,12 +87,10 @@ export default {
     EnrollMemberComment() {
       if(!this.validate1()) return
       const request = new BoardEnrollCommentMember(this.boardId, this.parentId, this.content, this.depth)
+      const headers = { "Authorization": token }
       let token = 'Bearer ' + cookies.get('lg.m.log');
       service
-          .BoardEnrollCommentMember(request, {
-            "Authorization": token
-          },
-          null)
+          .BoardEnrollCommentMember(request, headers,null)
           .then(res => {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
