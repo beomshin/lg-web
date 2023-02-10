@@ -3,7 +3,7 @@
     <hr>
     <div style="display: flex">
       <template v-for="(item, index) in lawFirms" :key="index">
-        <law-firm-list-body :lawFirm="item"/>
+        <law-firm-list-body :lawFirm="item" @click="MoveDetail(item.lawFirmId)"/>
       </template>
     </div>
     <hr>
@@ -81,6 +81,14 @@ export default {
       this.subject = payload.subject
       this.keyword = payload.keyword
       this.FindLawFirmList(this.page, this.pageNum, this.subject, this.keyword)
+    },
+    MoveDetail(id) {
+      this.$router.push({
+        name: 'LawFirmDetail',
+        query: {
+          lawfirmId: id
+        }
+      })
     }
   }
 }

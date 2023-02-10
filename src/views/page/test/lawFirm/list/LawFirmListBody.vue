@@ -4,6 +4,7 @@
     <div class="card-body">
       <p class="card-text" style="font-size: 8px">
         로펌명: {{lawFirm.name}}<br>
+        대표명: {{lawFirm.repName}}<br>
         재판수: {{lawFirm.trialCnt}}<br>
         게시글수: {{lawFirm.boardCnt}}<br>
         승소율: {{lawFirm.winRate}}%
