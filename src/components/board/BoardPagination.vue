@@ -5,7 +5,7 @@
         <li class="page-item"
             v-for="(item, index) in totalPage" :key="index"
             :class="{'active' : index == curPage}">
-          <a class="page-link">
+          <a class="page-link" @click="ChoosePage(index)">
           {{item}}</a>
         </li>
       </ul>
@@ -16,7 +16,13 @@
 <script>
 export default {
   name: "BoardPagination",
-  props: ['curPage', 'totalPage']
+  props: ['curPage', 'totalPage'],
+  methods: {
+    ChoosePage(page) {
+      this.$emit('ChoosePage', page)
+    }
+  }
+
 }
 </script>
 

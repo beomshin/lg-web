@@ -3,6 +3,7 @@
     <tr class="tr"  style="cursor: pointer"
         v-for="(item, index) in boards"
         v-bind:key="index"
+        @click="ChooseBoard(item.boardId)"
     >
       <td>{{(index + 1) + (curPage * 10)}}</td>
       <td>{{item.title}}</td>
@@ -36,6 +37,9 @@ export default {
         case 3 : return '원딜'
         case 4 : return '서폿'
       }
+    },
+    ChooseBoard(boardId) {
+      this.$emit('ChooseBoard', boardId)
     }
   }
 }

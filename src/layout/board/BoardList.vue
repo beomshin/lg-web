@@ -7,11 +7,13 @@
       <board-list-body
         :boards="boards"
         :cur-page="curPage"
+        @ChooseBoard="ChooseBoard"
         />
     </table>
     <board-pagination
       :cur-page="curPage"
       :total-page="totalPage"
+      @ChoosePage="ChoosePage"
       />
   </div>
 </template>
@@ -64,6 +66,14 @@ export default {
 
     return {
       heads
+    }
+  },
+  methods: {
+    ChooseBoard(boardId) {
+      this.$emit('ChooseBoard', boardId)
+    },
+    ChoosePage(page) {
+      this.$emit('ChoosePage', page)
     }
   }
 }

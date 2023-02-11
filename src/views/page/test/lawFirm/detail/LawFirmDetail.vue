@@ -10,6 +10,8 @@
       :boards="boards"
       :cur-page="curPage"
       :total-page="totalPage"
+      @ChooseBoard="ChooseBoard"
+      @ChoosePage="ChoosePage"
       />
   </div>
 </template>
@@ -74,6 +76,12 @@ export default {
           .catch(err => {
             alert('게시판 상세 조회 실패')
           })
+    },
+    ChooseBoard(boardId) {
+      console.log(boardId)
+    },
+    ChoosePage(page) {
+      console.log(page)
     }
   }
 }
