@@ -7,6 +7,7 @@
       <board-list-body
         :boards="boards"
         :cur-page="curPage"
+        :page-num="pageNum"
         @ChooseBoard="ChooseBoard"
         />
     </table>
@@ -39,7 +40,7 @@ import BoardSubject from "@/components/board/BoardSubject";
 export default {
   name: "BoardList",
   components: {BoardSubject, BoardKeyword, BoardPagination, BoardListBody, BoardListTop},
-  props: ['boards', 'curPage', 'totalPage'],
+  props: ['boards', 'curPage', 'totalPage', 'pageNum'],
   setup() {
     const heads = ref([
       {

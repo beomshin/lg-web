@@ -3,29 +3,25 @@
     <hr>
     <h1>게시판 페이지</h1>
 
-    <div style="margin-top: 5px; margin-bottom: 5px">
-      <select class="form-select" aria-label="Default select example" v-model="type" @change="FindBoard(0, pageNum, this.topic, this.subject, this.keyword)">
-        <option value="5">전체</option>
-        <option value="0">탑</option>
-        <option value="1">정글</option>
-        <option value="2">미드</option>
-        <option value="3">원딜</option>
-        <option value="4">서폿</option>>
-      </select>
-      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindAll">전체</button>
-      <button type="button" class="btn btn-danger btn-sm" style="margin-left: 5px" @click="FindHot">HOT</button>
-      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="MoveDetail">글쓰기</button>
-    </div>
+    <board-type
+      @FindAll="FindAll"
+      @FindHot="FindHot"
+      @MoveDetail="MoveDetail"
+      @ChooseType="ChooseType"
+      @ChoosePageNum="ChoosePageNum"
+      />
 
     <board-list
         :boards="boards"
         :cur-page="curPage"
         :total-page="totalPage"
+        :page-num="pageNum"
         @ChooseBoard="ChooseBoard"
         @ChoosePage="ChoosePage"
         @ChangeSubject="ChangeSubject"
         @ChooseKeyword="ChooseKeyword"
       />
+
   </div>
   <hr/>
 </template>
@@ -36,26 +32,25 @@ import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardList from "@/layout/board/BoardList";
+import BoardType from "@/components/board/BoardType";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardListView",
-  components: {BoardList},
+  components: {BoardType, BoardList},
   setup() {
-    const page = ref(0);
     const pageNum = ref(10);
     const topic = ref(0)
     const type = ref(5)
     const list = ref([]);
     const boards = ref([]);
     const totalPage = ref(0)
-    const curPage = ref(1)
+    const curPage = ref(0)
     const subject = ref(0)
     const keyword = ref('')
 
     return {
       list,
-      page,
       topic,
       type,
       totalPage,
@@ -67,8 +62,7 @@ export default {
     }
   },
   created() {
-    console.log('!???????')
-    this.FindBoard(this.page, this.pageNum, 0, this.subject, this.keyword)
+    this.FindBoard()
   },
   computed: {
     hasLogin () {
@@ -77,15 +71,15 @@ export default {
     }
   },
   methods: {
-    FindBoard(page, pageNum, topic, subject, keyword) {
-      this.topic = topic
+    FindBoard() {
+      const request = new BoardFindList(this.curPage, this.pageNum, this.topic, this.type, this.subject, this.keyword);
       service
-          .BoardFindList(new BoardFindList(page, pageNum, topic, this.type, subject, keyword), null, null)
+          .BoardFindList(request, null, null)
           .then(res => {
             if (res.data.resultCode == "00000") {
               this.boards = res.data.content.boards
               this.totalPage = res.data.content.totalPage
-              this.curPage = page
+              this.curPage = res.data.content.curPage
             } else {
               alert('게시판을 불러오는데 실패했습니다.')
             }
@@ -95,31 +89,40 @@ export default {
           })
 
     },
-    MoveDetail() {
-      if (this.hasLogin) {
-        this.$router.push('/board/enroll/user')
-      } else {
-        this.$router.push('/board/enroll/anonym')
-      }
-    },
     FindAll() {
       this.keyword = ''
       this.topic = 0
-      this.FindBoard(0, this.pageNum, this.topic, this.subject, this.keyword)
+      this.curPage = 0
+      this.type=5
+      this.subject=0
+      this.FindBoard()
     },
     FindHot() {
       this.keyword = ''
       this.topic = 1
-      this.FindBoard(0, this.pageNum, this.topic, this.subject, this.keyword)
+      this.curPage = 0
+      this.type=5
+      this.subject=0
+      this.FindBoard()
     },
-    lineName(lineType) {
-      switch (lineType) {
-        case 0 : return '탑'
-        case 1 : return '정글'
-        case 2 : return '미드'
-        case 3 : return '원딜'
-        case 4 : return '서폿'
-      }
+    ChoosePage(curPage) {
+      this.curPage=curPage
+      this.FindBoard()
+    },
+    ChangeSubject(subject) {
+      this.subject = subject;
+    },
+    ChooseKeyword(keyword) {
+      this.curPage = 0;
+      this.keyword = keyword;
+      this.FindBoard()
+    },
+    ChooseType(type) {
+      this.curPage = 0
+      this.type = type
+      this.keyword = ''
+      this.subject=0
+      this.FindBoard()
     },
     ChooseBoard(boardId) {
       this.$router.push({
@@ -129,18 +132,18 @@ export default {
         }
       })
     },
-    ChoosePage(page) {
-      this.FindBoard(page, this.pageNum, this.topic, this.subject, this.keyword)
+    ChoosePageNum(pageNum) {
+      this.pageNum = pageNum
+      this.curPage = 0
+      this.FindBoard()
     },
-    ChangeSubject(subject) {
-      console.log(subject)
-      this.subject = subject;
+    MoveDetail() {
+      if (this.hasLogin) {
+        this.$router.push('/board/enroll/user')
+      } else {
+        this.$router.push('/board/enroll/anonym')
+      }
     },
-    ChooseKeyword(keyword) {
-      this.page = 0;
-      this.keyword = keyword;
-      this.FindBoard(this.page, this.pageNum, this.topic, this.subject, this.keyword)
-    }
   }
 }
 </script>

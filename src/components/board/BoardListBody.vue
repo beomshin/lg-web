@@ -5,7 +5,7 @@
         v-bind:key="index"
         @click="ChooseBoard(item.boardId)"
     >
-      <td>{{(index + 1) + (curPage * 10)}}</td>
+      <td>{{(index + 1) + (curPage * pageNum)}}</td>
       <td>{{item.title}}</td>
       <td>{{lineName(item.lineType)}}</td>
       <td>{{item.writer}}
@@ -27,7 +27,7 @@
 <script>
 export default {
   name: "BoardListBody",
-  props: ['boards', 'curPage'],
+  props: ['boards', 'curPage', 'pageNum'],
   methods: {
     lineName(lineType) {
       switch (lineType) {
