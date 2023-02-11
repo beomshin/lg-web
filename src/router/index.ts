@@ -4,17 +4,17 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'main',
-    component: () => import('../views/page/test/MainView.vue')
+    component: () => import('../views/page/test/main/MainView.vue')
   },
   {
     path: '/sign',
     name: 'sign',
-    component: () => import('../views/page/test/SignView.vue')
+    component: () => import('../views/page/test/member/SignView.vue')
   },
   {
     path: '/board',
     name: 'board',
-    component: () => import('../views/page/test/BoardListView.vue')
+    component: () => import('../views/page/test/board/list/BoardListView.vue')
   },
   {
     path: '/board/enroll/anonym',
@@ -29,12 +29,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/board/detail',
     name: 'BoardDetailView',
-    component: () => import('../views/page/test/BoardDetailView.vue')
+    component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
   },
   {
     path: '/board/update',
     name: 'BoardUpdateView',
-    component: () => import('../views/page/test/BoardUpdateView.vue')
+    component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
   },
   {
     path: '/lawfirm',
