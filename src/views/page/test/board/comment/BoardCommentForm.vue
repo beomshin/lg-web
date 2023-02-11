@@ -87,8 +87,7 @@ export default {
     EnrollMemberComment() {
       if(!this.validate1()) return
       const request = new BoardEnrollCommentMember(this.boardId, this.parentId, this.content, this.depth)
-      const headers = { "Authorization": token }
-      let token = 'Bearer ' + cookies.get('lg.m.log');
+      const headers = { "Authorization": 'Bearer ' + cookies.get('lg.m.log') }
       service
           .BoardEnrollCommentMember(request, headers,null)
           .then(res => {

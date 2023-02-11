@@ -5,20 +5,16 @@
             @change="ChangeSubject($event.target.value)"
     >
       <template v-for="(item, index) in subjects" :key="index">
-        <option :value="item.val">{{item.name}}</option>
+        <option :value="item.val" :selected="subject == item.val">{{item.name}}</option>
       </template>
     </select>
   </div>
 </template>
 
 <script>
-import {ref} from 'vue'
 export default {
   name: "BoardSubject",
-  props: ['subjects'],
-  mounted() {
-    this.subject = this.subjects.val
-  },
+  props: ['subjects', 'subject'],
   methods: {
     ChangeSubject(subject) {
       this.$emit('ChangeSubject', subject)

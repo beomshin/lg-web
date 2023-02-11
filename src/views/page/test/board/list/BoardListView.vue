@@ -1,9 +1,12 @@
 <template>
   <div class="lgBoard">
     <hr>
-    <h1>게시판 페이지</h1>
+    <h1>게시판 페이지 ({{this.totalElements}}개)</h1>
 
     <board-type
+      :page-num="pageNum"
+      :type="type"
+      :topic="topic"
       @FindAll="FindAll"
       @FindHot="FindHot"
       @MoveDetail="MoveDetail"
@@ -16,6 +19,7 @@
         :cur-page="curPage"
         :total-page="totalPage"
         :page-num="pageNum"
+        :subject="subject"
         @ChooseBoard="ChooseBoard"
         @ChoosePage="ChoosePage"
         @ChangeSubject="ChangeSubject"
@@ -33,24 +37,27 @@ import { useCookies } from 'vue3-cookies'
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardList from "@/layout/board/BoardList";
 import BoardType from "@/components/board/BoardType";
+import {useRoute, useRouter} from "vue-router/dist/vue-router";
 const { cookies } = useCookies();
 
 export default {
   name: "BoardListView",
   components: {BoardType, BoardList},
   setup() {
+    const router = useRouter()
+    const route = useRoute()
+    const curPage = ref(0)
     const pageNum = ref(10);
     const topic = ref(0)
     const type = ref(5)
-    const list = ref([]);
-    const boards = ref([]);
-    const totalPage = ref(0)
-    const curPage = ref(0)
     const subject = ref(0)
     const keyword = ref('')
 
+    const boards = ref([]);
+    const totalPage = ref(0)
+    const totalElements = ref(0)
+
     return {
-      list,
       topic,
       type,
       totalPage,
@@ -58,7 +65,10 @@ export default {
       pageNum,
       boards,
       subject,
-      keyword
+      keyword,
+      totalElements,
+      route,
+      router
     }
   },
   created() {
@@ -80,6 +90,7 @@ export default {
               this.boards = res.data.content.boards
               this.totalPage = res.data.content.totalPage
               this.curPage = res.data.content.curPage
+              this.totalElements = res.data.content.totalElements
             } else {
               alert('게시판을 불러오는데 실패했습니다.')
             }
@@ -90,59 +101,59 @@ export default {
 
     },
     FindAll() {
-      this.keyword = ''
-      this.topic = 0
-      this.curPage = 0
-      this.type=5
-      this.subject=0
-      this.FindBoard()
+      this.curPage = 0;
+      this.pageNum = 10;
+      this.topic = 0;
+      this.type = 5;
+      this.subject = 0;
+      this.keyword = '';
+      this.FindBoard();
     },
     FindHot() {
-      this.keyword = ''
-      this.topic = 1
-      this.curPage = 0
-      this.type=5
-      this.subject=0
-      this.FindBoard()
+      this.curPage = 0;
+      this.pageNum = 10;
+      this.topic = 1;
+      this.type = 5;
+      this.subject = 0;
+      this.keyword = '';
+      this.FindBoard();
     },
     ChoosePage(curPage) {
-      this.curPage=curPage
-      this.FindBoard()
+      this.curPage = curPage;
+      this.FindBoard();
     },
     ChangeSubject(subject) {
       this.subject = subject;
     },
     ChooseKeyword(keyword) {
       this.curPage = 0;
+      this.pageNum = 10;
       this.keyword = keyword;
-      this.FindBoard()
+      this.FindBoard();
     },
     ChooseType(type) {
+      this.curPage = 0;
+      this.type = type;
+      this.subject = 0;
+      this.keyword = '';
+      this.FindBoard();
+    },
+    ChoosePageNum(pageNum) {
       this.curPage = 0
-      this.type = type
-      this.keyword = ''
-      this.subject=0
-      this.FindBoard()
+      this.pageNum = pageNum;
+      this.FindBoard();
     },
     ChooseBoard(boardId) {
-      this.$router.push({
+      this.router.push({
         name: 'BoardDetailView',
         query: {
           boardId: boardId
         }
       })
     },
-    ChoosePageNum(pageNum) {
-      this.pageNum = pageNum
-      this.curPage = 0
-      this.FindBoard()
-    },
     MoveDetail() {
-      if (this.hasLogin) {
-        this.$router.push('/board/enroll/user')
-      } else {
-        this.$router.push('/board/enroll/anonym')
-      }
+      if (this.hasLogin) this.router.push({ name: 'BoardEnrollUserView'})
+      else this.router.push({ name: 'BoardEnrollAnonymView'})
     },
   }
 }

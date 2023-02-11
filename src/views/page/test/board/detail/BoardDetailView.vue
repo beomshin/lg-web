@@ -79,7 +79,11 @@ export default {
       hasLogin
     }
   },
+  activated() {
+    window.scrollTo(0, 0);
+  },
   mounted() {
+    console.log('mounted')
     this.BoardDetail(this.boardId)
     this.FindComments(this.boardId)
     this.$emitter.on('ReFindComment', this.ReFindComment)

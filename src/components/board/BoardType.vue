@@ -2,16 +2,16 @@
   <div style="margin-top: 5px; margin-bottom: 5px">
     <select class="form-select" aria-label="Default select example" @change="ChooseType($event.target.value)">
       <template v-for="(item, index) in types" :key="index">
-        <option :value="item.val">{{item.name}}</option>
+        <option :value="item.val" :selected="type == item.val">{{item.name}}</option>
       </template>
     </select>
     <select style="margin-left: 5px" class="form-select" aria-label="Default select example" @change="ChoosePageNum($event.target.value)">
       <template v-for="(item, index) in pageNums" :key="index">
-        <option :value="item.val">{{item.name}}</option>
+        <option :value="item.val" :selected="pageNum == item.val">{{item.name}}</option>
       </template>
     </select>
-    <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="FindAll">전체</button>
-    <button type="button" class="btn btn-danger btn-sm" style="margin-left: 5px" @click="FindHot">HOT</button>
+    <button type="button" class="btn btn-sm" :class="{'btn-secondary': topic == '0', 'btn-outline-secondary' : topic != '0'}" style="margin-left: 5px" @click="FindAll">전체</button>
+    <button type="button" class="btn btn-sm" :class="{'btn-secondary': topic == '1', 'btn-outline-secondary' : topic != '1'}" style="margin-left: 5px" @click="FindHot">HOT</button>
     <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px" @click="MoveDetail">글쓰기</button>
   </div>
 </template>
@@ -20,6 +20,7 @@
 import {ref} from 'vue'
 export default {
   name: "BoardType",
+  props: ['pageNum', 'topic', 'type'],
   setup() {
     const types = ref([
       {
@@ -68,6 +69,9 @@ export default {
       pageNums
     }
   },
+  mounted() {
+    console.log(this.topic)
+  },
   methods: {
     FindAll() {
       this.$emit('FindAll')
@@ -83,7 +87,7 @@ export default {
     },
     ChoosePageNum(pageNum) {
       this.$emit('ChoosePageNum', pageNum)
-    }
+    },
   }
 }
 </script>

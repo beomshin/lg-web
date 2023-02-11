@@ -20,6 +20,7 @@
     <div style="display: flex">
       <board-subject
         :subjects="subjects"
+        :subject="subject"
         @ChangeSubject="ChangeSubject"
       />
       <board-keyword
@@ -40,7 +41,7 @@ import BoardSubject from "@/components/board/BoardSubject";
 export default {
   name: "BoardList",
   components: {BoardSubject, BoardKeyword, BoardPagination, BoardListBody, BoardListTop},
-  props: ['boards', 'curPage', 'totalPage', 'pageNum'],
+  props: ['boards', 'curPage', 'totalPage', 'pageNum', 'subject'],
   setup() {
     const heads = ref([
       {
