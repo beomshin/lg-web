@@ -13,7 +13,7 @@
 
 <script>
 import { useCookies } from 'vue3-cookies'
-import BoardCommentForm from "@/views/page/test/comment/BoardCommentForm";
+import BoardCommentForm from "@/views/page/test/board/comment/BoardCommentForm";
 const { cookies } = useCookies();
 
 export default {

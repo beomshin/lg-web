@@ -40,12 +40,12 @@
 import {ref} from "vue";
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
-import BoardCommentParent from "@/views/page/test/comment/BoardCommentParent";
-import BoardComment from "@/views/page/test/comment/BoardCommentList";
+import BoardCommentParent from "@/views/page/test/board/comment/BoardCommentParent";
+import BoardComment from "@/views/page/test/board/comment/BoardCommentList";
 import { useRouter, useRoute } from 'vue-router'
-import BoardDetailBody from "@/views/page/test/detail/BoardDetailBody";
-import BoardDetailFiles from "@/views/page/test/detail/BoardDetailFiles";
-import BoardDetailTab from "@/views/page/test/detail/BoardDetailTab";
+import BoardDetailBody from "@/views/page/test/board/detail/BoardDetailBody";
+import BoardDetailFiles from "@/views/page/test/board/detail/BoardDetailFiles";
+import BoardDetailTab from "@/views/page/test/board/detail/BoardDetailTab";
 
 const { cookies } = useCookies();
 export default {

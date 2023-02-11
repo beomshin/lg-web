@@ -39,13 +39,13 @@
 <script>
 import {ref} from "vue";
 import { useCookies } from 'vue3-cookies'
-import BoardCommentChildren from "@/views/page/test/comment/BoardCommentChildren";
-import BoardCommentUpdate from "@/views/page/test/comment/BoardCommentUpdate";
+import BoardCommentChildren from "@/views/page/test/board/comment/BoardCommentChildren";
+import BoardCommentUpdate from "@/views/page/test/board/comment/BoardCommentUpdate";
 const { cookies } = useCookies();
 import service from "@/service";
 import BoardDeleteComment from "@/dto/board/BoardDeleteComment";
-import BoardComment from "@/views/page/test/comment/BoardComment";
-import BoardCommentDelete from "@/views/page/test/comment/BoardCommentDelete";
+import BoardComment from "@/views/page/test/board/comment/BoardComment";
+import BoardCommentDelete from "@/views/page/test/board/comment/BoardCommentDelete";
 
 export default {
   name: "BoardComments",
