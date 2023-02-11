@@ -5,6 +5,12 @@
     <law-firm-detail-top
       :law-firm="lawFirm"
     />
+    <hr>
+    <board-list
+      :boards="boards"
+      :cur-page="curPage"
+      :total-page="totalPage"
+      />
   </div>
 </template>
 
@@ -14,9 +20,11 @@ import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import service from "@/service";
 import {ref} from 'vue'
 import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
+import BoardList from "@/layout/board/BoardList";
+
 export default {
   name: "LawFirmDetail",
-  components: {LawFirmDetailTop},
+  components: {BoardList, LawFirmDetailTop},
   setup() {
     const router = useRouter()
     const route = useRoute()
@@ -27,6 +35,9 @@ export default {
     const keyword = ref('')
     const lawFirm = ref({})
     const boards = ref([])
+    const totalElements = ref(0)
+    const totalPage = ref(0)
+    const curPage = ref(0)
 
     return {
       lawfirmId,
@@ -35,7 +46,10 @@ export default {
       subject,
       keyword,
       lawFirm,
-      boards
+      boards,
+      totalElements,
+      totalPage,
+      curPage
     }
   },
   mounted() {
@@ -50,6 +64,9 @@ export default {
             if (res.data.resultCode == '00000') {
               this.lawFirm = res.data.content.lawFirm
               this.boards = res.data.content.boards
+              this.totalPage = res.data.content.totalPage;
+              this.totalElements = res.data.content.totalElements;
+              this.curPage = res.data.content.curPage
             } else {
               alert('게시판 상세 조회 실패')
             }
