@@ -13,7 +13,7 @@ export default {
   name: 'App',
   components: {HeaderTab, Login},
   setup() {
-    const tabs = ref([{ name: '메인 페이지', path: '/'}, { name: '게시판 페이지', path: '/board'}, { name: '로펌 페이지', path: '/lawfirm/list'}])
+    const tabs = ref([{ name: '메인 페이지', path: '/'}, { name: '게시판 페이지', path: '/board/list'}, { name: '로펌 페이지', path: '/lawfirm/list'}])
 
     return {
       tabs

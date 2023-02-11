@@ -14,27 +14,35 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/board',
     name: 'board',
-    component: () => import('../views/page/test/board/list/BoardListView.vue')
-  },
-  {
-    path: '/board/enroll/anonym',
-    name: 'BoardEnrollAnonymView',
-    component: () => import('../views/page/test/board/enroll/BoardEnrollAnonymView.vue')
-  },
-  {
-    path: '/board/enroll/user',
-    name: 'BoardEnrollUserView',
-    component: () => import('../views/page/test/board/enroll/BoardEnrollUserView.vue')
-  },
-  {
-    path: '/board/detail',
-    name: 'BoardDetailView',
-    component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
-  },
-  {
-    path: '/board/update',
-    name: 'BoardUpdateView',
-    component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
+    component: () => import('../views/page/test/board/BoardBody.vue'),
+    children: [
+      {
+        path: '/board/list',
+        name: 'BoardListView',
+        component: () => import('../views/page/test/board/list/BoardListView.vue')
+      },
+      {
+        path: '/board/enroll/anonym',
+        name: 'BoardEnrollAnonymView',
+        component: () => import('../views/page/test/board/enroll/BoardEnrollAnonymView.vue')
+      },
+      {
+        path: '/board/enroll/user',
+        name: 'BoardEnrollUserView',
+        component: () => import('../views/page/test/board/enroll/BoardEnrollUserView.vue')
+      },
+      {
+        path: '/board/detail',
+        name: 'BoardDetailView',
+        component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
+      },
+      {
+        path: '/board/update',
+        name: 'BoardUpdateView',
+        component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
+      },
+    ]
+
   },
   {
     path: '/lawfirm',

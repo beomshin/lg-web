@@ -39,7 +39,7 @@ import BoardList from "@/layout/board/BoardList";
 const { cookies } = useCookies();
 
 export default {
-  name: "BoardView",
+  name: "BoardListView",
   components: {BoardList},
   setup() {
     const page = ref(0);
@@ -66,7 +66,8 @@ export default {
       keyword
     }
   },
-  mounted() {
+  created() {
+    console.log('!???????')
     this.FindBoard(this.page, this.pageNum, 0, this.subject, this.keyword)
   },
   computed: {
