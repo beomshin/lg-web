@@ -78,7 +78,12 @@ export default {
           })
     },
     ChooseBoard(boardId) {
-      console.log(boardId)
+      this.$router.push({
+        name: 'BoardDetailView',
+        query: {
+          boardId: boardId
+        }
+      })
     },
     ChoosePage(page) {
       console.log(page)

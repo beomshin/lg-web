@@ -15,6 +15,16 @@
       :total-page="totalPage"
       @ChoosePage="ChoosePage"
       />
+    <hr>
+    <div style="display: flex">
+      <board-subject
+        :subjects="subjects"
+        @ChangeSubject="ChangeSubject"
+      />
+      <board-keyword
+        @ChooseKeyword="ChooseKeyword"
+      />
+    </div>
   </div>
 </template>
 
@@ -23,10 +33,12 @@ import { ref } from 'vue'
 import BoardListTop from "@/components/board/BoardListTop";
 import BoardListBody from "@/components/board/BoardListBody";
 import BoardPagination from "@/components/board/BoardPagination";
+import BoardKeyword from "@/components/board/BoardKeyword";
+import BoardSubject from "@/components/board/BoardSubject";
 
 export default {
   name: "BoardList",
-  components: {BoardPagination, BoardListBody, BoardListTop},
+  components: {BoardSubject, BoardKeyword, BoardPagination, BoardListBody, BoardListTop},
   props: ['boards', 'curPage', 'totalPage'],
   setup() {
     const heads = ref([
@@ -64,8 +76,28 @@ export default {
       }
     ])
 
+    const subjects = ref([
+      {
+        name: '전체',
+        val: 0
+      },
+      {
+        name: '제목',
+        val: 1
+      },
+      {
+        name: '내용',
+        val: 2
+      },
+      {
+        name: '작성자',
+        val: 3
+      }
+    ])
+
     return {
-      heads
+      heads,
+      subjects
     }
   },
   methods: {
@@ -74,6 +106,12 @@ export default {
     },
     ChoosePage(page) {
       this.$emit('ChoosePage', page)
+    },
+    ChangeSubject(subject) {
+      this.$emit('ChangeSubject', subject)
+    },
+    ChooseKeyword(keyword) {
+      this.$emit('ChooseKeyword', keyword)
     }
   }
 }
