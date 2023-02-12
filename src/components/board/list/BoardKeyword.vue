@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="display: flex">
       <div style="margin-left: 5px">
         <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-default">키워드</span>

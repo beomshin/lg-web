@@ -17,6 +17,8 @@
       @ChangeSubject="ChangeSubject"
       @ChooseKeyword="ChooseKeyword"
       />
+    <hr>
+    <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
 </template>
 
@@ -83,7 +85,7 @@ export default {
     },
     ChooseBoard(boardId) {
       this.$router.push({
-        name: 'LawFirmBoardDetailView',
+        name: 'LawFirmBoardDetailPage',
         query: {
           boardId: boardId
         }
@@ -97,6 +99,9 @@ export default {
     },
     ChooseKeyword(keyword) {
       console.log(keyword)
+    },
+    Back() {
+      window.history.back()
     }
   }
 }
