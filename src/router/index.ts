@@ -27,15 +27,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
       },
       {
-        path: '/board/enroll/anonym',
-        name: 'BoardEnrollAnonymPage',
-        component: () => import('../views/page/test/board/enroll/BoardEnrollAnonymPage.vue')
-      },
-      {
-        path: '/board/enroll/user',
-        name: 'BoardEnrollUserPage',
-        component: () => import('../views/page/test/board/enroll/BoardEnrollUserPage.vue')
-      },
+        path: '/board/enroll',
+        name: 'BoardEnrollPage',
+        component: () => import('../views/page/test/board/enroll/BoardEnrollPage.vue')
+      }
     ]
   },
   {

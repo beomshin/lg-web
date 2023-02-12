@@ -154,8 +154,9 @@ export default {
       })
     },
     MoveDetail() {
-      if (this.hasLogin) this.router.push({ name: 'BoardEnrollUserPage'})
-      else this.router.push({ name: 'BoardEnrollAnonymPage'})
+      this.router.push({
+        name: 'BoardEnrollPage'
+      })
     },
   }
 }

@@ -103,6 +103,11 @@ export default {
 
   },
   activated() {
+    if (!cookies.isKey('lg.m.log')) {
+      alert('로그인 해주세요')
+      window.location.replace('/board/list')
+      return
+    }
     this.title = ''
     this.content = ''
     this.files = []
