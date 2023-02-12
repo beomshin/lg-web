@@ -8,7 +8,6 @@
 
 <script>
 import LawFirmList from "@/views/page/test/lawFirm/list/LawFirmList";
-import BoardDetailPage from "@/views/page/test/board/detail/BoardDetailPage";
 import LawFirmDetail from "@/views/page/test/lawFirm/detail/LawFirmDetail";
 
 export default {
@@ -28,8 +27,7 @@ export default {
   },
   components: {
     LawFirmList,
-    LawFirmDetail,
-    BoardDetailPage
+    LawFirmDetail
   }
 }
 </script>

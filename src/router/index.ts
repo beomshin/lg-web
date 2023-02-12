@@ -61,7 +61,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/lawfirm/board/detail',
-        name: 'BoardDetailPage',
+        name: 'LawFirmBoardDetailPage',
         component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
       },
     ]

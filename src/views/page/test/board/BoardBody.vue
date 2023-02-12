@@ -14,7 +14,7 @@ export default {
   name: "BoardBody",
   data () {
     return {
-      comp: 'BoardBody'
+      comp: 'BoardListPage'
     }
   },
   watch: {
