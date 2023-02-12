@@ -6,7 +6,7 @@
       <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">비밀번호</label>
         <div class="col-sm-10">
-          <input class="form-control" type="password" placeholder="비밀번호" aria-label="Disabled input example" v-model="password">
+          <input class="form-control" type="password" placeholder="비밀번호" v-model="password">
         </div>
       </div>
       <div class="row mb-3">
@@ -28,7 +28,7 @@ import service from "@/service";
 import BoardUpdateComment from "@/dto/board/BoardUpdateComment";
 
 export default {
-  name: "BoardCommentChildren",
+  name: "BoardCommentUpdate",
   props: ['content','boardCommentId'],
   setup() {
     const text = ref('')
@@ -60,7 +60,7 @@ export default {
             .then(res => {
               if (res.data.resultCode == '00000') {
                 this.password = ''
-                this.$emit('close')
+                this.$emit('Close')
                 this.$emitter.emit('ReFindComment')
                 alert('댓글 수정 성공')
               } else {

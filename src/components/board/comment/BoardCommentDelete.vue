@@ -32,7 +32,7 @@ export default {
           .then(res => {
             if (res.data.resultCode == '00000') {
               this.password = ''
-              this.$emit('close')
+              this.$emit('Close')
               this.$emitter.emit('ReFindComment')
               alert('댓글 삭제 성공')
             } else {

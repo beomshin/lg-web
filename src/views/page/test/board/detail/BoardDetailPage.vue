@@ -11,46 +11,36 @@
       @DeleteBoard="DeleteBoard"
       @UpdateBoard="UpdateBoard"
       />
-
-    <hr>
-    <BoardCommentParent
-      :boardId="board.boardId"
-      :parent-id="board.rootId"
-    />
-    <hr>
-    <BoardComment
-        :boardId="board.boardId"
-        :comments="comments"
-        :totalCommentCnt="totalCommentCnt"
+    <board-comment
+      :board="board"
+      :comments="comments"
+      :total-comment-cnt="totalCommentCnt"
       />
+    <hr>
+    <button class="btn btn-secondary" @click="Back">뒤로가기</button>
+    <hr>
   </div>
-  <button class="btn btn-secondary" @click="Back">뒤로가기</button>
-  <hr>
 </template>
 
 <script>
 import {ref} from "vue";
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
-import BoardCommentParent from "@/views/page/test/board/comment/BoardCommentParent";
-import BoardComment from "@/views/page/test/board/comment/BoardCommentList";
 import { useRouter, useRoute } from 'vue-router'
-import BoardDetailBody from "@/components/board/detail/BoardDetailBody";
-import BoardDetailFiles from "@/components/board/detail/BoardDetailFiles";
-import BoardDetailTab from "@/components/board/detail/BoardDetailTab";
 import BoardDetail from "@/layout/board/BoardDetail";
 import BoardRecommend from "@/dto/board/BoardRecommend";
 import BoardReport from "@/dto/board/BoardReport";
 import BoardDelete from "@/dto/board/BoardDelete";
+import BoardComment from "@/layout/board/BoardComment";
 
 const { cookies } = useCookies();
 export default {
   name: "BoardDetailPage",
-  components: {BoardDetail, BoardComment, BoardCommentParent},
+  components: {BoardComment, BoardDetail},
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const boardId = route.query.boardId
+    const boardId = ref(0)
     const board = ref({})
     const type = ref(0)
     const password = ref('')
@@ -72,16 +62,17 @@ export default {
       commentCnt,
       totalCommentCnt,
       boardId,
+      route,
       hasLogin
     }
   },
   activated() {
+    this.boardId = this.route.query.boardId
+    this.BoardDetail(this.boardId)
+    this.FindComments(this.boardId)
     window.scrollTo(0, 0);
   },
   mounted() {
-    console.log('mounted')
-    this.BoardDetail(this.boardId)
-    this.FindComments(this.boardId)
     this.$emitter.on('ReFindComment', this.ReFindComment)
   },
   methods: {
@@ -209,9 +200,4 @@ export default {
 </script>
 
 <style scoped>
-.boardDetail {
-  margin-top: 20px;
-  padding-left: 10px;
-  width: 600px;
-}
 </style>

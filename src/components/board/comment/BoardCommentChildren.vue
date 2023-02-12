@@ -1,6 +1,6 @@
 <template>
   <li class="list-group-item" >
-    <h3>댓글 달기</h3>
+    <h4>대댓글 달기</h4>
     <hr>
     <BoardCommentForm
         :board-id="this.boardId"
@@ -12,7 +12,7 @@
 
 <script>
 import { useCookies } from 'vue3-cookies'
-import BoardCommentForm from "@/views/page/test/board/comment/BoardCommentForm";
+import BoardCommentForm from "@/components/board/comment/BoardCommentForm";
 const { cookies } = useCookies();
 
 export default {

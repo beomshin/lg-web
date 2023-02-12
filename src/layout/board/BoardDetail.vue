@@ -20,8 +20,8 @@
     <board-detail-files
       :files="board.files"
       />
+    <hr>
   </div>
-  <hr>
 </template>
 
 <script>

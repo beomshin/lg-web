@@ -33,7 +33,7 @@ import BoardEnrollCommentAnonym from "@/dto/board/BoardEnrollCommentAnonym";
 const { cookies } = useCookies();
 
 export default {
-  name: "BoardEnrollForm",
+  name: "BoardCommentForm",
   props: ['boardId', 'parentId', 'depth'],
   setup () {
     const id = ref('')
@@ -94,7 +94,7 @@ export default {
             if(res.data.resultCode == '00000') {
               alert('댓글 등록 성공')
               this.content = ''
-              this.$emitter.emit('close')
+              this.$emitter.emit('Close')
               this.$emitter.emit('ReFindComment')
             } else {
               alert('댓글 등록 실패')
@@ -112,6 +112,7 @@ export default {
           .then(res => {
             if(res.data.resultCode == '00000') {
               this.content = ''
+              this.$emitter.emit('Close')
               this.$emitter.emit('ReFindComment')
               alert('댓글 등록 성공')
             } else {

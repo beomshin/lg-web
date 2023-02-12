@@ -69,9 +69,6 @@ export default {
       pageNums
     }
   },
-  mounted() {
-    console.log(this.topic)
-  },
   methods: {
     FindAll() {
       this.$emit('FindAll')
