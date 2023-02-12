@@ -103,11 +103,6 @@ export default {
 
   },
   activated() {
-    if (!cookies.isKey('lg.m.log')) {
-      alert('로그인 해주세요')
-      window.location.replace('/board/list')
-      return
-    }
     this.title = ''
     this.content = ''
     this.files = []
@@ -132,7 +127,7 @@ export default {
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('게시글 등록에 성공했습니다.')
-                window.location.replace('/board')
+                window.history.back()
               } else {
                 alert('게시글 등록에 실패했습니다.')
               }

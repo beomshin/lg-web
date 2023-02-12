@@ -177,7 +177,7 @@ export default {
           .then(res => {
             if (res.data.resultCode == '00000') {
               alert('게시판 삭제 성공')
-              window.location.replace('/board/list')
+              window.history.back()
             } else {
               alert('게시판 삭제 실패')
             }

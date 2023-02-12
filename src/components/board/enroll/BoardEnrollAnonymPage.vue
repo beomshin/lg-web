@@ -156,7 +156,7 @@ export default {
             .then(res => {
               if (res.data.resultCode == '00000') {
                 alert('게시글 등록에 성공했습니다.')
-                window.location.replace('/board')
+                window.history.back()
               } else {
                 alert('게시글 등록에 실패했습니다.')
               }
