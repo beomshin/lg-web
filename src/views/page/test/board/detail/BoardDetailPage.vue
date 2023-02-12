@@ -45,7 +45,7 @@ import BoardDelete from "@/dto/board/BoardDelete";
 
 const { cookies } = useCookies();
 export default {
-  name: "BoardDetailView",
+  name: "BoardDetailPage",
   components: {BoardDetail, BoardComment, BoardCommentParent},
   setup() {
     const router = useRouter()

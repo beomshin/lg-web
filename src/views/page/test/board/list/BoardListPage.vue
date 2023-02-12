@@ -41,7 +41,7 @@ import {useRoute, useRouter} from "vue-router/dist/vue-router";
 const { cookies } = useCookies();
 
 export default {
-  name: "BoardListView",
+  name: "BoardListPage",
   components: {BoardType, BoardList},
   setup() {
     const router = useRouter()
@@ -147,7 +147,7 @@ export default {
     },
     ChooseBoard(boardId) {
       this.router.push({
-        name: 'BoardDetailView',
+        name: 'BoardDetailPage',
         query: {
           boardId: boardId
         }

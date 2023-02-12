@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import BoardListView from "@/views/page/test/board/list/BoardListView";
-import BoardDetailView from "@/views/page/test/board/detail/BoardDetailView";
+import BoardListPage from "@/views/page/test/board/list/BoardListPage";
+import BoardDetailPage from "@/views/page/test/board/detail/BoardDetailPage";
 
 export default {
   name: "BoardBody",
   data () {
     return {
-      comp: 'BoardListView'
+      comp: 'BoardBody'
     }
   },
   watch: {
@@ -26,8 +26,8 @@ export default {
     this.comp = this.$route.name
   },
   components: {
-    BoardListView,
-    BoardDetailView
+    BoardListPage,
+    BoardDetailPage
   }
 }
 </script>

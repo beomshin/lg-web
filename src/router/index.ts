@@ -18,8 +18,8 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/board/list',
-        name: 'BoardListView',
-        component: () => import('../views/page/test/board/list/BoardListView.vue')
+        name: 'BoardListPage',
+        component: () => import('../views/page/test/board/list/BoardListPage.vue')
       },
       {
         path: '/board/enroll/anonym',
@@ -33,8 +33,8 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/board/detail',
-        name: 'BoardDetailView',
-        component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
+        name: 'BoardDetailPage',
+        component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
       },
       {
         path: '/board/update',
@@ -61,8 +61,8 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/lawfirm/board/detail',
-        name: 'BoardDetailView',
-        component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
+        name: 'BoardDetailPage',
+        component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
       },
     ]
   }
