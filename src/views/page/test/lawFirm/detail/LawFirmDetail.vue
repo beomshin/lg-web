@@ -10,8 +10,12 @@
       :boards="boards"
       :cur-page="curPage"
       :total-page="totalPage"
+      :page-num="pageNum"
+      :subject="subject"
       @ChooseBoard="ChooseBoard"
       @ChoosePage="ChoosePage"
+      @ChangeSubject="ChangeSubject"
+      @ChooseKeyword="ChooseKeyword"
       />
   </div>
 </template>
@@ -79,7 +83,7 @@ export default {
     },
     ChooseBoard(boardId) {
       this.$router.push({
-        name: 'BoardDetailView',
+        name: 'LawFirmBoardDetailView',
         query: {
           boardId: boardId
         }
@@ -87,6 +91,12 @@ export default {
     },
     ChoosePage(page) {
       console.log(page)
+    },
+    ChangeSubject(subject) {
+      console.log(subject)
+    },
+    ChooseKeyword(keyword) {
+      console.log(keyword)
     }
   }
 }

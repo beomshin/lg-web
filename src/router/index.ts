@@ -58,7 +58,12 @@ const routes: Array<RouteRecordRaw> = [
         path: '/lawfirm/detail',
         name: 'LawFirmDetail',
         component: () => import('../views/page/test/lawFirm/detail/LawFirmDetail.vue')
-      }
+      },
+      {
+        path: '/lawfirm/board/detail',
+        name: 'BoardDetailView',
+        component: () => import('../views/page/test/board/detail/BoardDetailView.vue')
+      },
     ]
   }
 ]

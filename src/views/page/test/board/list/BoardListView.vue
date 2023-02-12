@@ -36,7 +36,7 @@ import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardList from "@/layout/board/BoardList";
-import BoardType from "@/components/board/BoardType";
+import BoardType from "@/components/board/list/BoardType";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 const { cookies } = useCookies();
 
@@ -119,6 +119,7 @@ export default {
       this.FindBoard();
     },
     ChoosePage(curPage) {
+      window.scrollTo(0, 0);
       this.curPage = curPage;
       this.FindBoard();
     },
@@ -126,6 +127,7 @@ export default {
       this.subject = subject;
     },
     ChooseKeyword(keyword) {
+      window.scrollTo(0, 0);
       this.curPage = 0;
       this.pageNum = 10;
       this.keyword = keyword;

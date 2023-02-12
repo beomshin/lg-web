@@ -32,11 +32,11 @@
 
 <script>
 import { ref } from 'vue'
-import BoardListTop from "@/components/board/BoardListTop";
-import BoardListBody from "@/components/board/BoardListBody";
-import BoardPagination from "@/components/board/BoardPagination";
-import BoardKeyword from "@/components/board/BoardKeyword";
-import BoardSubject from "@/components/board/BoardSubject";
+import BoardListTop from "@/components/board/list/BoardListTop";
+import BoardListBody from "@/components/board/list/BoardListBody";
+import BoardPagination from "@/components/board/list/BoardPagination";
+import BoardKeyword from "@/components/board/list/BoardKeyword";
+import BoardSubject from "@/components/board/list/BoardSubject";
 
 export default {
   name: "BoardList",

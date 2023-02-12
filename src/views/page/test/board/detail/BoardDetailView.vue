@@ -3,23 +3,15 @@
     <hr>
     <h1>{{board.writerType == 0 ? '비회원 게시판' : '회원 게시판'}}</h1>
     <hr/>
-    <BoardDetailTab
-      :board-id="board.boardId"
-      :has-login="hasLogin"
-      :writer-type="board.writerType"
-      :created="board.created"
-      :recommend="board.recommend"
-      @SuccessRecommend="SuccessRecommend"
-    />
-    <hr>
-    <BoardDetailBody
-      :total-comment-cnt="totalCommentCnt"
+    <board-detail
       :board="board"
-    />
-    <hr>
-    <BoardDetailFiles
-      :files="board.files"
-    />
+      :total-comment-cnt="totalCommentCnt"
+      @Recommend="Recommend"
+      @Report="Report"
+      @DeleteBoard="DeleteBoard"
+      @UpdateBoard="UpdateBoard"
+      />
+
     <hr>
     <BoardCommentParent
       :boardId="board.boardId"
@@ -31,8 +23,8 @@
         :comments="comments"
         :totalCommentCnt="totalCommentCnt"
       />
-    <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
+  <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   <hr>
 </template>
 
@@ -43,14 +35,18 @@ import {useCookies} from "vue3-cookies";
 import BoardCommentParent from "@/views/page/test/board/comment/BoardCommentParent";
 import BoardComment from "@/views/page/test/board/comment/BoardCommentList";
 import { useRouter, useRoute } from 'vue-router'
-import BoardDetailBody from "@/views/page/test/board/detail/BoardDetailBody";
-import BoardDetailFiles from "@/views/page/test/board/detail/BoardDetailFiles";
-import BoardDetailTab from "@/views/page/test/board/detail/BoardDetailTab";
+import BoardDetailBody from "@/components/board/detail/BoardDetailBody";
+import BoardDetailFiles from "@/components/board/detail/BoardDetailFiles";
+import BoardDetailTab from "@/components/board/detail/BoardDetailTab";
+import BoardDetail from "@/layout/board/BoardDetail";
+import BoardRecommend from "@/dto/board/BoardRecommend";
+import BoardReport from "@/dto/board/BoardReport";
+import BoardDelete from "@/dto/board/BoardDelete";
 
 const { cookies } = useCookies();
 export default {
   name: "BoardDetailView",
-  components: {BoardDetailTab, BoardDetailFiles, BoardDetailBody, BoardComment, BoardCommentParent},
+  components: {BoardDetail, BoardComment, BoardCommentParent},
   setup() {
     const router = useRouter()
     const route = useRoute()
@@ -151,9 +147,63 @@ export default {
     ReFindComment() {
       this.FindComments(this.boardId)
     },
-    SuccessRecommend() {
-      this.board.recommend = 1
+    Recommend() {
+      service
+          .BoardRecommend(new BoardRecommend(this.board.boardId), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              this.board.recommend = 1
+              alert('추천하기 성공했습니다.')
+            } else if (res.data.resultCode == '10016') {
+              alert('이미 추천하셨습니다.')
+            } else {
+              alert('추천하기 실패했습니다.')
+            }
+          })
+          .catch(err => {
+            alert('추천하기 실패했습니다.')
+          })
+    },
+    Report() {
+      service
+          .BoardReport(new BoardReport(this.board.boardId), null, null)
+          .then(res => {
+            if(res.data.resultCode == '00000') {
+              alert('신고하기 성공하였습니다.')
+            } else if (res.data.resultCode == '10017') {
+              alert('이미 신고하셨습니다.')
+            } else {
+              alert('신고하기 실패하였습니다.')
+            }
+          })
+          .catch(err => {
+            alert('신고하기 실패하였습니다.')
+          })
+    },
+    DeleteBoard() {
+      service
+          .BoardDelete(new BoardDelete(this.board.boardId), null, null)
+          .then(res => {
+            if (res.data.resultCode == '00000') {
+              alert('게시판 삭제 성공')
+              window.location.replace('/board/list')
+            } else {
+              alert('게시판 삭제 실패')
+            }
+          })
+          .catch(err => {
+            alert('게시판 삭제 실패')
+          })
+    },
+    UpdateBoard() {
+      this.$router.push({
+        name: 'BoardUpdateView',
+        query: {
+          boardId: this.boardId
+        }
+      })
     }
+
   }
 }
 </script>

@@ -22,6 +22,9 @@ export default {
       this.comp = to.name
     }
   },
+  mounted() {
+    this.comp = this.$route.name
+  },
   components: {
     BoardListView,
     BoardDetailView
