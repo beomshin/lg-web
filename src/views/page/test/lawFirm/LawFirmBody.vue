@@ -10,6 +10,7 @@
 import LawFirmListPage from "@/views/page/test/lawFirm/list/LawFirmListPage";
 import LawFirmDetail from "@/views/page/test/lawFirm/detail/LawFirmDetail";
 import LawFirmBoardDetailPage from '@/views/page/test/board/detail/BoardDetailPage'
+import LawFirmBoardEnrollPage from '@/views/page/test/board/enroll/BoardEnrollPage'
 
 export default {
   name: "LawFirmBody",
@@ -29,7 +30,8 @@ export default {
   components: {
     LawFirmListPage,
     LawFirmDetail,
-    LawFirmBoardDetailPage
+    LawFirmBoardDetailPage,
+    LawFirmBoardEnrollPage
   }
 }
 </script>

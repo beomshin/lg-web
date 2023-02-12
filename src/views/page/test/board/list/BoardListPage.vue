@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     FindBoard() {
-      const request = new BoardFindList(this.curPage, this.pageNum, this.topic, this.type, this.subject, this.keyword);
+      const request = new BoardFindList(this.curPage, this.pageNum, this.topic, this.type, this.subject, this.keyword, null);
       service
           .BoardFindList(request, null, null)
           .then(res => {
