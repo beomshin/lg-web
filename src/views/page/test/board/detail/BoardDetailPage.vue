@@ -68,7 +68,7 @@ export default {
     }
   },
   activated() {
-    this.boardId = this.route.query.boardId
+    this.boardId = this.route.query.id
     this.BoardDetail(this.boardId)
     this.FindComments(this.boardId)
     window.scrollTo(0, 400);

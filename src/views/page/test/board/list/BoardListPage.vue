@@ -149,7 +149,7 @@ export default {
       this.router.push({
         name: 'BoardDetailPage',
         query: {
-          boardId: boardId
+          id: boardId
         }
       })
     },

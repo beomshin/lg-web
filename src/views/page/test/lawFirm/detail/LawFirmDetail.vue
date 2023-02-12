@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import LawFirmDetailTop from "@/views/page/test/lawFirm/detail/LawFirmDetailTop";
+import LawFirmDetailTop from "@/components/lawFirm/detail/LawFirmDetailTop";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import service from "@/service";
 import {ref} from 'vue'
@@ -36,7 +36,7 @@ export default {
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const lawfirmId = route.query.lawfirmId
+    const lawfirmId = String(route.query.id)
     const page = ref(0)
     const pageNum = ref(10)
     const subject = ref(0)
@@ -60,14 +60,13 @@ export default {
       curPage
     }
   },
-  mounted() {
+  activated() {
     this.FindLawFirmDetail()
   },
   methods: {
     FindLawFirmDetail() {
-      let request = new LawFirmFIndDetail(this.page, this.pageNum, this.subject, this.keyword);
       service
-          .LawFirmFindDetail(request, null, String(this.lawfirmId))
+          .LawFirmFindDetail(new LawFirmFIndDetail(this.page, this.pageNum, this.subject, this.keyword), null, this.lawfirmId)
           .then(res => {
             if (res.data.resultCode == '00000') {
               this.lawFirm = res.data.content.lawFirm
@@ -87,7 +86,7 @@ export default {
       this.$router.push({
         name: 'LawFirmBoardDetailPage',
         query: {
-          boardId: boardId
+          id: boardId
         }
       })
     },

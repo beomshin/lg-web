@@ -41,7 +41,7 @@ export default {
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const boardId = route.query.boardId
+    const boardId = route.query.id
     const type = ref(0)
     const password = ref('')
     const comments = ref([])

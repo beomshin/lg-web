@@ -24,9 +24,9 @@
 import { ref } from 'vue'
 import LawFirmFindList from "@/dto/lawFirm/LawFirmFindList";
 import service from "@/service";
-import LawFirmListBody from "@/components/lawFirm/LawFirmListBody";
-import LawFirmListPagination from "@/components/lawFirm/LawFirmListPagination";
-import LawFirmListCondition from "@/components/lawFirm/LawFirmListCondition";
+import LawFirmListBody from "@/components/lawFirm/list/LawFirmListBody";
+import LawFirmListPagination from "@/components/lawFirm/list/LawFirmListPagination";
+import LawFirmListCondition from "@/components/lawFirm/list/LawFirmListCondition";
 
 export default {
   name: "LawFirmListPage",
@@ -84,7 +84,7 @@ export default {
       this.$router.push({
         name: 'LawFirmDetail',
         query: {
-          lawfirmId: id
+          id: id
         }
       })
     }

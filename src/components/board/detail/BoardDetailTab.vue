@@ -4,7 +4,7 @@
       <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="UpdateBoard">수정하기</button>
       <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="() => this.active = 1">삭제하기</button>
     </template>
-    <button class="btn btn btn-outline-secondary" v-if="ViewBtn2(recommend, created)" @click="Recommend">추천하기</button>
+    <button class="btn btn btn-outline-secondary" style="margin-left: 5px" v-if="ViewBtn2(recommend, created)" @click="Recommend">추천하기</button>
     <button class="btn btn btn-outline-secondary" v-if="ViewBtn3(created)" style="margin-left: 5px" @click="Report">신고하기</button>
     <div v-if="this.active == 1" class="input-group mb-3" style="margin-top: 5px">
       <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="password">
