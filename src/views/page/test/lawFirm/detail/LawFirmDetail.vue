@@ -6,28 +6,41 @@
       :law-firm="lawFirm"
     />
     <hr>
-    <board-type
-        :page-num="pageNum"
-        :type="type"
-        :topic="topic"
-        @FindAll="FindAll"
-        @FindHot="FindHot"
-        @MoveDetail="MoveDetail"
-        @ChooseType="ChooseType"
-        @ChoosePageNum="ChoosePageNum"
-    />
+    <div>
+      <select class="form-select" aria-label="Default select example" v-model="viewType">
+        <option value="0">게시판</option>
+        <option value="1">트라이얼</option>
+      </select>
+      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px">가입신청</button>
+    </div>
     <hr>
-    <board-list
-      :boards="boards"
-      :cur-page="curPage"
-      :total-page="totalPage"
-      :page-num="pageNum"
-      :subject="subject"
-      @ChooseBoard="ChooseBoard"
-      @ChoosePage="ChoosePage"
-      @ChangeSubject="ChangeSubject"
-      @ChooseKeyword="ChooseKeyword"
+    <template v-if="viewType == 0">
+      <board-type
+          :page-num="pageNum"
+          :type="type"
+          :topic="topic"
+          @FindAll="FindAll"
+          @FindHot="FindHot"
+          @MoveDetail="MoveDetail"
+          @ChooseType="ChooseType"
+          @ChoosePageNum="ChoosePageNum"
       />
+      <hr>
+      <board-list
+          :boards="boards"
+          :cur-page="curPage"
+          :total-page="totalPage"
+          :page-num="pageNum"
+          :subject="subject"
+          @ChooseBoard="ChooseBoard"
+          @ChoosePage="ChoosePage"
+          @ChangeSubject="ChangeSubject"
+          @ChooseKeyword="ChooseKeyword"
+      />
+    </template>
+    <template v-if="viewType == 1">
+      <h2>준비중...</h2>
+    </template>
     <hr>
     <button class="btn btn-secondary" @click="Back">뒤로가기</button>
   </div>
@@ -42,14 +55,15 @@ import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
 import BoardList from "@/layout/board/BoardList";
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardType from "@/components/board/list/BoardType";
-
+import {useCookies} from "vue3-cookies";
+const { cookies } = useCookies();
 export default {
   name: "LawFirmDetail",
   components: {BoardType, BoardList, LawFirmDetailTop},
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const lawfirmId = String(route.query.id)
+    const lawfirmId = ref(0)
     const page = ref(0)
     const pageNum = ref(10)
     const subject = ref(0)
@@ -61,6 +75,7 @@ export default {
     const curPage = ref(0)
     const topic = ref(0)
     const type = ref(5)
+    const viewType = ref(0)
 
     return {
       lawfirmId,
@@ -76,12 +91,20 @@ export default {
       topic,
       type,
       router,
-      route
+      route,
+      viewType
     }
   },
   activated() {
+    this.lawfirmId = String(this.route.query.id);
     this.FindLawFirmDetail()
     this.FindBoard()
+  },
+  computed: {
+    hasLogin () {
+      if (cookies.isKey('lg.m.log')) return true
+      return false
+    }
   },
   methods: {
     FindLawFirmDetail() {
@@ -92,10 +115,12 @@ export default {
               this.lawFirm = res.data.content.lawFirm
             } else {
               alert('로펌 상세 조회 실패')
+              window.history.back()
             }
           })
           .catch(err => {
             alert('로펌 상세 조회 실패')
+            window.history.back()
           })
     },
     FindBoard() {
@@ -174,8 +199,16 @@ export default {
       window.history.back()
     },
     MoveDetail() {
+      if (!this.hasLogin) {
+        alert('로그인 유저만 게시글을 작성 할 수 있습니다.')
+        return
+      }
+
       this.router.push({
-        name: 'LawFirmBoardEnrollPage'
+        name: 'LawFirmBoardEnrollPage',
+        query: {
+          id: this.lawfirmId
+        }
       })
     },
   }
