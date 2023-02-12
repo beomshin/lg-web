@@ -63,6 +63,7 @@ export default {
       totalCommentCnt,
       boardId,
       route,
+      router,
       hasLogin
     }
   },
@@ -77,7 +78,6 @@ export default {
   },
   methods: {
     BoardDetail (boardId) {
-
       if (cookies.isKey('lg.m.log')) {
         let token = 'Bearer ' + cookies.get('lg.m.log');
         service
@@ -187,12 +187,21 @@ export default {
           })
     },
     UpdateBoard() {
-      this.$router.push({
-        name: 'BoardUpdateView',
-        query: {
-          boardId: this.boardId
-        }
-      })
+      if (this.board.writerType == 0) {
+        this.$router.push({
+          name: 'BoardUpdateAnonymPage',
+          query: {
+            boardId: this.boardId
+          }
+        })
+      } else {
+        this.$router.push({
+          name: 'BoardUpdateMemberPage',
+          query: {
+            boardId: this.boardId
+          }
+        })
+      }
     }
 
   }

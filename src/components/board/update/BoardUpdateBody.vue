@@ -1,12 +1,9 @@
 <template>
-  <div class="boardDetail">
-    <hr>
-    <h1>게시판 수정 페이지</h1>
-    <hr>
+  <div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-2 col-form-label">제목</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" v-model="board.title">
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" v-model="title">
       </div>
     </div>
     <div class="row mb-3">
@@ -16,7 +13,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">글쓴이</label>
+      <label for="inputEmail3" class="col-sm-2 col-form-label">작성자</label>
       <div class="col-sm-10">
         <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled :value="board.writer">
       </div>
@@ -24,7 +21,7 @@
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
       <div class="col-sm-10">
-        <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="board.content" ></textarea>
+        <textarea class="form-control" aria-label="With textarea" placeholder="내용" v-model="content" ></textarea>
       </div>
     </div>
     <div class="row mb-3">
@@ -45,8 +42,8 @@
         </ul>
       </div>
     </div>
-    <template v-if="board.files">
-      <div v-for="(item, index) in board.files" :key="index">
+    <template v-if="files">
+      <div v-for="(item, index) in files" :key="index">
         <span>{{item.oriName}}</span>
         <img :src="item.path" class="img-thumbnail" style="width: 50px; height: 50px; margin-left: 5px">
         <button class="btn btn-danger" style="margin-left: 5px" @click="DeleteFile2(index, item.boardAttachId)">삭제</button>
@@ -55,22 +52,22 @@
     <button class="btn btn-secondary" @click="Back">뒤로가기</button>
     <button class="btn btn-secondary" style="margin-left: 5px" @click="UpdateBoard">수정하기</button>
   </div>
-  <hr>
 </template>
 
 <script>
-import {ref} from "vue";
-import service from "@/service";
-import {useCookies} from "vue3-cookies";
+import { ref } from 'vue'
 import BoardUpdate from "@/dto/board/BoardUpdate";
-const { cookies } = useCookies();
+import service from "@/service";
 
 export default {
-  name: "BoardUpdateView",
+  name: "BoardUpdateBody",
+  props: ['board'],
   setup() {
-    const board = ref({})
+    const title = ref('')
+    const content = ref('')
     const deleteFiles = ref([])
     const addFiles = ref([])
+    const files = ref([])
 
     const UploadFile = (event) => {
       for (const file of event.target.files) {
@@ -87,50 +84,34 @@ export default {
 
     const DeleteFile2 = (idx, boardAttachId) => {
       deleteFiles.value.push(boardAttachId)
-      board.value.files = board.value.files.filter((e, index) => {
+      files.value = files.value.filter((e, index) => {
         return index != idx
       })
     }
 
     return {
-      board,
+      title,
+      content,
+      UploadFile,
       deleteFiles,
       addFiles,
       DeleteFile,
-      UploadFile,
-      DeleteFile2
+      DeleteFile2,
+      files
     }
   },
   mounted() {
-    this.BoardDetail(this.$route.query.boardId)
+    this.title = this.board.title;
+    this.content = this.board.content;
+    this.files = this.board.files
   },
   methods: {
-    BoardDetail(boardId) {
-
-      if (cookies.isKey('lg.m.log')) {
-        let token = 'Bearer ' + cookies.get('lg.m.log');
-        service
-            .BoardFindBoardMember(null, {
-              "Authorization": token
-            }, boardId)
-            .then(res => {
-              this.board = res.data.content.board
-            })
-      } else {
-        service
-            .BoardFindBoardAnonym(null, null, boardId)
-            .then(res => {
-              this.board = res.data.content.board
-            })
-      }
-    },
-    Back() {
-      window.history.back()
-    },
     UpdateBoard() {
-      let request = new BoardUpdate(this.board.boardId, this.board.title, this.board.content, this.addFiles, this.deleteFiles)
       service
-          .BoardUpdate(request, { "Content-Type" : 'multipart/form-data'}, null)
+          .BoardUpdate(
+              new BoardUpdate(this.board.boardId, this.title, this.content, this.addFiles, this.deleteFiles)
+              , { "Content-Type" : 'multipart/form-data'}
+              , null)
           .then(res => {
             if (res.data.resultCode == '00000') {
               alert('게시판 수정 성공')
@@ -142,15 +123,14 @@ export default {
           .catch(err => {
             alert('게시판 수정 실패')
           })
-    }
+    },
+    Back() {
+      window.history.back()
+    },
   }
 }
 </script>
 
 <style scoped>
-.boardDetail {
-  margin-top: 20px;
-  padding-left: 10px;
-  width: 600px;
-}
+
 </style>

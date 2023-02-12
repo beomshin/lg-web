@@ -34,9 +34,14 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/board/update',
-    name: 'BoardUpdateView',
-    component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
+    path: '/board/update/member',
+    name: 'BoardUpdateMemberPage',
+    component: () => import('../views/page/test/board/update/BoardUpdateMemberPage.vue')
+  },
+  {
+    path: '/board/update/anonym',
+    name: 'BoardUpdateAnonymPage',
+    component: () => import('../views/page/test/board/update/BoardUpdateAnonymPage.vue')
   },
   {
     path: '/lawfirm',

@@ -1,14 +1,14 @@
 <template>
   <div style="margin-top: 10px; margin-bottom: 10px">
     <template v-if="ViewBtn1(writerType, created)">
-      <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="() => ChangeType(1)">수정하기</button>
-      <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="() => ChangeType(2)">삭제하기</button>
+      <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="UpdateBoard">수정하기</button>
+      <button class="btn btn btn-outline-secondary" style="margin-left: 5px" @click="() => this.active = 1">삭제하기</button>
     </template>
     <button class="btn btn btn-outline-secondary" v-if="ViewBtn2(recommend, created)" @click="Recommend">추천하기</button>
     <button class="btn btn btn-outline-secondary" v-if="ViewBtn3(created)" style="margin-left: 5px" @click="Report">신고하기</button>
-    <div v-if="this.type != 0" class="input-group mb-3" style="margin-top: 5px">
+    <div v-if="this.active == 1" class="input-group mb-3" style="margin-top: 5px">
       <input type="password" class="form-control" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="password">
-      <button class="btn btn btn-outline-secondary" type="button" id="button-addon2" @click="VerifyPassword">
+      <button class="btn btn btn-outline-secondary" type="button" id="button-addon2" @click="DeleteBoard">
         {{type == 1 ? '수정' : '삭제'}}
       </button>
     </div>
@@ -34,7 +34,7 @@ export default {
     const createdUser = 1
     const useRecommend = 0;
     const password = ref('')
-    const type = ref(0)
+    const active = ref(0)
 
     const hasLogin = () => {
       if (cookies.isKey('lg.m.log')) return true
@@ -56,17 +56,12 @@ export default {
       else return false;
     }
 
-    const ChangeType = (val) => {
-      type.value = val
-    }
-
     return {
       password,
-      type,
+      active,
       ViewBtn1,
       ViewBtn2,
       ViewBtn3,
-      ChangeType
     }
   },
   methods: {
@@ -76,12 +71,10 @@ export default {
     Report() {
       this.$emit('Report')
     },
-    async VerifyPassword () {
-      if (!this.password) {
-        alert('비밀번호를 입력해주세요')
-        return
-      }
-
+    UpdateBoard() {
+      this.$emit('UpdateBoard')
+    },
+    async DeleteBoard() {
       const writerType = this.writerType
       let response = {}
       switch (writerType) {
@@ -93,15 +86,10 @@ export default {
       if (response.data.resultCode != '00000') {
         alert('비밀번호가 잘못되었습니다.')
         return;
-      }
-
-      if (this.type == 1) {
-        this.$emit('UpdateBoard')
-      } else if (this.type == 2) {
+      } else {
         this.$emit('DeleteBoard')
       }
     },
-
   }
 }
 </script>
