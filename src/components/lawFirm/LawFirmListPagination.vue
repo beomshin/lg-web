@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "LawFirmListPageination",
+  name: "LawFirmListPagination",
   props: ['totalPage', 'curPage'],
   methods: {
     FindLawFirmList(page) {

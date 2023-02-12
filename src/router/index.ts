@@ -50,8 +50,8 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/lawfirm/list',
-        name: 'LawFirmList',
-        component: () => import('../views/page/test/lawFirm/list/LawFirmList.vue')
+        name: 'LawFirmListPage',
+        component: () => import('../views/page/test/lawFirm/list/LawFirmListPage.vue')
       },
       {
         path: '/lawfirm/detail',

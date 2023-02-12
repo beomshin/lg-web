@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LawFirmList from "@/views/page/test/lawFirm/list/LawFirmList";
+import LawFirmListPage from "@/views/page/test/lawFirm/list/LawFirmListPage";
 import LawFirmDetail from "@/views/page/test/lawFirm/detail/LawFirmDetail";
 import LawFirmBoardDetailPage from '@/views/page/test/board/detail/BoardDetailPage'
 
@@ -27,7 +27,7 @@ export default {
     this.comp = this.$route.name
   },
   components: {
-    LawFirmList,
+    LawFirmListPage,
     LawFirmDetail,
     LawFirmBoardDetailPage
   }

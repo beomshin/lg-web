@@ -2,7 +2,7 @@
   <div class="lgBoard">
     <hr>
     <h1>게시판 페이지 ({{this.totalElements}}개)</h1>
-
+    <hr>
     <board-type
       :page-num="pageNum"
       :type="type"

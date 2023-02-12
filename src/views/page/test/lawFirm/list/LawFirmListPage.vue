@@ -7,9 +7,9 @@
       </template>
     </div>
     <hr>
-    <law-firm-list-pageination
+    <law-firm-list-pagination
       :total-page="totalPage"
-      :cur-page="page"
+      :cur-page="curPage"
       @pageMove="pageMove"
       />
     <hr>
@@ -24,24 +24,24 @@
 import { ref } from 'vue'
 import LawFirmFindList from "@/dto/lawFirm/LawFirmFindList";
 import service from "@/service";
-import LawFirmListBody from "@/views/page/test/lawFirm/list/LawFirmListBody";
-import LawFirmListPageination from "@/views/page/test/lawFirm/list/LawFirmListPageination";
-import LawFirmListCondition from "@/views/page/test/lawFirm/list/LawFirmListCondition";
+import LawFirmListBody from "@/components/lawFirm/LawFirmListBody";
+import LawFirmListPagination from "@/components/lawFirm/LawFirmListPagination";
+import LawFirmListCondition from "@/components/lawFirm/LawFirmListCondition";
 
 export default {
-  name: "LawFirmList",
-  components: {LawFirmListCondition, LawFirmListPageination, LawFirmListBody},
+  name: "LawFirmListPage",
+  components: {LawFirmListCondition, LawFirmListPagination, LawFirmListBody},
   setup() {
-    const page = ref('0')
-    const pageNum = ref('4')
-    const subject = ref('0')
+    const curPage = ref(0)
+    const pageNum = ref(4)
+    const subject = ref(0)
     const keyword = ref('')
     const lawFirms = ref('')
     const totalPage = ref(0)
     const totalElements = ref(0)
 
     return {
-      page,
+      curPage,
       pageNum,
       subject,
       keyword,
@@ -51,14 +51,12 @@ export default {
     }
   },
   mounted() {
-    this.FindLawFirmList(this.page, this.pageNum, this.subject, this.keyword)
+    this.FindLawFirmList()
   },
   methods: {
-    FindLawFirmList(page, pageNum, subject, keyword) {
-      const request = new LawFirmFindList(page, pageNum, subject, keyword);
-
+    FindLawFirmList() {
       service
-          .LawFirmFindList(request, null, null)
+          .LawFirmFindList(new LawFirmFindList(this.curPage, this.pageNum, this.subject, this.keyword), null, null)
           .then(res => {
             if (res.data.resultCode == '00000') {
               this.lawFirms = res.data.content.lawFirms
@@ -73,14 +71,14 @@ export default {
           })
     },
     pageMove(payload) {
-      this.page = payload.page
-      this.FindLawFirmList(this.page, this.pageNum, this.subject, this.keyword)
+      this.curPage = payload.page
+      this.FindLawFirmList()
     },
     FindKeyword(payload) {
-      this.page = 0;
+      this.curPage = 0;
       this.subject = payload.subject
       this.keyword = payload.keyword
-      this.FindLawFirmList(this.page, this.pageNum, this.subject, this.keyword)
+      this.FindLawFirmList()
     },
     MoveDetail(id) {
       this.$router.push({
