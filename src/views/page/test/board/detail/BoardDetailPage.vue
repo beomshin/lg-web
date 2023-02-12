@@ -70,7 +70,7 @@ export default {
     this.boardId = this.route.query.boardId
     this.BoardDetail(this.boardId)
     this.FindComments(this.boardId)
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 400);
   },
   mounted() {
     this.$emitter.on('ReFindComment', this.ReFindComment)

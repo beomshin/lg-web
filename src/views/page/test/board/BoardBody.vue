@@ -9,6 +9,8 @@
 <script>
 import BoardListPage from "@/views/page/test/board/list/BoardListPage";
 import BoardDetailPage from "@/views/page/test/board/detail/BoardDetailPage";
+import BoardEnrollAnonymPage from "@/views/page/test/board/enroll/BoardEnrollAnonymPage";
+import BoardEnrollUserPage from "@/views/page/test/board/enroll/BoardEnrollUserPage";
 
 export default {
   name: "BoardBody",
@@ -27,7 +29,9 @@ export default {
   },
   components: {
     BoardListPage,
-    BoardDetailPage
+    BoardDetailPage,
+    BoardEnrollUserPage,
+    BoardEnrollAnonymPage
   }
 }
 </script>

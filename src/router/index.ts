@@ -22,27 +22,26 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/page/test/board/list/BoardListPage.vue')
       },
       {
-        path: '/board/enroll/anonym',
-        name: 'BoardEnrollAnonymView',
-        component: () => import('../views/page/test/board/enroll/BoardEnrollAnonymView.vue')
-      },
-      {
-        path: '/board/enroll/user',
-        name: 'BoardEnrollUserView',
-        component: () => import('../views/page/test/board/enroll/BoardEnrollUserView.vue')
-      },
-      {
         path: '/board/detail',
         name: 'BoardDetailPage',
         component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
       },
       {
-        path: '/board/update',
-        name: 'BoardUpdateView',
-        component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
+        path: '/board/enroll/anonym',
+        name: 'BoardEnrollAnonymPage',
+        component: () => import('../views/page/test/board/enroll/BoardEnrollAnonymPage.vue')
+      },
+      {
+        path: '/board/enroll/user',
+        name: 'BoardEnrollUserPage',
+        component: () => import('../views/page/test/board/enroll/BoardEnrollUserPage.vue')
       },
     ]
-
+  },
+  {
+    path: '/board/update',
+    name: 'BoardUpdateView',
+    component: () => import('../views/page/test/board/update/BoardUpdateView.vue')
   },
   {
     path: '/lawfirm',
