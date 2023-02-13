@@ -79,6 +79,16 @@ const routes: Array<RouteRecordRaw> = [
         path: '/mypage/member',
         name: 'MyMemberPage',
         component: () => import('../views/page/test/mypage/member/MyMemberPage.vue')
+      },
+      {
+        path: '/mypage/board',
+        name: 'MyBoardPage',
+        component: () => import('../views/page/test/mypage/member/MyBoardPage.vue')
+      },
+      {
+        path: '/mypage/alarm',
+        name: 'MyAlarmPage',
+        component: () => import('../views/page/test/mypage/member/MyAlarmPage.vue')
       }
     ]
   }
