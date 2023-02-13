@@ -1,9 +1,20 @@
 <template>
-  <div>
+  <div style="width: 100%">
     <alarm-nav
       @FindReceiveAlarm="FindReceiveAlarm"
       @FindSendAlarm="FindSendAlarm"
     />
+    <alarm-list
+      :alarms="alarms"
+      :cur-page="curPage"
+      :page-num="pageNum"
+      :total-page="totalPage"
+      :subject="subject"
+      @ChoosePage="ChoosePage"
+      @ChooseKeyword="ChooseKeyword"
+      @ChangeSubject="ChangeSubject"
+      />
+
   </div>
 </template>
 
@@ -11,12 +22,37 @@
 import {useCookies} from "vue3-cookies";
 import AlarmNav from "@/components/mypage/alaram/AlarmNav";
 import service from "@/service";
+import { ref } from 'vue'
+import MemberReceiveAlarmList from "@/dto/member/MemberReceiveAlarmList";
+import MemberSenderAlarmList from "@/dto/member/MemberSenderAlarmList";
+import AlarmList from "@/layout/alarm/AlarmList";
 
 const { cookies } = useCookies();
 
 export default {
   name: "MyAlarmPage",
-  components: {AlarmNav},
+  components: { AlarmList, AlarmNav},
+  setup() {
+    const curPage = ref(0)
+    const pageNum = ref(10)
+    const subject = ref(0)
+    const keyword = ref('')
+    const alarms = ref([])
+    const totalElements = ref(0)
+    const totalPage = ref(0)
+    const type = ref(0)
+
+    return {
+      curPage,
+      pageNum,
+      subject,
+      keyword,
+      alarms,
+      totalElements,
+      totalPage,
+      type
+    }
+  },
   computed: {
     hasLogin () {
       if (cookies.isKey('lg.m.log')) return true
@@ -27,30 +63,83 @@ export default {
     if(!this.hasLogin) {
       window.location.replace('/')
     }
+
+    this.MemberReceiveAlarmList()
   },
   methods: {
     FindReceiveAlarm() {
-      console.log('FindReceiveAlarm')
-      service
-          .MemberReceiveAlarmList(null, {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
-          .then(res => {
-            console.log(res)
-          })
-          .catch(err => {
-            console.log(err)
-          })
+      this.curPage = 0
+      this.subject = 0
+      this.keyword = ''
+      this.type = 0;
+      this.MemberReceiveAlarmList()
     },
     FindSendAlarm() {
-      console.log('FindSendAlarm')
+      this.curPage = 0
+      this.subject = 0
+      this.keyword = ''
+      this.type = 1;
+      this.MemberSenderAlarmList()
+    },
+    MemberReceiveAlarmList() {
       service
-          .MemberSenderAlarmList(null, {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
+          .MemberReceiveAlarmList(new MemberReceiveAlarmList(this.curPage, this.pageNum, this.subject, this.keyword),
+              {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
+              null)
           .then(res => {
-            console.log(res)
+            if (res.data.resultCode == '00000') {
+              this.alarms = res.data.content.receiveAlarmList
+              this.totalElements = res.data.content.totalElements
+              this.totalPage = res.data.content.totalPage
+              this.curPage = res.data.content.curPage
+            } else {
+              alert('수신 알림함 조회 실패')
+            }
           })
           .catch(err => {
-            console.log(err)
+            alert('수신 알림함 조회 실패')
           })
+    },
+    MemberSenderAlarmList() {
+      service
+          .MemberSenderAlarmList(new MemberSenderAlarmList(this.curPage, this.pageNum, this.subject, this.keyword),
+              {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
+              null)
+          .then(res => {
+            if (res.data.resultCode == '00000') {
+              this.alarms = res.data.content.sendAlarmList
+              this.totalElements = res.data.content.totalElements
+              this.totalPage = res.data.content.totalPage
+              this.curPage = res.data.content.curPage
+            } else {
+              alert('발신 알림함 조회 실패')
+            }
+          })
+          .catch(err => {
+            alert('발신 알림함 조회 실패')
+          })
+    },
+    ChoosePage(page) {
+      this.curPage = page;
+      if (this.type == 0) {
+        this.MemberReceiveAlarmList()
+      } else if (this.type == 1 ){
+        this.MemberSenderAlarmList()
+      }
+    },
+    ChangeSubject(subject) {
+      this.subject = subject;
+    },
+    ChooseKeyword(keyword) {
+      this.curPage = 0;
+      this.keyword = keyword
+      if (this.type == 0) {
+        this.MemberReceiveAlarmList()
+      } else if (this.type == 1 ){
+        this.MemberSenderAlarmList()
+      }
     }
+
   }
 }
 </script>

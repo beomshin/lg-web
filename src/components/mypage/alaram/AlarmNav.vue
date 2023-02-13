@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" style="cursor: pointer">
     <li class="nav-item">
       <a class="nav-link" :class="{'active' : type == 0}" @click="FindReceiveAlarm">수신알림함</a>
     </li>

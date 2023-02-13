@@ -29,9 +29,9 @@ export default {
         return post('/be/member/pq/info', data, headers);
     },
     MemberReceiveAlarmList: (data: MemberReceiveAlarmList, headers: any, subUrl: string) => {
-        return post('/be/member/pq/receive/alarm', data, headers);
+        return get('/be/member/pq/receive/alarm', data, headers);
     },
     MemberSenderAlarmList: (data: MemberSenderAlarmList, headers: any, subUrl: string) => {
-        return post('/be/member/pq/send/alarm', data, headers);
+        return get('/be/member/pq/send/alarm', data, headers);
     }
 }
