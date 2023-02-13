@@ -6,13 +6,11 @@
       :law-firm="lawFirm"
     />
     <hr>
-    <div>
-      <select class="form-select" aria-label="Default select example" v-model="viewType">
-        <option value="0">게시판</option>
-        <option value="1">트라이얼</option>
-      </select>
-      <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 5px">가입신청</button>
-    </div>
+    <law-firm-group
+      :view-type="viewType"
+      @ChooseGroup="ChooseGroup"
+      @Apply="Apply"
+      />
     <hr>
     <template v-if="viewType == 0">
       <board-type
@@ -56,10 +54,13 @@ import BoardList from "@/layout/board/BoardList";
 import BoardFindList from "@/dto/board/BoardFindList";
 import BoardType from "@/components/board/list/BoardType";
 import {useCookies} from "vue3-cookies";
+import LawFirmGroup from "@/components/lawFirm/detail/LawFirmGroup";
+import LawFirmApply from "@/dto/lawFirm/LawFirmApply";
+
 const { cookies } = useCookies();
 export default {
   name: "LawFirmDetail",
-  components: {BoardType, BoardList, LawFirmDetailTop},
+  components: {LawFirmGroup, BoardType, BoardList, LawFirmDetailTop},
   setup() {
     const router = useRouter()
     const route = useRoute()
@@ -211,6 +212,37 @@ export default {
         }
       })
     },
+    ChooseGroup(val) {
+      this.viewType = val
+    },
+    Apply() {
+      if (!this.hasLogin) {
+        alert('로그인 유저만 신청할 수 있습니다.')
+        return
+      }
+
+      service
+          .LawFirmApply(new LawFirmApply(this.lawfirmId, 'hi'),
+              {
+                "Authorization": 'Bearer ' + cookies.get('lg.m.log')
+              },
+              null
+          )
+          .then(res => {
+            if (res.data.resultCode == '00000') {
+              alert('로펌 신청이 완료되었습니다.')
+            } else if (res.data.resultCode == '10019') {
+              alert('이미 로펌에 가입되어있습니다.')
+            } else if (res.data.resultCode == '10020') {
+              alert('이미 로펌 신청하였습니다.')
+            } else {
+              alert('로펌 신청을 실패했습니다.')
+            }
+          })
+          .catch(err => {
+            alert('로펌 신청을 실패했습니다.')
+          })
+    }
   }
 }
 </script>

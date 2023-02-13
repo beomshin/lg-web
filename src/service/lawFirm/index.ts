@@ -3,6 +3,7 @@ import post from "@/http/post";
 import LawFirmFindList from "@/dto/lawFirm/LawFirmFindList";
 import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
 import LawFirmBoardEnroll from "@/dto/lawFirm/LawFirmBoardEnroll";
+import LawFirmApply from "@/dto/lawFirm/LawFirmApply";
 
 
 
@@ -15,5 +16,8 @@ export default  {
     },
     LawFirmBoardEnroll: (data: LawFirmBoardEnroll, headers: any, subUrl: string) => {
         return post('/be/board/pq/enroll/lawfirm', data, headers)
+    },
+    LawFirmApply: (data: LawFirmApply, headers: any, subUrl: string) => {
+        return post('/be/lawfirm/pq/apply', data, headers)
     }
 }
