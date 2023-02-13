@@ -4,7 +4,10 @@
         <div class="card" style="width: 23rem;">
           <img class="card-img-top" >
           <div class="card-body">
-            <h5 class="card-title">닉네임 : {{user?.nickName || '-'}} 님</h5>
+            <div style="display: flex;">
+              <h5 class="card-title">닉네임 : {{user?.nickName || '-'}} 님</h5>
+              <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 10px" @click="MoveMyPage">마이페이지</button>
+            </div>
             <p class="card-text">나의 티어 : {{user?.tierName || '미정'}}, 내 로펌 : {{user?.lawFirmName || '없음'}}</p>
           </div>
           <ul class="list-group list-group-flush">
@@ -105,7 +108,7 @@ export default {
           .MemberInfo(null, {Authorization: token}, null)
           .then(res => {
             if (res.data.resultCode == '00000') {
-              this.user = res.data.content
+              this.user = res.data.content.user
             } else if (res.data.resultCode == "17008") {
               cookies.remove('lg.m.log')
               alert('세션이 만료되었습니다. 로그아웃 됩니다.')
@@ -120,6 +123,11 @@ export default {
     },
     MoveSign() {
       this.$router.push('/sign')
+    },
+    MoveMyPage() {
+      this.$router.push({
+        name: 'MyMemberPage'
+      })
     }
   },
 }

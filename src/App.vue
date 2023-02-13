@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Login from "@/views/page/test/member/Login";
+import Login from "@/views/page/test/member/login/Login";
 import HeaderTab from "@/views/page/test/HeaderTab";
 import {ref} from "vue";
 

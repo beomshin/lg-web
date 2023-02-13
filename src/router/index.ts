@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/sign',
     name: 'sign',
-    component: () => import('../views/page/test/member/SignView.vue')
+    component: () => import('../views/page/test/member/sign/SignView.vue')
   },
   {
     path: '/board',
@@ -69,6 +69,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/lawfirm/enroll',
     name: 'LawFirmBoardEnrollPage',
     component: () => import('../views/page/test/lawFirm/enroll/LawFirmBoardEnrollPage.vue')
+  },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: () => import('../views/page/test/mypage/MyPage.vue'),
+    children: [
+      {
+        path: '/mypage/member',
+        name: 'MyMemberPage',
+        component: () => import('../views/page/test/mypage/member/MyMemberPage.vue')
+      }
+    ]
   }
 ]
 
