@@ -6,8 +6,6 @@ import MemberCheckId from "@/dto/member/MemberCheckId";
 import MemberPostEmail from "@/dto/member/MemberPostEmail";
 import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
 import MemberInfo from "@/dto/member/MemberInfo";
-import MemberSenderAlarmList from "@/dto/member/MemberSenderAlarmList";
-import MemberReceiveAlarmList from "@/dto/member/MemberReceiveAlarmList";
 
 export default {
     MemberLogin: (data: MemberLoginDto, headers: any, subUrl: string) => {
@@ -27,11 +25,5 @@ export default {
     },
     MemberInfo: (data: MemberInfo, headers: any, subUrl: string) => {
         return post('/be/member/pq/info', data, headers);
-    },
-    MemberReceiveAlarmList: (data: MemberReceiveAlarmList, headers: any, subUrl: string) => {
-        return get('/be/member/pq/receive/alarm', data, headers);
-    },
-    MemberSenderAlarmList: (data: MemberSenderAlarmList, headers: any, subUrl: string) => {
-        return get('/be/member/pq/send/alarm', data, headers);
     }
 }

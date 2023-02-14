@@ -1,4 +1,4 @@
-class MemberSenderAlarmList {
+class AlarmSenderList {
     page: number
     pageNum: number
     subject: number
@@ -12,4 +12,4 @@ class MemberSenderAlarmList {
     }
 }
 
-export default MemberSenderAlarmList
+export default AlarmSenderList

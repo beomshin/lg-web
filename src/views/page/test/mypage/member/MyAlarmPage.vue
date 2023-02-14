@@ -23,8 +23,8 @@ import {useCookies} from "vue3-cookies";
 import AlarmNav from "@/components/mypage/alaram/AlarmNav";
 import service from "@/service";
 import { ref } from 'vue'
-import MemberReceiveAlarmList from "@/dto/member/MemberReceiveAlarmList";
-import MemberSenderAlarmList from "@/dto/member/MemberSenderAlarmList";
+import AlarmReceiveList from "@/dto/alarm/AlarmReceiveList";
+import AlarmSenderList from "@/dto/alarm/AlarmSenderList";
 import AlarmList from "@/layout/alarm/AlarmList";
 
 const { cookies } = useCookies();
@@ -83,7 +83,7 @@ export default {
     },
     MemberReceiveAlarmList() {
       service
-          .MemberReceiveAlarmList(new MemberReceiveAlarmList(this.curPage, this.pageNum, this.subject, this.keyword),
+          .AlarmReceiveList(new AlarmReceiveList(this.curPage, this.pageNum, this.subject, this.keyword),
               {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
               null)
           .then(res => {
@@ -102,7 +102,7 @@ export default {
     },
     MemberSenderAlarmList() {
       service
-          .MemberSenderAlarmList(new MemberSenderAlarmList(this.curPage, this.pageNum, this.subject, this.keyword),
+          .AlarmSenderList(new AlarmSenderList(this.curPage, this.pageNum, this.subject, this.keyword),
               {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
               null)
           .then(res => {
