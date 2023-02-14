@@ -1,4 +1,4 @@
-class AlarmSenderList {
+class MessageSenderList {
     page: number
     pageNum: number
     subject: number
@@ -12,4 +12,4 @@ class AlarmSenderList {
     }
 }
 
-export default AlarmSenderList
+export default MessageSenderList

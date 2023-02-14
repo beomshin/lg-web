@@ -1,4 +1,4 @@
-class AlarmReceiveList {
+class MessageReceiveList {
     page: number
     pageNum: number
     subject: number
@@ -12,4 +12,4 @@ class AlarmReceiveList {
     }
 }
 
-export default AlarmReceiveList
+export default MessageReceiveList
