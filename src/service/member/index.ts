@@ -8,6 +8,7 @@ import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
 import MemberInfo from "@/dto/member/MemberInfo";
 import MemberChangeInfo from "@/dto/member/MemberChangeInfo";
 import MemberChangePasword from "@/dto/member/MemberChangePasword";
+import MemberFindId from "@/dto/member/MemberFindId";
 
 export default {
     MemberLogin: (data: MemberLoginDto, headers: any, subUrl: string) => {
@@ -33,5 +34,8 @@ export default {
     },
     MemberChangePassword: (data: MemberChangePasword, headers: any, subUrl: string) => {
         return post('/be/member/update/pw', data, headers);
+    },
+    MemberFindId: (data: MemberFindId, headers: any, subUrl: string) => {
+        return post('/be/member/find/id', data, headers);
     }
 }

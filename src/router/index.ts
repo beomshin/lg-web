@@ -91,6 +91,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/page/test/mypage/member/MyAlarmPage.vue')
       }
     ]
+  },
+  {
+    path: '/find/id',
+    name: 'FindLoginId',
+    component: () => import('../views/page/test/member/login/FindLoginId.vue')
   }
 ]
 

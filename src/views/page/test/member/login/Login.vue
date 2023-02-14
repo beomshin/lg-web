@@ -39,7 +39,7 @@
             </div>
             <button type="button" class="btn btn-secondary" @click="Login(loginId, password)">로그인</button>
             <button type="button" class="btn btn-secondary" style="margin-left: 5px" @click="MoveSign" >회원가입</button>
-            <button type="button" class="btn btn-secondary" style="margin-left: 5px" >아이디 찾기</button>
+            <button type="button" class="btn btn-secondary" style="margin-left: 5px" @click="MoveFindLoginId">아이디 찾기</button>
             <button type="button" class="btn btn-secondary" style="margin-left: 5px" >비밀번호 찾기</button>
           </form>
         </div>
@@ -132,6 +132,11 @@ export default {
     MoveMyPage() {
       this.$router.push({
         name: 'MyMemberPage'
+      })
+    },
+    MoveFindLoginId() {
+      this.$router.push({
+        name: 'FindLoginId'
       })
     }
   },
