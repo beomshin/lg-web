@@ -6,6 +6,8 @@ import MemberCheckId from "@/dto/member/MemberCheckId";
 import MemberPostEmail from "@/dto/member/MemberPostEmail";
 import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
 import MemberInfo from "@/dto/member/MemberInfo";
+import MemberChangeInfo from "@/dto/member/MemberChangeInfo";
+import MemberChangePasword from "@/dto/member/MemberChangePasword";
 
 export default {
     MemberLogin: (data: MemberLoginDto, headers: any, subUrl: string) => {
@@ -25,5 +27,11 @@ export default {
     },
     MemberInfo: (data: MemberInfo, headers: any, subUrl: string) => {
         return post('/be/member/pq/info', data, headers);
+    },
+    MemberChangeInfo: (data: MemberChangeInfo, headers: any, subUrl: string) => {
+        return post('/be/member/pq/change/member/info', data, headers);
+    },
+    MemberChangePassword: (data: MemberChangePasword, headers: any, subUrl: string) => {
+        return post('/be/member/update/pw', data, headers);
     }
 }

@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div class="mb-3">
+      <label for="formGroupExampleInput" class="form-label">프로필</label><br>
+      <template v-if="board.profile">
+        <img :src="board.profile" class="img-thumbnail" style="width: 150px; height: 150px">
+      </template>
+      <template v-else>
+        <img src="https://s3.ap-northeast-2.amazonaws.com/law.gg.bucket/c5598ec4-5a14-4a32-952f-2d0bc87e24ca.png" class="img-thumbnail" style="width: 150px; height: 150px">
+      </template>
+    </div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-2 col-form-label">제목</label>
       <div class="col-sm-10">

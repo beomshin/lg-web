@@ -2,7 +2,12 @@
   <div class="login">
       <template v-if="hasLogin">
         <div class="card" style="width: 23rem;">
-          <img class="card-img-top" >
+          <template v-if="user.profile">
+            <img :src="user.profile" class="card-img-top">
+          </template>
+          <template v-else>
+            <img src="https://s3.ap-northeast-2.amazonaws.com/law.gg.bucket/c5598ec4-5a14-4a32-952f-2d0bc87e24ca.png" class="card-img-top">
+          </template>
           <div class="card-body">
             <div style="display: flex;">
               <h5 class="card-title">닉네임 : {{user?.nickName || '-'}} 님</h5>
