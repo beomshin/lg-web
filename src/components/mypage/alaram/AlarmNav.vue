@@ -1,10 +1,13 @@
 <template>
   <ul class="nav nav-tabs" style="cursor: pointer">
     <li class="nav-item">
-      <a class="nav-link" :class="{'active' : type == 0}" @click="FindReceiveAlarm">수신알림함</a>
+      <a class="nav-link" :class="{'active' : type == 0}" @click="FindReceiveAlarm">수신메세지</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" :class="{'active' : type == 1}" @click="FindSendAlarm">발신알림함</a>
+      <a class="nav-link" :class="{'active' : type == 1}" @click="FindSendAlarm">발신메세지</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" :class="{'active' : type == 2}" @click="PostMessage">메세지전송</a>
     </li>
   </ul>
 </template>
@@ -28,6 +31,10 @@ export default {
     FindSendAlarm () {
       this.type = 1
       this.$emit('FindSendAlarm')
+    },
+    PostMessage() {
+      this.type = 2
+      this.$emit('PostMessage')
     }
   }
 }

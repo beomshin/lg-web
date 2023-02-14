@@ -7,7 +7,7 @@
       <alarm-list-body
           :page-num="pageNum"
           :cur-page="curPage"
-          :alarms="alarms"
+          :messages="messages"
           />
     </table>
     <div style="display: flex">
@@ -39,7 +39,7 @@ import AlarmPagination from "@/components/mypage/alaram/AlarmPagination";
 export default {
   name: "AlarmList",
   components: {AlarmPagination, AlarmKeyword, AlarmSubject, AlarmListBody, AlarmListTop},
-  props: ['alarms', 'totalPage', 'curPage', 'pageNum', 'subject'],
+  props: ['messages', 'totalPage', 'curPage', 'pageNum', 'subject'],
   setup() {
     const heads = ref([
       {

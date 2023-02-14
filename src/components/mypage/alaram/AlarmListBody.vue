@@ -1,7 +1,7 @@
 <template>
   <tbody>
     <tr class="tr"  style="cursor: pointer"
-        v-for="(item, index) in alarms"
+        v-for="(item, index) in messages"
         v-bind:key="index"
     >
       <td>{{(index + 1) + (curPage * pageNum)}}</td>
@@ -18,7 +18,7 @@
 <script>
 export default {
   name: "AlarmListBody",
-  props: ['alarms', 'curPage', 'pageNum'],
+  props: ['messages', 'curPage', 'pageNum'],
 }
 </script>
 

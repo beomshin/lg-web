@@ -3,17 +3,24 @@
     <alarm-nav
       @FindReceiveAlarm="FindReceiveAlarm"
       @FindSendAlarm="FindSendAlarm"
+      @PostMessage="PostMessage"
     />
-    <alarm-list
-      :alarms="alarms"
-      :cur-page="curPage"
-      :page-num="pageNum"
-      :total-page="totalPage"
-      :subject="subject"
-      @ChoosePage="ChoosePage"
-      @ChooseKeyword="ChooseKeyword"
-      @ChangeSubject="ChangeSubject"
+
+    <template v-if="type == 0 || type == 1">
+      <alarm-list
+          :messages="messages"
+          :cur-page="curPage"
+          :page-num="pageNum"
+          :total-page="totalPage"
+          :subject="subject"
+          @ChoosePage="ChoosePage"
+          @ChooseKeyword="ChooseKeyword"
+          @ChangeSubject="ChangeSubject"
       />
+    </template>
+    <template v-else-if="type == 2">
+      <message-post/>
+    </template>
 
   </div>
 </template>
@@ -26,18 +33,19 @@ import { ref } from 'vue'
 import MessageReceiveList from "@/dto/message/MessageReceiveList";
 import MessageSenderList from "@/dto/message/MessageSenderList";
 import AlarmList from "@/layout/alarm/AlarmList";
+import MessagePost from "@/layout/alarm/MessagePost";
 
 const { cookies } = useCookies();
 
 export default {
   name: "MyAlarmPage",
-  components: { AlarmList, AlarmNav},
+  components: {MessagePost, AlarmList, AlarmNav},
   setup() {
     const curPage = ref(0)
     const pageNum = ref(10)
     const subject = ref(0)
     const keyword = ref('')
-    const alarms = ref([])
+    const messages = ref([])
     const totalElements = ref(0)
     const totalPage = ref(0)
     const type = ref(0)
@@ -47,7 +55,7 @@ export default {
       pageNum,
       subject,
       keyword,
-      alarms,
+      messages,
       totalElements,
       totalPage,
       type
@@ -88,7 +96,7 @@ export default {
               null)
           .then(res => {
             if (res.data.resultCode == '00000') {
-              this.alarms = res.data.content.receiveAlarmList
+              this.messages = res.data.content.messages
               this.totalElements = res.data.content.totalElements
               this.totalPage = res.data.content.totalPage
               this.curPage = res.data.content.curPage
@@ -107,7 +115,7 @@ export default {
               null)
           .then(res => {
             if (res.data.resultCode == '00000') {
-              this.alarms = res.data.content.sendAlarmList
+              this.messages = res.data.content.messages
               this.totalElements = res.data.content.totalElements
               this.totalPage = res.data.content.totalPage
               this.curPage = res.data.content.curPage
@@ -138,8 +146,10 @@ export default {
       } else if (this.type == 1 ){
         this.MemberSenderAlarmList()
       }
+    },
+    PostMessage() {
+      this.type = 2;
     }
-
   }
 }
 </script>
