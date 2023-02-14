@@ -13,9 +13,11 @@
           :page-num="pageNum"
           :total-page="totalPage"
           :subject="subject"
+          :type="type"
           @ChoosePage="ChoosePage"
           @ChooseKeyword="ChooseKeyword"
           @ChangeSubject="ChangeSubject"
+          @Read="Read"
       />
     </template>
     <template v-else-if="type == 2">
@@ -149,6 +151,9 @@ export default {
     },
     PostMessage() {
       this.type = 2;
+    },
+    Read(index) {
+      this.messages[index].readFlag = 1
     }
   }
 }

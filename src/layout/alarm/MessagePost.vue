@@ -49,6 +49,9 @@ export default {
       service
           .MessagePost(new MessagePost(this.receiver, this.title, this.content), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
           .then(res => {
+            this.receiver = ''
+            this.title = ''
+            this.content = ''
             if (res.data.resultCode == '00000') {
               alert('메세지 발송 성공')
             } else if (res.data.resultCode == '10021') {
@@ -60,7 +63,9 @@ export default {
             }
           })
           .catch(err => {
-            console.log(err)
+            this.receiver = ''
+            this.title = ''
+            this.content = ''
             alert('메세지 발송 실패')
           })
     }

@@ -8,6 +8,8 @@
           :page-num="pageNum"
           :cur-page="curPage"
           :messages="messages"
+          :type="type"
+          @Read="Read"
           />
     </table>
     <div style="display: flex">
@@ -39,7 +41,7 @@ import AlarmPagination from "@/components/mypage/alaram/AlarmPagination";
 export default {
   name: "AlarmList",
   components: {AlarmPagination, AlarmKeyword, AlarmSubject, AlarmListBody, AlarmListTop},
-  props: ['messages', 'totalPage', 'curPage', 'pageNum', 'subject'],
+  props: ['messages', 'totalPage', 'curPage', 'pageNum', 'subject', 'type'],
   setup() {
     const heads = ref([
       {
@@ -49,10 +51,6 @@ export default {
       {
         name: '제목',
         width: 25
-      },
-      {
-        name: '내용',
-        width: 5
       },
       {
         name: '수신자',
@@ -109,6 +107,9 @@ export default {
     },
     ChoosePage(page) {
       this.$emit('ChoosePage', page)
+    },
+    Read(index){
+      this.$emit('Read', index)
     }
   }
 }

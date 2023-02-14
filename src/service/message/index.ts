@@ -3,6 +3,7 @@ import post from "@/http/post"
 import MessageReceiveList from "@/dto/message/MessageReceiveList";
 import MessageSenderList from "@/dto/message/MessageSenderList";
 import MessagePost from "@/dto/message/MessagePost";
+import MessageRead from "@/dto/message/MessageRead";
 
 export default {
     AlarmReceiveList: (data: MessageReceiveList, headers: any, subUrl: string) => {
@@ -13,5 +14,8 @@ export default {
     },
     MessagePost: (data: MessagePost, headers: any, subUrl: string) => {
         return post('/be/message/pq/post', data, headers);
+    },
+    MessageRead: (data: MessageRead, headers: any, subUrl: string) => {
+        return post('/be/message/pq/read', data, headers);
     }
 }
