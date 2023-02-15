@@ -27,8 +27,9 @@
 import {ref} from 'vue'
 import AlarmCard from "@/components/mypage/alaram/AlarmCard";
 import service from "@/service";
-import MessageRead from "@/dto/message/MessageRead";
 import {useCookies} from "vue3-cookies";
+import MessageReadReceive from "@/dto/message/MessageReadReceive";
+import MessageReadSend from "@/dto/message/MessageReadSend";
 
 const { cookies } = useCookies();
 
@@ -57,9 +58,10 @@ export default {
         return
       }
 
-      service
-          .MessageRead(new MessageRead(messageId, this.type), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
-          .then(res => {
+      if (this.type == 0) {
+        service
+            .MessageReadReceive(new MessageReadReceive(messageId), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
+            .then(res => {
               if (res.data.resultCode == '00000') {
                 this.active= index
                 this.message = res.data.content.message
@@ -69,10 +71,29 @@ export default {
               } else {
                 alert('내용 호출 실패')
               }
-          })
-          .catch(err => {
-            alert('내용 호출 실패')
-          })
+            })
+            .catch(err => {
+              alert('내용 호출 실패')
+            })
+      } else if (this.type == 1) {
+        service
+            .MessageReadSend(new MessageReadSend(messageId), {Authorization: 'Bearer ' + cookies.get('lg.m.log')}, null)
+            .then(res => {
+              if (res.data.resultCode == '00000') {
+                this.active= index
+                this.message = res.data.content.message
+                if (this.type == 0) {
+                  this.$emit('Read', index)
+                }
+              } else {
+                alert('내용 호출 실패')
+              }
+            })
+            .catch(err => {
+              alert('내용 호출 실패')
+            })
+      }
+
     }
   }
 }

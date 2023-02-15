@@ -3,19 +3,27 @@ import post from "@/http/post"
 import MessageReceiveList from "@/dto/message/MessageReceiveList";
 import MessageSenderList from "@/dto/message/MessageSenderList";
 import MessagePost from "@/dto/message/MessagePost";
-import MessageRead from "@/dto/message/MessageRead";
+import MessageReadReceive from "@/dto/message/MessageReadReceive";
+import MessageReadSend from "@/dto/message/MessageReadSend";
+import MessageDelete from "@/dto/message/MessageDelete";
 
 export default {
-    AlarmReceiveList: (data: MessageReceiveList, headers: any, subUrl: string) => {
+    MessageReceiveList: (data: MessageReceiveList, headers: any, subUrl: string) => {
         return get('/be/message/pq/receive', data, headers);
     },
-    AlarmSenderList: (data: MessageSenderList, headers: any, subUrl: string) => {
+    MessageSenderList: (data: MessageSenderList, headers: any, subUrl: string) => {
         return get('/be/message/pq/send', data, headers);
     },
     MessagePost: (data: MessagePost, headers: any, subUrl: string) => {
         return post('/be/message/pq/post', data, headers);
     },
-    MessageRead: (data: MessageRead, headers: any, subUrl: string) => {
-        return post('/be/message/pq/read', data, headers);
+    MessageReadReceive: (data: MessageReadReceive, headers: any, subUrl: string) => {
+        return post('/be/message/pq/read/receive', data, headers);
+    },
+    MessageReadSend: (data: MessageReadSend, headers: any, subUrl: string) => {
+        return post('/be/message/pq/read/send', data, headers);
+    },
+    MessageDelete: (data: MessageDelete, headers: any, subUrl: string) => {
+        return post('/be/message/pq/delete', data, headers);
     }
 }

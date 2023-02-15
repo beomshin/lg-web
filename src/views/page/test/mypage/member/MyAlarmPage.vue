@@ -93,7 +93,7 @@ export default {
     },
     MemberReceiveAlarmList() {
       service
-          .AlarmReceiveList(new MessageReceiveList(this.curPage, this.pageNum, this.subject, this.keyword),
+          .MessageReceiveList(new MessageReceiveList(this.curPage, this.pageNum, this.subject, this.keyword),
               {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
               null)
           .then(res => {
@@ -112,7 +112,7 @@ export default {
     },
     MemberSenderAlarmList() {
       service
-          .AlarmSenderList(new MessageSenderList(this.curPage, this.pageNum, this.subject, this.keyword),
+          .MessageSenderList(new MessageSenderList(this.curPage, this.pageNum, this.subject, this.keyword),
               {Authorization: 'Bearer ' + cookies.get('lg.m.log')},
               null)
           .then(res => {
