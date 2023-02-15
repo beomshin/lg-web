@@ -3,7 +3,7 @@
   <div style="display: flex;">
     <ul class="list-group" style="margin-right: 10px; cursor: pointer">
       <li class="list-group-item" :class="{'color' : type == 0}" @click="Move(0)">개인정보 수정</li>
-      <li class="list-group-item" :class="{'color' : type == 1}" @click="Move(1)">알림함</li>
+      <li class="list-group-item" :class="{'color' : type == 1}" @click="Move(1)">메세지함</li>
       <li class="list-group-item" :class="{'color' : type == 2}" @click="Move(2)">글목록</li>
     </ul>
     <router-view/>

@@ -17,6 +17,7 @@ import BoardUpdateComment from "@/dto/board/BoardUpdateComment";
 import BoardDeleteComment from "@/dto/board/BoardDeleteComment";
 import BoardFindBoardMember from "@/dto/board/BoardFindBoardMember";
 import BoardFindCommentMember from "@/dto/board/BoardFindCommentMember";
+import BoardFindMemberList from "@/dto/board/BoardFindMemberList";
 
 export default {
     BoardLoginAnonym: (data: BoardLoginAnonym, headers: any, subUrl: string) => {
@@ -70,4 +71,7 @@ export default {
     BoardDeleteComment: (data: BoardDeleteComment, headers: any, subUrl: string) => {
         return post('/be/board/delete/comment', data, headers);
     },
+    BoardFindMemberList: (data: BoardFindMemberList, headers: any, subUrl: string) => {
+        return get('/be/board/pq/find/member/list', data, headers);
+    }
 }
