@@ -11,7 +11,7 @@
 
 <script>
 import {ref} from "vue";
-import BoardDeleteComment from "@/dto/board/BoardDeleteComment";
+import BoardDeleteComment from "@/dto/etc/BoardDeleteComment";
 import service from "@/service";
 
 export default {

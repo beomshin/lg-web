@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import BoardRecommend from "@/dto/board/BoardRecommend";
+import BoardRecommend from "@/dto/etc/BoardRecommend";
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
-import BoardReport from "@/dto/board/BoardReport";
-import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
-import BoardLoginMember from "@/dto/board/BoardLoginMember";
-import BoardDelete from "@/dto/board/BoardDelete";
+import BoardReport from "@/dto/etc/BoardReport";
+import BoardLoginAnonym from "@/dto/etc/BoardLoginAnonym";
+import BoardLoginMember from "@/dto/etc/BoardLoginMember";
+import BoardDelete from "@/dto/etc/BoardDelete";
 const { cookies } = useCookies();
 import {ref} from "vue";
 export default {

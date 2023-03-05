@@ -51,7 +51,7 @@ import service from "@/service";
 import {ref} from 'vue'
 import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
 import BoardList from "@/layout/board/BoardList";
-import BoardFindList from "@/dto/board/BoardFindList";
+import BoardFindList from "@/dto/etc/BoardFindList";
 import BoardType from "@/components/board/list/BoardType";
 import {useCookies} from "vue3-cookies";
 import LawFirmGroup from "@/components/lawFirm/detail/LawFirmGroup";

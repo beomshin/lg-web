@@ -11,8 +11,8 @@
 <script>
 import { ref } from 'vue'
 import service from "@/service";
-import BoardLoginAnonym from "@/dto/board/BoardLoginAnonym";
-import BoardLoginMember from "@/dto/board/BoardLoginMember";
+import BoardLoginAnonym from "@/dto/etc/BoardLoginAnonym";
+import BoardLoginMember from "@/dto/etc/BoardLoginMember";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
 export default {

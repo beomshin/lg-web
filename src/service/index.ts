@@ -1,11 +1,17 @@
-import memberService from './member'
+import authService from './auth'
 import boardService from './board'
 import lawfirmService from './lawFirm'
 import messageService from './message'
+import signService from './sign'
+import trialService from './trial'
+import userService from './user'
 
 export default {
-    ...memberService,
+    ...authService,
     ...boardService,
     ...lawfirmService,
-    ...messageService
+    ...messageService,
+    ...signService,
+    ...trialService,
+    ...userService
 }

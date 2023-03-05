@@ -68,7 +68,7 @@ import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import { useRouter, useRoute } from 'vue-router'
-import BoardEnrollAnonym from "@/dto/board/BoardEnrollAnonym";
+import BoardEnrollAnonym from "@/dto/etc/BoardEnrollAnonym";
 
 export default {
   name: "BoardEnrollAnonymPage",

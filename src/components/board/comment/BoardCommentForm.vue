@@ -28,8 +28,8 @@
 import {ref} from "vue";
 import {useCookies} from "vue3-cookies";
 import service from "@/service";
-import BoardEnrollCommentMember from "@/dto/board/BoardEnrollCommentMember";
-import BoardEnrollCommentAnonym from "@/dto/board/BoardEnrollCommentAnonym";
+import BoardEnrollCommentMember from "@/dto/etc/BoardEnrollCommentMember";
+import BoardEnrollCommentAnonym from "@/dto/etc/BoardEnrollCommentAnonym";
 const { cookies } = useCookies();
 
 export default {

@@ -33,7 +33,7 @@
 import {ref} from "vue";
 import service from "@/service";
 import { useCookies } from 'vue3-cookies'
-import BoardFindList from "@/dto/board/BoardFindList";
+import BoardFindList from "@/dto/etc/BoardFindList";
 import BoardList from "@/layout/board/BoardList";
 import BoardType from "@/components/board/list/BoardType";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";

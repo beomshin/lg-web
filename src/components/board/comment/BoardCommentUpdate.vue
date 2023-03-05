@@ -25,7 +25,7 @@ import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import {ref} from "vue";
 import service from "@/service";
-import BoardUpdateComment from "@/dto/board/BoardUpdateComment";
+import BoardUpdateComment from "@/dto/etc/BoardUpdateComment";
 
 export default {
   name: "BoardCommentUpdate",

@@ -55,7 +55,7 @@ import {ref} from "vue";
 import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
-import BoardEnrollMember from "@/dto/board/BoardEnrollMember";
+import BoardEnrollMember from "@/dto/etc/BoardEnrollMember";
 
 export default {
   name: "BoardEnrollUserPage",

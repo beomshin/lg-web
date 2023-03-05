@@ -56,7 +56,7 @@
 
 <script>
 import { ref } from 'vue'
-import BoardUpdate from "@/dto/board/BoardUpdate";
+import BoardUpdate from "@/dto/etc/BoardUpdate";
 import service from "@/service";
 
 export default {

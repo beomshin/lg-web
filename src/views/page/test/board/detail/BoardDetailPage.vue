@@ -28,9 +28,9 @@ import service from "@/service";
 import {useCookies} from "vue3-cookies";
 import { useRouter, useRoute } from 'vue-router'
 import BoardDetail from "@/layout/board/BoardDetail";
-import BoardRecommend from "@/dto/board/BoardRecommend";
-import BoardReport from "@/dto/board/BoardReport";
-import BoardDelete from "@/dto/board/BoardDelete";
+import BoardRecommend from "@/dto/etc/BoardRecommend";
+import BoardReport from "@/dto/etc/BoardReport";
+import BoardDelete from "@/dto/etc/BoardDelete";
 import BoardComment from "@/layout/board/BoardComment";
 
 const { cookies } = useCookies();
