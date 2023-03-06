@@ -20,7 +20,7 @@
 <script>
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
-import MessageDelete from "@/dto/message/MessageDelete";
+import MessageDelete from "@/dto/etc/MessageDelete";
 const { cookies } = useCookies();
 
 export default {

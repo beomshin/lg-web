@@ -1,11 +1,11 @@
 import get from "@/http/get";
 import post from "@/http/post"
-import MessageReceiveList from "@/dto/message/MessageReceiveList";
-import MessageSenderList from "@/dto/message/MessageSenderList";
-import MessagePost from "@/dto/message/MessagePost";
-import MessageReadReceive from "@/dto/message/MessageReadReceive";
-import MessageReadSend from "@/dto/message/MessageReadSend";
-import MessageDelete from "@/dto/message/MessageDelete";
+import MessageReceiveList from "@/dto/etc/MessageReceiveList";
+import MessageSenderList from "@/dto/etc/MessageSenderList";
+import MessagePost from "@/dto/etc/MessagePost";
+import MessageReadReceive from "@/dto/etc/MessageReadReceive";
+import MessageReadSend from "@/dto/etc/MessageReadSend";
+import MessageDelete from "@/dto/etc/MessageDelete";
 
 export default {
     MessageReceiveList: (data: MessageReceiveList, headers: any, subUrl: string) => {

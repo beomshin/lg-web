@@ -28,8 +28,8 @@ import {ref} from 'vue'
 import AlarmCard from "@/components/mypage/alaram/AlarmCard";
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
-import MessageReadReceive from "@/dto/message/MessageReadReceive";
-import MessageReadSend from "@/dto/message/MessageReadSend";
+import MessageReadReceive from "@/dto/etc/MessageReadReceive";
+import MessageReadSend from "@/dto/etc/MessageReadSend";
 
 const { cookies } = useCookies();
 

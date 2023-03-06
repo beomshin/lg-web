@@ -32,8 +32,8 @@ import {useCookies} from "vue3-cookies";
 import AlarmNav from "@/components/mypage/alaram/AlarmNav";
 import service from "@/service";
 import { ref } from 'vue'
-import MessageReceiveList from "@/dto/message/MessageReceiveList";
-import MessageSenderList from "@/dto/message/MessageSenderList";
+import MessageReceiveList from "@/dto/etc/MessageReceiveList";
+import MessageSenderList from "@/dto/etc/MessageSenderList";
 import AlarmList from "@/layout/alarm/AlarmList";
 import MessagePost from "@/layout/alarm/MessagePost";
 

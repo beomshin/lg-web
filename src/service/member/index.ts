@@ -1,14 +1,14 @@
 import get from "@/http/get";
 import post from "@/http/post";
-import MemberLoginDto from "@/dto/member/MemberLoginDto";
-import MemberSignDto from "@/dto/member/MemberSignDto";
-import MemberCheckId from "@/dto/member/MemberCheckId";
-import MemberPostEmail from "@/dto/member/MemberPostEmail";
-import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
-import MemberInfo from "@/dto/member/MemberInfo";
-import MemberChangeInfo from "@/dto/member/MemberChangeInfo";
-import MemberChangePasword from "@/dto/member/MemberChangePasword";
-import MemberFindId from "@/dto/member/MemberFindId";
+import MemberLoginDto from "@/dto/etc/MemberLoginDto";
+import MemberSignDto from "@/dto/etc/MemberSignDto";
+import MemberCheckId from "@/dto/etc/MemberCheckId";
+import MemberPostEmail from "@/dto/etc/MemberPostEmail";
+import MemberVerifyEmail from "@/dto/etc/MemberVerifyEmail";
+import MemberInfo from "@/dto/etc/MemberInfo";
+import MemberChangeInfo from "@/dto/etc/MemberChangeInfo";
+import MemberChangePasword from "@/dto/etc/MemberChangePasword";
+import MemberFindId from "@/dto/etc/MemberFindId";
 
 export default {
     MemberLogin: (data: MemberLoginDto, headers: any, subUrl: string) => {

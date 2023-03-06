@@ -66,8 +66,8 @@
 import service from "@/service";
 import {useCookies} from "vue3-cookies";
 import {ref} from 'vue'
-import MemberChangeInfo from "@/dto/member/MemberChangeInfo";
-import MemberChangePasword from "@/dto/member/MemberChangePasword";
+import MemberChangeInfo from "@/dto/etc/MemberChangeInfo";
+import MemberChangePasword from "@/dto/etc/MemberChangePasword";
 const { cookies } = useCookies();
 
 

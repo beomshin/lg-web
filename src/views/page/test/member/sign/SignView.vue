@@ -64,10 +64,10 @@
 import service from "@/service";
 import {reactive, ref} from "vue";
 import { useRouter, useRoute } from 'vue-router'
-import MemberSignDto from "@/dto/member/MemberSignDto";
-import MemberCheckId from "@/dto/member/MemberCheckId";
-import MemberPostEmail from "@/dto/member/MemberPostEmail";
-import MemberVerifyEmail from "@/dto/member/MemberVerifyEmail";
+import MemberSignDto from "@/dto/etc/MemberSignDto";
+import MemberCheckId from "@/dto/etc/MemberCheckId";
+import MemberPostEmail from "@/dto/etc/MemberPostEmail";
+import MemberVerifyEmail from "@/dto/etc/MemberVerifyEmail";
 
 export default {
   name: "SignView",

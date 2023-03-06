@@ -33,7 +33,7 @@
 
 <script>
 import service from "@/service";
-import MemberFindId from "@/dto/member/MemberFindId";
+import MemberFindId from "@/dto/etc/MemberFindId";
 import {ref} from "vue";
 export default {
   name: "FindLoginId",
