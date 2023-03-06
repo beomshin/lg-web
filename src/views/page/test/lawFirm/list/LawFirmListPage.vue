@@ -22,7 +22,7 @@
 
 <script>
 import { ref } from 'vue'
-import LawFirmFindList from "@/dto/lawFirm/LawFirmFindList";
+import LawFirmFindList from "@/dto/etc/LawFirmFindList";
 import service from "@/service";
 import LawFirmListBody from "@/components/lawFirm/list/LawFirmListBody";
 import LawFirmListPagination from "@/components/lawFirm/list/LawFirmListPagination";

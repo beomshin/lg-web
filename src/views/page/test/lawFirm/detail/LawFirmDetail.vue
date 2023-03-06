@@ -49,13 +49,13 @@ import LawFirmDetailTop from "@/components/lawFirm/detail/LawFirmDetailTop";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import service from "@/service";
 import {ref} from 'vue'
-import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
+import LawFirmFIndDetail from "@/dto/etc/LawFirmFIndDetail";
 import BoardList from "@/layout/board/BoardList";
 import BoardFindList from "@/dto/etc/BoardFindList";
 import BoardType from "@/components/board/list/BoardType";
 import {useCookies} from "vue3-cookies";
 import LawFirmGroup from "@/components/lawFirm/detail/LawFirmGroup";
-import LawFirmApply from "@/dto/lawFirm/LawFirmApply";
+import LawFirmApply from "@/dto/etc/LawFirmApply";
 
 const { cookies } = useCookies();
 export default {

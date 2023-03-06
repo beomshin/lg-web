@@ -1,9 +1,9 @@
 import get from "@/http/get";
 import post from "@/http/post";
-import LawFirmFindList from "@/dto/lawFirm/LawFirmFindList";
-import LawFirmFIndDetail from "@/dto/lawFirm/LawFirmFIndDetail";
-import LawFirmBoardEnroll from "@/dto/lawFirm/LawFirmBoardEnroll";
-import LawFirmApply from "@/dto/lawFirm/LawFirmApply";
+import LawFirmFindList from "@/dto/etc/LawFirmFindList";
+import LawFirmFIndDetail from "@/dto/etc/LawFirmFIndDetail";
+import LawFirmBoardEnroll from "@/dto/etc/LawFirmBoardEnroll";
+import LawFirmApply from "@/dto/etc/LawFirmApply";
 
 
 

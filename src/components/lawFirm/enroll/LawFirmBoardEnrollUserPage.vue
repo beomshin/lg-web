@@ -55,7 +55,7 @@ import {ref} from "vue";
 import service from "@/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
-import LawFirmBoardEnroll from "@/dto/lawFirm/LawFirmBoardEnroll";
+import LawFirmBoardEnroll from "@/dto/etc/LawFirmBoardEnroll";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
 export default {
