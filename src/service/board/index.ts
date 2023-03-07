@@ -1,77 +1,71 @@
-import get from "@/http/get";
-import post from "@/http/post";
-import BoardLoginAnonym from "@/dto/etc/BoardLoginAnonym";
-import BoardLoginMember from "@/dto/etc/BoardLoginMember";
-import BoardFindList from "@/dto/etc/BoardFindList";
-import BoardFindBoardAnonym from "@/dto/etc/BoardFindBoardAnonym";
-import BoardEnrollAnonym from "@/dto/etc/BoardEnrollAnonym";
-import BoardEnrollMember from "@/dto/etc/BoardEnrollMember";
-import BoardUpdate from "@/dto/etc/BoardUpdate";
-import BoardDelete from "@/dto/etc/BoardDelete";
-import BoardReport from "@/dto/etc/BoardReport";
-import BoardRecommend from "@/dto/etc/BoardRecommend";
-import BoardFindCommentAnonym from "@/dto/etc/BoardFindCommentAnonym";
-import BoardEnrollCommentMember from "@/dto/etc/BoardEnrollCommentMember";
-import BoardEnrollCommentAnonym from "@/dto/etc/BoardEnrollCommentAnonym";
-import BoardUpdateComment from "@/dto/etc/BoardUpdateComment";
-import BoardDeleteComment from "@/dto/etc/BoardDeleteComment";
-import BoardFindBoardMember from "@/dto/etc/BoardFindBoardMember";
-import BoardFindCommentMember from "@/dto/etc/BoardFindCommentMember";
-import BoardFindMemberList from "@/dto/etc/BoardFindMemberList";
+import get from '../../http/get'
+import post from '../../http/post'
+import {useCookies} from "vue3-cookies";
+import DeleteAnonymBoardRequestDto from "@/dto/board/DeleteAnonymBoardRequestDto";
+import DeleteUserBoardRequestDto from "@/dto/board/DeleteUserBoardRequestDto";
+import LoginAnonymBoardRequestDto from "@/dto/board/LoginAnonymBoardRequestDto";
+import LoginUserBoardRequestDto from "@/dto/board/LoginUserBoardRequestDto";
+import FindAllListBoardRequestDto from "@/dto/board/FindAllListBoardRequestDto";
+import FindUserListBoardRequestDto from "@/dto/board/FindUserListBoardRequestDto";
+import EnrollUserBoardRequestDto from "@/dto/board/EnrollUserBoardRequestDto";
+import EnrollAnonymBoardRequestDto from "@/dto/board/EnrollAnonymBoardRequestDto";
+import EnrollLawFirmBoardRequestDto from "@/dto/board/EnrollLawFirmBoardRequestDto";
+import RecommendBoardRequestDto from "@/dto/board/RecommendBoardRequestDto";
+import DeleteRecommendBoardRequestDto from "@/dto/board/DeleteRecommendBoardRequestDto";
+import ReportBoardRequestDto from "@/dto/board/ReportBoardRequestDto";
+import UpdateUserBoardRequestDto from "@/dto/board/UpdateUserBoardRequestDto";
+import UpdateAnonymBoardRequestDto from "@/dto/board/UpdateAnonymBoardRequestDto";
+const { cookies } = useCookies();
+
 
 export default {
-    BoardLoginAnonym: (data: BoardLoginAnonym, headers: any, subUrl: string) => {
-        return post('/be/board/login/anonym', data, headers);
+    deleteAnonymBoard: (data: DeleteAnonymBoardRequestDto) => {
+        return post('/api/public/board/delete/anonym', data,  null)
     },
-    BoardLoginMember: (data: BoardLoginMember, headers: any, subUrl: string) => {
-        return post('/be/board/login/member', data, headers);
+    deleteUserBoard: (data: DeleteUserBoardRequestDto) => {
+        return post('/api/board/delete/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardFindList: (data: BoardFindList, headers: any, subUrl: string) => {
-        return get('/be/board/find/list', data, headers);
+    loginAnonymBoard: (data: LoginAnonymBoardRequestDto) => {
+        return post('/api/public/board/login/anonym', data, null);
     },
-    BoardFindBoardAnonym: (data: BoardFindBoardAnonym, headers: any, subUrl: string) => {
-        return get(`/be/board/find/anonym/${subUrl}`, data, headers);
+    loginUserBoard: (data: LoginUserBoardRequestDto) => {
+        return post('/api/board/login/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardFindBoardMember: (data: BoardFindBoardMember, headers: any, subUrl: string) => {
-        return get(`/be/board/pq/find/member/${subUrl}`, data, headers);
+    findAllListBoard: (params: FindAllListBoardRequestDto) => {
+        return get('/api/public/board/find/all/list', params, null)
     },
-    BoardEnrollAnonym: (data: BoardEnrollAnonym, headers: any, subUrl: string) => {
-        return post('/be/board/enroll/anonym', data, headers);
+    findUserListBoard: (params: FindUserListBoardRequestDto) => {
+        return get('/api/board/find/user/list', params, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardEnrollMember: (data: BoardEnrollMember, headers: any, subUrl: string) => {
-        return post('/be/board/pq/enroll/member', data, headers)
+    findAnonymDetailBoard: (id: string) => {
+        return get(`/api/public/board/find/anonym/detail/${id}`, {}, {})
     },
-    BoardUpdate: (data: BoardUpdate, headers: any, subUrl: string) => {
-        return post('/be/board/update', data, headers);
+    findUserDetailBoard: (id: string) => {
+        return get(`/api/board/find/user/detail/${id}`, {}, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardDelete: (data: BoardDelete, headers: any, subUrl: string) => {
-        return post('/be/board/delete', data, headers);
+    enrollUserBoard: (data: EnrollUserBoardRequestDto) => {
+        return post('/api/board/enroll/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
     },
-    BoardReport: (data: BoardReport, headers: any, subUrl: string) => {
-        return post('/be/board/report', data, headers);
+    enrollAnonymBoard: (data: EnrollAnonymBoardRequestDto) => {
+        return post('/api/public/board/enroll/anonym', data, { "Content-Type" : 'multipart/form-data' })
     },
-    BoardRecommend: (data: BoardRecommend, headers: any, subUrl: string) => {
-        return post('/be/board/pq/recommend', data, headers);
+    enrollLawFirmBoard: (data: EnrollLawFirmBoardRequestDto) => {
+        return post('/api/board-position/enroll/lawfirm', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
     },
-    BoardFindCommentAnonym: (data: BoardFindCommentAnonym, headers: any, subUrl: string) => {
-        return get(`/be/board/find/comment/anonym/${subUrl}`, data, headers);
+    recommendBoard: (data: RecommendBoardRequestDto) => {
+        return post('/api/board/recommend', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardFindCommentMember: (data: BoardFindCommentMember, headers: any, subUrl: string) => {
-        return get(`/be/board/pq/find/comment/member/${subUrl}`, data, headers);
+    deleteRecommendBoard: (data: DeleteRecommendBoardRequestDto) => {
+        return post('/api/board/delete/recommend', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
     },
-    BoardEnrollCommentMember: (data: BoardEnrollCommentMember, headers: any, subUrl: string) => {
-        return post('/be/board/pq/enroll/comment/member', data, headers);
+    reportBoard: (data: ReportBoardRequestDto) => {
+        return post('/api/public/board/report', data, {})
     },
-    BoardEnrollCommentAnonym: (data: BoardEnrollCommentAnonym, headers: any, subUrl: string) => {
-        return post('/be/board/enroll/comment/anonym', data, headers);
+    updateUserBoard: (data: UpdateUserBoardRequestDto) => {
+        return post('/api/board/update/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
     },
-    BoardUpdateComment: (data: BoardUpdateComment, headers: any, subUrl: string) => {
-        return post('/be/board/update/comment', data, headers);
-    },
-    BoardDeleteComment: (data: BoardDeleteComment, headers: any, subUrl: string) => {
-        return post('/be/board/delete/comment', data, headers);
-    },
-    BoardFindMemberList: (data: BoardFindMemberList, headers: any, subUrl: string) => {
-        return get('/be/board/pq/find/member/list', data, headers);
+    updateAnonymBoard: (data: UpdateAnonymBoardRequestDto) => {
+        return post('/api/public/board/update/anonym', data, { "Content-Type" : 'multipart/form-data' })
     }
+
 }

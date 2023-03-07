@@ -1,5 +1,5 @@
 import authService from './auth'
-import boardService from './board'
+import boardService from './board/test'
 import lawfirmService from './lawFirm'
 import messageService from './message'
 import signService from './sign'
