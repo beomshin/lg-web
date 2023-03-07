@@ -67,5 +67,4 @@ export default {
     updateAnonymBoard: (data: UpdateAnonymBoardRequestDto) => {
         return post('/api/public/board/update/anonym', data, { "Content-Type" : 'multipart/form-data' })
     }
-
 }
