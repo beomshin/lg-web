@@ -1,11 +1,9 @@
 import get from '../../http/get'
 import post from '../../http/post'
-import {useCookies} from "vue3-cookies";
-import CookieCont from "@/constants/CookieCont";
-const { cookies } = useCookies();
+import HeaderUtils from "@/http/headerUtils";
 
 export default  {
     authReissue: () => {
-        return get('/api/auth/reissue', {},  {Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME)})
+        return get('/api/auth/reissue', {},  HeaderUtils.AUTH_HEADER)
     }
 }
