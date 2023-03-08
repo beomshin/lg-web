@@ -31,7 +31,7 @@
 
 <script>
 import {ref} from "vue";
-import service from "@/service";
+import service from "@/http/service";
 import { useCookies } from 'vue3-cookies'
 import BoardFindList from "@/dto/etc/BoardFindList";
 import BoardList from "@/layout/board/BoardList";

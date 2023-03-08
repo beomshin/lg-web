@@ -17,7 +17,7 @@
 
 <script>
 import BoardRecommend from "@/dto/etc/BoardRecommend";
-import service from "@/service";
+import service from "@/http/service";
 import {useCookies} from "vue3-cookies";
 import BoardReport from "@/dto/etc/BoardReport";
 import BoardLoginAnonym from "@/dto/etc/BoardLoginAnonym";

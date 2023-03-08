@@ -10,7 +10,7 @@
 
 <script>
 import { ref } from 'vue'
-import service from "@/service";
+import service from "@/http/service";
 import BoardLoginAnonym from "@/dto/etc/BoardLoginAnonym";
 import BoardLoginMember from "@/dto/etc/BoardLoginMember";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";

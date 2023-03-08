@@ -25,7 +25,7 @@
 
 <script>
 import {ref} from 'vue'
-import service from "@/service";
+import service from "@/http/service";
 import MessagePost from "@/dto/etc/MessagePost";
 import {useCookies} from "vue3-cookies";
 

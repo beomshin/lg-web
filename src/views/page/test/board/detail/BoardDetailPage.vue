@@ -24,7 +24,7 @@
 
 <script>
 import {ref} from "vue";
-import service from "@/service";
+import service from "@/http/service";
 import {useCookies} from "vue3-cookies";
 import { useRouter, useRoute } from 'vue-router'
 import BoardDetail from "@/layout/board/BoardDetail";

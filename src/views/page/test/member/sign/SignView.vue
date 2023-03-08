@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import service from "@/service";
+import service from "@/http/service";
 import {reactive, ref} from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import MemberSignDto from "@/dto/etc/MemberSignDto";

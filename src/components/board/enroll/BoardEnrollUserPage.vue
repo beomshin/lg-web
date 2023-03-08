@@ -52,7 +52,7 @@
 
 <script>
 import {ref} from "vue";
-import service from "@/service";
+import service from "@/http/service";
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies();
 import BoardEnrollMember from "@/dto/etc/BoardEnrollMember";

@@ -20,7 +20,7 @@
 
 <script>
 import {ref} from "vue";
-import service from "@/service";
+import service from "@/http/service";
 import {useCookies} from "vue3-cookies";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import BoardUpdateLogin from "@/components/board/update/BoardUpdateLogin";

@@ -27,7 +27,7 @@
 <script>
 import {ref} from "vue";
 import {useCookies} from "vue3-cookies";
-import service from "@/service";
+import service from "@/http/service";
 import BoardEnrollCommentMember from "@/dto/etc/BoardEnrollCommentMember";
 import BoardEnrollCommentAnonym from "@/dto/etc/BoardEnrollCommentAnonym";
 const { cookies } = useCookies();

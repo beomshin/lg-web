@@ -26,7 +26,7 @@
 <script>
 import {ref} from 'vue'
 import AlarmCard from "@/components/mypage/alaram/AlarmCard";
-import service from "@/service";
+import service from "@/http/service";
 import {useCookies} from "vue3-cookies";
 import MessageReadReceive from "@/dto/etc/MessageReadReceive";
 import MessageReadSend from "@/dto/etc/MessageReadSend";

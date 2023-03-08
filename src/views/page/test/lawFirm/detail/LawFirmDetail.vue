@@ -47,7 +47,7 @@
 <script>
 import LawFirmDetailTop from "@/components/lawFirm/detail/LawFirmDetailTop";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
-import service from "@/service";
+import service from "@/http/service";
 import {ref} from 'vue'
 import LawFirmFIndDetail from "@/dto/etc/LawFirmFIndDetail";
 import BoardList from "@/layout/board/BoardList";

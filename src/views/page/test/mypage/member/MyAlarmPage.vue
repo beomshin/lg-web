@@ -30,7 +30,7 @@
 <script>
 import {useCookies} from "vue3-cookies";
 import AlarmNav from "@/components/mypage/alaram/AlarmNav";
-import service from "@/service";
+import service from "@/http/service";
 import { ref } from 'vue'
 import MessageReceiveList from "@/dto/etc/MessageReceiveList";
 import MessageSenderList from "@/dto/etc/MessageSenderList";

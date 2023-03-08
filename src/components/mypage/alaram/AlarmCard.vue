@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import service from "@/service";
+import service from "@/http/service";
 import {useCookies} from "vue3-cookies";
 import MessageDelete from "@/dto/etc/MessageDelete";
 const { cookies } = useCookies();

@@ -50,7 +50,7 @@
 <script>
 import {useCookies} from "vue3-cookies";
 import {ref} from "vue";
-import service from "@/service";
+import service from "@/http/service";
 import MemberLoginDto from "@/dto/etc/MemberLoginDto";
 const { cookies } = useCookies();
 

@@ -12,7 +12,7 @@
 <script>
 import {ref} from "vue";
 import BoardDeleteComment from "@/dto/etc/BoardDeleteComment";
-import service from "@/service";
+import service from "@/http/service";
 
 export default {
   name: "BoardCommentDelete",

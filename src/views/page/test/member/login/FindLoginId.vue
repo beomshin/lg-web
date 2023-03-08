@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import service from "@/service";
+import service from "@/http/service";
 import MemberFindId from "@/dto/etc/MemberFindId";
 import {ref} from "vue";
 export default {
