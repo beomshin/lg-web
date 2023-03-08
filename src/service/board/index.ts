@@ -15,6 +15,7 @@ import DeleteRecommendBoardRequestDto from "@/dto/board/DeleteRecommendBoardRequ
 import ReportBoardRequestDto from "@/dto/board/ReportBoardRequestDto";
 import UpdateUserBoardRequestDto from "@/dto/board/UpdateUserBoardRequestDto";
 import UpdateAnonymBoardRequestDto from "@/dto/board/UpdateAnonymBoardRequestDto";
+import CookieCont from "@/constants/CookieCont";
 const { cookies } = useCookies();
 
 
@@ -23,46 +24,46 @@ export default {
         return post('/api/public/board/delete/anonym', data,  null)
     },
     deleteUserBoard: (data: DeleteUserBoardRequestDto) => {
-        return post('/api/board/delete/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return post('/api/board/delete/user', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     loginAnonymBoard: (data: LoginAnonymBoardRequestDto) => {
         return post('/api/public/board/login/anonym', data, null);
     },
     loginUserBoard: (data: LoginUserBoardRequestDto) => {
-        return post('/api/board/login/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return post('/api/board/login/user', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     findAllListBoard: (params: FindAllListBoardRequestDto) => {
         return get('/api/public/board/find/all/list', params, null)
     },
     findUserListBoard: (params: FindUserListBoardRequestDto) => {
-        return get('/api/board/find/user/list', params, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return get('/api/board/find/user/list', params, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     findAnonymDetailBoard: (id: string) => {
         return get(`/api/public/board/find/anonym/detail/${id}`, {}, {})
     },
     findUserDetailBoard: (id: string) => {
-        return get(`/api/board/find/user/detail/${id}`, {}, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return get(`/api/board/find/user/detail/${id}`, {}, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     enrollUserBoard: (data: EnrollUserBoardRequestDto) => {
-        return post('/api/board/enroll/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
+        return post('/api/board/enroll/user', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME), "Content-Type" : 'multipart/form-data'})
     },
     enrollAnonymBoard: (data: EnrollAnonymBoardRequestDto) => {
         return post('/api/public/board/enroll/anonym', data, { "Content-Type" : 'multipart/form-data' })
     },
     enrollLawFirmBoard: (data: EnrollLawFirmBoardRequestDto) => {
-        return post('/api/board-position/enroll/lawfirm', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
+        return post('/api/board-position/enroll/lawfirm', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME), "Content-Type" : 'multipart/form-data'})
     },
     recommendBoard: (data: RecommendBoardRequestDto) => {
-        return post('/api/board/recommend', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return post('/api/board/recommend', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     deleteRecommendBoard: (data: DeleteRecommendBoardRequestDto) => {
-        return post('/api/board/delete/recommend', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log') })
+        return post('/api/board/delete/recommend', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME) })
     },
     reportBoard: (data: ReportBoardRequestDto) => {
         return post('/api/public/board/report', data, {})
     },
     updateUserBoard: (data: UpdateUserBoardRequestDto) => {
-        return post('/api/board/update/user', data, { Authorization: 'Bearer ' + cookies.get('lg.m.log'), "Content-Type" : 'multipart/form-data'})
+        return post('/api/board/update/user', data, { Authorization: 'Bearer ' + cookies.get(CookieCont.AUTH_COOKIE_NAME), "Content-Type" : 'multipart/form-data'})
     },
     updateAnonymBoard: (data: UpdateAnonymBoardRequestDto) => {
         return post('/api/public/board/update/anonym', data, { "Content-Type" : 'multipart/form-data' })
