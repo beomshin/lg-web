@@ -6,7 +6,7 @@ import MessageEndPoint from './message'
 import SignEndPoint from './sign'
 import TrialEndPoint from './trial'
 import TrialCommentEndPoint from './trial/comment'
-import UserEndPoint from  './user'
+import UserEndPoint from './user'
 
 export default  {
     ...BoardEndPoint,
