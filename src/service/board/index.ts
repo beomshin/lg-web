@@ -17,8 +17,8 @@ import DeleteRecommendBoardRequestDto from "@/dto/board/DeleteRecommendBoardRequ
 import ReportBoardRequestDto from "@/dto/board/ReportBoardRequestDto";
 import UpdateUserBoardRequestDto from "@/dto/board/UpdateUserBoardRequestDto";
 import UpdateAnonymBoardRequestDto from "@/dto/board/UpdateAnonymBoardRequestDto";
-import FindAnonymDetailBoard from "@/dto/board/FindAnonymDetailBoard";
-import findUserDetailBoard from "@/dto/board/comment/FindUserDetailBoard";
+import FindAnonymDetailBoardRequestDto from "@/dto/board/FindAnonymDetailBoardRequestDto";
+import findUserDetailBoardRequestDto from "@/dto/board/FindUserDetailBoardRequestDto";
 
 export default {
     deleteAnonymBoard: (data: DeleteAnonymBoardRequestDto) => { // 익명 게시판 삭제
@@ -39,10 +39,10 @@ export default {
     findUserListBoard: (params: FindUserListBoardRequestDto) => { // 회원 포지션 게시판 조회
         return get(EndPoint.FIND_USER_LIST_BOARD, params, HeaderUtils.AUTH_HEADER)
     },
-    findAnonymDetailBoard: (params: FindAnonymDetailBoard) => { // 게시판 상세 조회 (익명)
+    findAnonymDetailBoard: (params: FindAnonymDetailBoardRequestDto) => { // 게시판 상세 조회 (익명)
         return get(EndPoint.FIND_ANONYM_DETAIL_BOARD(params.id), ParamsUtils.EMPTY, HeaderUtils.NORMAL)
     },
-    findUserDetailBoard: (params: findUserDetailBoard) => { // 게시판 상세 조회 (화원)
+    findUserDetailBoard: (params: findUserDetailBoardRequestDto) => { // 게시판 상세 조회 (화원)
         return get(EndPoint.FIND_USER_DETAIL_BOARD(params.id), ParamsUtils.EMPTY, HeaderUtils.AUTH_HEADER)
     },
     enrollUserBoard: (data: EnrollUserBoardRequestDto) => { // 회원 포지션 게시판 등록

@@ -1,9 +1,11 @@
-import boardEndPoint from './board'
-import boardCommentEndPoint from './board/comment'
 import AuthEndPoint from './auth'
+import BoardEndPoint from './board'
+import BoardCommentEndPoint from './board/comment'
+import LawFirmEndPoint from './lawFirm'
 
 export default  {
-    ...boardEndPoint,
-    ...boardCommentEndPoint,
-    ...AuthEndPoint
+    ...BoardEndPoint,
+    ...BoardCommentEndPoint,
+    ...AuthEndPoint,
+    ...LawFirmEndPoint
 }
