@@ -4,6 +4,7 @@ import BoardCommentEndPoint from './board/comment'
 import LawFirmEndPoint from './lawFirm'
 import MessageEndPoint from './message'
 import SignEndPoint from './sign'
+import TrialEndPoint from './trial'
 
 export default  {
     ...BoardEndPoint,
@@ -11,5 +12,6 @@ export default  {
     ...AuthEndPoint,
     ...LawFirmEndPoint,
     ...MessageEndPoint,
-    ...SignEndPoint
+    ...SignEndPoint,
+    ...TrialEndPoint
 }
