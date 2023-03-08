@@ -1,9 +1,11 @@
 import get from '../../http/get'
 import post from '../../http/post'
 import HeaderUtils from "@/http/headerUtils";
+import EndPoint from '@/http/endpoint'
+import ParamsUtils from "@/http/ParamsUtils";
 
 export default  {
     authReissue: () => {
-        return get('/api/auth/reissue', {},  HeaderUtils.AUTH_HEADER)
+        return get(EndPoint.AUTH_REISSUE, ParamsUtils.EMPTY, HeaderUtils.AUTH_HEADER)
     }
 }
