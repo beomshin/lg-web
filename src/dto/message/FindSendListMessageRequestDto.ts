@@ -1,4 +1,4 @@
-class FindReceiveMessageListRequestDto {
+class FindSendListMessageRequestDto {
     page: number
     pageNum: number
     subject: number
@@ -17,4 +17,4 @@ class FindReceiveMessageListRequestDto {
     }
 }
 
-export default FindReceiveMessageListRequestDto
+export default FindSendListMessageRequestDto
