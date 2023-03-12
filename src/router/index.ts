@@ -7,95 +7,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/page/test/main/MainView.vue')
   },
   {
-    path: '/sign',
-    name: 'sign',
-    component: () => import('../views/page/test/member/sign/SignView.vue')
-  },
-  {
-    path: '/board',
-    name: 'board',
-    component: () => import('../views/page/test/board/BoardBody.vue'),
-    children: [
-      {
-        path: '/board/list',
-        name: 'BoardListPage',
-        component: () => import('../views/page/test/board/list/BoardListPage.vue')
-      },
-      {
-        path: '/board/detail',
-        name: 'BoardDetailPage',
-        component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
-      },
-      {
-        path: '/board/enroll',
-        name: 'BoardEnrollPage',
-        component: () => import('../views/page/test/board/enroll/BoardEnrollPage.vue')
-      }
-    ]
-  },
-  {
-    path: '/board/update/member',
-    name: 'BoardUpdateMemberPage',
-    component: () => import('../views/page/test/board/update/BoardUpdateMemberPage.vue')
-  },
-  {
-    path: '/board/update/anonym',
-    name: 'BoardUpdateAnonymPage',
-    component: () => import('../views/page/test/board/update/BoardUpdateAnonymPage.vue')
-  },
-  {
-    path: '/lawfirm',
-    name: 'LawFirmBody',
-    component: () => import('../views/page/test/lawFirm/LawFirmBody.vue'),
-    children: [
-      {
-        path: '/lawfirm/list',
-        name: 'LawFirmListPage',
-        component: () => import('../views/page/test/lawFirm/list/LawFirmListPage.vue')
-      },
-      {
-        path: '/lawfirm/detail',
-        name: 'LawFirmDetail',
-        component: () => import('../views/page/test/lawFirm/detail/LawFirmDetail.vue')
-      },
-      {
-        path: '/lawfirm/board/detail',
-        name: 'LawFirmBoardDetailPage',
-        component: () => import('../views/page/test/board/detail/BoardDetailPage.vue')
-      },
-    ]
-  },
-  {
-    path: '/lawfirm/enroll',
-    name: 'LawFirmBoardEnrollPage',
-    component: () => import('../views/page/test/lawFirm/enroll/LawFirmBoardEnrollPage.vue')
-  },
-  {
-    path: '/mypage',
-    name: 'MyPage',
-    component: () => import('../views/page/test/mypage/MyPage.vue'),
-    children: [
-      {
-        path: '/mypage/member',
-        name: 'MyMemberPage',
-        component: () => import('../views/page/test/mypage/member/MyMemberPage.vue')
-      },
-      {
-        path: '/mypage/board',
-        name: 'MyBoardPage',
-        component: () => import('../views/page/test/mypage/member/MyBoardPage.vue')
-      },
-      {
-        path: '/mypage/alarm',
-        name: 'MyAlarmPage',
-        component: () => import('../views/page/test/mypage/member/MyAlarmPage.vue')
-      }
-    ]
-  },
-  {
-    path: '/find/id',
-    name: 'FindLoginId',
-    component: () => import('../views/page/test/member/login/FindLoginId.vue')
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/LoginTest.vue')
   }
 ]
 
